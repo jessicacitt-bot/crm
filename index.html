@@ -1,4 +1,3 @@
-```
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -228,9 +227,18 @@ button{
     color:var(--text);
 }
 
+.btn-secondary:hover{
+    background:#f8fafc;
+}
+
 .btn-danger{
     background:#fee2e2;
     color:#b91c1c;
+}
+
+.btn-success{
+    background:#d1fae5;
+    color:#047857;
 }
 
 .btn-small{
@@ -251,6 +259,7 @@ button{
     display:flex;
     align-items:center;
     justify-content:space-between;
+    gap:15px;
 }
 
 .card-title{
@@ -332,6 +341,7 @@ button{
     border-radius:50%;
     background:var(--primary);
     margin-top:6px;
+    flex-shrink:0;
 }
 
 .activity-title{
@@ -588,100 +598,12 @@ textarea.form-control{
     resize:vertical;
 }
 
-/* CLIENT DETAIL */
-
-.detail-header{
-    background:linear-gradient(135deg,#111827,#1e293b);
-    color:#fff;
-    border-radius:20px;
-    padding:26px;
-    margin-bottom:20px;
-}
-
-.detail-header-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.detail-company{
-    display:flex;
-    align-items:center;
-    gap:15px;
-}
-
-.company-avatar{
-    width:55px;
-    height:55px;
-    border-radius:15px;
-    display:grid;
-    place-items:center;
-    background:rgba(255,255,255,.12);
-    font-size:22px;
-    font-weight:800;
-}
-
-.detail-company h2{
-    font-size:22px;
-}
-
-.detail-company p{
-    color:#cbd5e1;
-    font-size:13px;
-    margin-top:4px;
-}
-
-.tabs{
-    display:flex;
-    gap:4px;
-    margin-bottom:18px;
-    border-bottom:1px solid var(--border);
-}
-
-.tab{
-    border:0;
-    background:transparent;
-    padding:12px 15px;
-    color:var(--muted);
-    font-weight:650;
-    border-bottom:2px solid transparent;
-}
-
-.tab.active{
-    color:var(--primary);
-    border-color:var(--primary);
-}
-
-.info-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:16px;
-    padding:22px;
-}
-
-.info-item{
-    background:#f8fafc;
-    padding:14px;
-    border-radius:11px;
-}
-
-.info-label{
-    color:var(--muted);
-    font-size:11px;
-    margin-bottom:5px;
-}
-
-.info-value{
-    font-size:13px;
-    font-weight:650;
-}
-
 /* PROJECTS */
 
 .project-grid{
     display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:18px;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
 }
 
 .project-card{
@@ -689,15 +611,15 @@ textarea.form-control{
 }
 
 .project-card h3{
-    font-size:16px;
-    margin-bottom:7px;
+    font-size:17px;
+    margin-bottom:6px;
 }
 
 .project-description{
     color:var(--muted);
     font-size:12px;
     line-height:1.5;
-    min-height:38px;
+    margin-top:15px;
 }
 
 .project-meta{
@@ -708,36 +630,61 @@ textarea.form-control{
     color:var(--muted);
 }
 
-/* PHASES */
+.project-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:18px;
+}
+
+/* PROJECT PHASES */
+
+.project-details{
+    margin-top:20px;
+    border-top:1px solid var(--border);
+    padding-top:18px;
+}
 
 .phase{
-    margin-bottom:14px;
+    margin-bottom:12px;
     border:1px solid var(--border);
     border-radius:13px;
     overflow:hidden;
+    background:#fff;
+}
+
+.phase:last-child{
+    margin-bottom:0;
 }
 
 .phase-header{
     background:#f8fafc;
-    padding:14px 16px;
+    padding:13px 15px;
     display:flex;
     justify-content:space-between;
     align-items:center;
+    gap:10px;
 }
 
 .phase-name{
     font-weight:750;
+    font-size:13px;
+}
+
+.phase-actions{
+    display:flex;
+    gap:5px;
 }
 
 .tasks{
-    padding:0 16px;
+    padding:0 15px;
 }
 
 .task{
     display:flex;
     align-items:center;
-    gap:12px;
-    padding:13px 0;
+    gap:10px;
+    padding:12px 0;
     border-bottom:1px solid #f0f1f4;
 }
 
@@ -746,13 +693,15 @@ textarea.form-control{
 }
 
 .task-check{
-    width:19px;
-    height:19px;
+    width:18px;
+    height:18px;
     accent-color:var(--primary);
+    flex-shrink:0;
 }
 
 .task-info{
     flex:1;
+    min-width:0;
 }
 
 .task-name{
@@ -760,10 +709,34 @@ textarea.form-control{
     font-weight:650;
 }
 
+.task-name.completed{
+    text-decoration:line-through;
+    color:var(--muted);
+}
+
 .task-meta{
     font-size:11px;
     color:var(--muted);
     margin-top:3px;
+}
+
+.task-actions{
+    display:flex;
+    gap:4px;
+}
+
+.phase-empty{
+    color:var(--muted);
+    font-size:12px;
+    padding:15px 0;
+}
+
+.project-no-phase{
+    padding:15px;
+    background:#f8fafc;
+    border-radius:11px;
+    color:var(--muted);
+    font-size:12px;
 }
 
 /* CALENDAR */
@@ -812,16 +785,22 @@ textarea.form-control{
     padding:8px;
     border-right:1px solid var(--border);
     border-bottom:1px solid var(--border);
+    cursor:pointer;
+    transition:.15s;
+}
+
+.calendar-cell:hover{
+    background:#fafbff;
+}
+
+.calendar-cell.today{
+    background:#fafaff;
 }
 
 .calendar-number{
     font-size:12px;
     font-weight:700;
     margin-bottom:6px;
-}
-
-.calendar-cell.today{
-    background:#fafaff;
 }
 
 .calendar-cell.today .calendar-number{
@@ -837,13 +816,31 @@ textarea.form-control{
 .calendar-event{
     background:#eef2ff;
     color:#4338ca;
-    padding:5px 6px;
+    padding:6px 7px;
     border-radius:6px;
     font-size:10px;
-    margin-bottom:4px;
+    margin-bottom:5px;
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
+    cursor:pointer;
+}
+
+.calendar-event.completed{
+    background:#d1fae5;
+    color:#047857;
+    text-decoration:line-through;
+}
+
+.calendar-add{
+    color:#9ca3af;
+    font-size:10px;
+    opacity:0;
+    margin-top:8px;
+}
+
+.calendar-cell:hover .calendar-add{
+    opacity:1;
 }
 
 /* FILES */
@@ -855,6 +852,7 @@ textarea.form-control{
     text-align:center;
     color:var(--muted);
     margin-bottom:20px;
+    display:block;
 }
 
 .file-upload:hover{
@@ -977,6 +975,7 @@ textarea.form-control{
 /* RESPONSIVE */
 
 @media(max-width:1100px){
+
     .stats{
         grid-template-columns:repeat(2,1fr);
     }
@@ -986,11 +985,13 @@ textarea.form-control{
     }
 
     .project-grid{
-        grid-template-columns:repeat(2,1fr);
+        grid-template-columns:1fr;
     }
+
 }
 
 @media(max-width:800px){
+
     .sidebar{
         width:72px;
     }
@@ -1019,21 +1020,22 @@ textarea.form-control{
     }
 
     .form-grid,
-    .info-grid,
     .settings-grid{
         grid-template-columns:1fr;
     }
 
-    .project-grid{
-        grid-template-columns:1fr;
+    .calendar-cell{
+        min-height:90px;
     }
 
-    .calendar-cell{
-        min-height:80px;
+    .calendar-add{
+        display:none;
     }
+
 }
 
 @media(max-width:560px){
+
     .stats{
         grid-template-columns:1fr;
     }
@@ -1054,6 +1056,22 @@ textarea.form-control{
     td:nth-child(n+4){
         display:none;
     }
+
+    .calendar-cell{
+        min-height:70px;
+        padding:5px;
+    }
+
+    .calendar-event{
+        font-size:9px;
+        padding:4px;
+    }
+
+    .calendar-day-name{
+        padding:8px 3px;
+        font-size:9px;
+    }
+
 }
 </style>
 </head>
@@ -1062,1112 +1080,1140 @@ textarea.form-control{
 
 <div class="app">
 
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
+<!-- SIDEBAR -->
 
-        <div class="logo">
-            <div class="logo-icon">C</div>
-            <span>CRM Personal</span>
+<aside class="sidebar">
+
+    <div class="logo">
+        <div class="logo-icon">C</div>
+        <span>CRM Personal</span>
+    </div>
+
+    <nav class="nav">
+
+        <button class="active" data-page="dashboard">
+            <span class="nav-icon">⌂</span>
+            <span>Dashboard</span>
+        </button>
+
+        <button data-page="clients">
+            <span class="nav-icon">👥</span>
+            <span>Clienti</span>
+        </button>
+
+        <button data-page="projects">
+            <span class="nav-icon">▣</span>
+            <span>Progetti</span>
+        </button>
+
+        <button data-page="tasks">
+            <span class="nav-icon">✓</span>
+            <span>Attività</span>
+        </button>
+
+        <button data-page="calendar">
+            <span class="nav-icon">▦</span>
+            <span>Calendario</span>
+        </button>
+
+        <button data-page="files">
+            <span class="nav-icon">▱</span>
+            <span>Documenti</span>
+        </button>
+
+        <button data-page="settings">
+            <span class="nav-icon">⚙</span>
+            <span>Impostazioni</span>
+        </button>
+
+    </nav>
+
+</aside>
+
+<main class="main">
+
+<header class="topbar">
+
+    <div class="topbar-title" id="topbarTitle">
+        Dashboard
+    </div>
+
+    <div class="topbar-right">
+        <div class="avatar">A</div>
+    </div>
+
+</header>
+
+<div class="content">
+
+<!-- DASHBOARD -->
+
+<section class="page active" id="page-dashboard">
+
+    <div class="page-header">
+
+        <div>
+            <h1 class="page-title">Buongiorno 👋</h1>
+            <p class="page-subtitle">
+                Ecco una panoramica della tua attività.
+            </p>
         </div>
 
-        <nav class="nav">
+        <button class="btn btn-primary"
+                onclick="openClientModal()">
+            + Nuovo cliente
+        </button>
 
-            <button class="active" data-page="dashboard">
-                <span class="nav-icon">⌂</span>
-                <span>Dashboard</span>
-            </button>
+    </div>
 
-            <button data-page="clients">
-                <span class="nav-icon">👥</span>
-                <span>Clienti</span>
-            </button>
+    <div class="stats">
 
-            <button data-page="projects">
-                <span class="nav-icon">▣</span>
-                <span>Progetti</span>
-            </button>
+        <div class="card stat">
+            <div class="stat-top">
+                <div>
+                    <div class="stat-label">Clienti</div>
+                    <div class="stat-value" id="statClients">0</div>
+                </div>
+                <div class="stat-icon purple">👥</div>
+            </div>
+        </div>
 
-            <button data-page="tasks">
-                <span class="nav-icon">✓</span>
-                <span>Attività</span>
-            </button>
+        <div class="card stat">
+            <div class="stat-top">
+                <div>
+                    <div class="stat-label">Progetti attivi</div>
+                    <div class="stat-value" id="statProjects">0</div>
+                </div>
+                <div class="stat-icon blue">▣</div>
+            </div>
+        </div>
 
-            <button data-page="calendar">
-                <span class="nav-icon">▦</span>
-                <span>Calendario</span>
-            </button>
+        <div class="card stat">
+            <div class="stat-top">
+                <div>
+                    <div class="stat-label">Attività aperte</div>
+                    <div class="stat-value" id="statTasks">0</div>
+                </div>
+                <div class="stat-icon green">✓</div>
+            </div>
+        </div>
 
-            <button data-page="files">
-                <span class="nav-icon">▱</span>
-                <span>Documenti</span>
-            </button>
+        <div class="card stat">
+            <div class="stat-top">
+                <div>
+                    <div class="stat-label">In scadenza</div>
+                    <div class="stat-value" id="statDue">0</div>
+                </div>
+                <div class="stat-icon orange">!</div>
+            </div>
+        </div>
 
-            <button data-page="settings">
-                <span class="nav-icon">⚙</span>
-                <span>Impostazioni</span>
-            </button>
+    </div>
 
-        </nav>
+    <div class="dashboard-grid">
 
-    </aside>
+        <div class="card">
 
-    <main class="main">
+            <div class="card-header">
 
-        <header class="topbar">
+                <div class="card-title">
+                    Attività recenti
+                </div>
 
-            <div class="topbar-title" id="topbarTitle">
-                Dashboard
+                <button class="btn btn-secondary btn-small"
+                        onclick="navigate('tasks')">
+                    Vedi tutte
+                </button>
+
             </div>
 
-            <div class="topbar-right">
-                <div class="avatar">A</div>
+            <div class="activity-list"
+                 id="recentActivities">
             </div>
-
-        </header>
-
-        <div class="content">
-
-            <!-- DASHBOARD -->
-            <section class="page active" id="page-dashboard">
-
-                <div class="page-header">
-                    <div>
-                        <h1 class="page-title">Buongiorno 👋</h1>
-                        <p class="page-subtitle">
-                            Ecco una panoramica della tua attività.
-                        </p>
-                    </div>
-
-                    <button class="btn btn-primary" onclick="openClientModal()">
-                        + Nuovo cliente
-                    </button>
-                </div>
-
-                <div class="stats">
-
-                    <div class="card stat">
-                        <div class="stat-top">
-                            <div>
-                                <div class="stat-label">Clienti</div>
-                                <div class="stat-value" id="statClients">0</div>
-                            </div>
-
-                            <div class="stat-icon purple">👥</div>
-                        </div>
-                    </div>
-
-                    <div class="card stat">
-                        <div class="stat-top">
-                            <div>
-                                <div class="stat-label">Progetti attivi</div>
-                                <div class="stat-value" id="statProjects">0</div>
-                            </div>
-
-                            <div class="stat-icon blue">▣</div>
-                        </div>
-                    </div>
-
-                    <div class="card stat">
-                        <div class="stat-top">
-                            <div>
-                                <div class="stat-label">Attività aperte</div>
-                                <div class="stat-value" id="statTasks">0</div>
-                            </div>
-
-                            <div class="stat-icon green">✓</div>
-                        </div>
-                    </div>
-
-                    <div class="card stat">
-                        <div class="stat-top">
-                            <div>
-                                <div class="stat-label">In scadenza</div>
-                                <div class="stat-value" id="statDue">0</div>
-                            </div>
-
-                            <div class="stat-icon orange">!</div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="dashboard-grid">
-
-                    <div class="card">
-
-                        <div class="card-header">
-                            <div class="card-title">Attività recenti</div>
-                            <button class="btn btn-secondary btn-small"
-                                    onclick="navigate('tasks')">
-                                Vedi tutte
-                            </button>
-                        </div>
-
-                        <div class="activity-list" id="recentActivities"></div>
-
-                    </div>
-
-                    <div class="card">
-
-                        <div class="card-header">
-                            <div class="card-title">Progetti</div>
-                        </div>
-
-                        <div class="progress-list" id="dashboardProjects"></div>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-            <!-- CLIENTI -->
-            <section class="page" id="page-clients">
-
-                <div class="page-header">
-
-                    <div>
-                        <h1 class="page-title">Clienti</h1>
-                        <p class="page-subtitle">
-                            Gestisci anagrafiche, progetti e documenti.
-                        </p>
-                    </div>
-
-                    <button class="btn btn-primary"
-                            onclick="openClientModal()">
-                        + Nuovo cliente
-                    </button>
-
-                </div>
-
-                <div class="card table-card">
-
-                    <div class="toolbar">
-
-                        <div class="search">
-                            <span class="search-icon">⌕</span>
-
-                            <input
-                                id="clientSearch"
-                                type="text"
-                                placeholder="Cerca cliente, P.IVA..."
-                                oninput="renderClients()"
-                            >
-                        </div>
-
-                    </div>
-
-                    <div id="clientsTable"></div>
-
-                </div>
-
-            </section>
-
-            <!-- PROGETTI -->
-            <section class="page" id="page-projects">
-
-                <div class="page-header">
-
-                    <div>
-                        <h1 class="page-title">Progetti</h1>
-                        <p class="page-subtitle">
-                            Gestisci progetti, fasi e avanzamento.
-                        </p>
-                    </div>
-
-                    <button class="btn btn-primary"
-                            onclick="openProjectModal()">
-                        + Nuovo progetto
-                    </button>
-
-                </div>
-
-                <div class="project-grid" id="projectsGrid"></div>
-
-            </section>
-
-            <!-- ATTIVITA -->
-            <section class="page" id="page-tasks">
-
-                <div class="page-header">
-
-                    <div>
-                        <h1 class="page-title">Attività</h1>
-                        <p class="page-subtitle">
-                            Pianifica e monitora il lavoro.
-                        </p>
-                    </div>
-
-                    <button class="btn btn-primary"
-                            onclick="openTaskModal()">
-                        + Nuova attività
-                    </button>
-
-                </div>
-
-                <div class="card table-card">
-
-                    <div id="tasksTable"></div>
-
-                </div>
-
-            </section>
-
-            <!-- CALENDARIO -->
-            <section class="page" id="page-calendar">
-
-                <div class="page-header">
-
-                    <div>
-                        <h1 class="page-title">Calendario</h1>
-                        <p class="page-subtitle">
-                            Pianifica le tue attività.
-                        </p>
-                    </div>
-
-                    <button class="btn btn-primary"
-                            onclick="openTaskModal()">
-                        + Nuova attività
-                    </button>
-
-                </div>
-
-                <div class="card calendar-card">
-
-                    <div class="calendar-header">
-
-                        <button class="btn btn-secondary"
-                                onclick="changeMonth(-1)">
-                            ‹
-                        </button>
-
-                        <div class="calendar-title" id="calendarTitle"></div>
-
-                        <button class="btn btn-secondary"
-                                onclick="changeMonth(1)">
-                            ›
-                        </button>
-
-                    </div>
-
-                    <div class="calendar-grid" id="calendar"></div>
-
-                </div>
-
-            </section>
-
-            <!-- DOCUMENTI -->
-            <section class="page" id="page-files">
-
-                <div class="page-header">
-
-                    <div>
-                        <h1 class="page-title">Documenti</h1>
-                        <p class="page-subtitle">
-                            Archivio dei file caricati.
-                        </p>
-                    </div>
-
-                </div>
-
-                <div class="card" style="padding:22px">
-
-                    <label class="file-upload">
-
-                        <div class="file-icon">↑</div>
-
-                        <strong>
-                            Trascina qui i documenti
-                        </strong>
-
-                        <div style="margin-top:5px;font-size:12px">
-                            oppure clicca per selezionare i file
-                        </div>
-
-                        <input
-                            type="file"
-                            multiple
-                            onchange="uploadFiles(event)"
-                        >
-
-                    </label>
-
-                    <div class="files-list" id="filesList"></div>
-
-                </div>
-
-            </section>
-
-            <!-- IMPOSTAZIONI -->
-            <section class="page" id="page-settings">
-
-                <div class="page-header">
-
-                    <div>
-                        <h1 class="page-title">Impostazioni</h1>
-                        <p class="page-subtitle">
-                            Personalizza il CRM.
-                        </p>
-                    </div>
-
-                </div>
-
-                <div class="settings-grid">
-
-                    <div class="card settings-menu">
-
-                        <button class="active">
-                            Campi cliente
-                        </button>
-
-                        <button>
-                            Stati
-                        </button>
-
-                        <button>
-                            Preferenze
-                        </button>
-
-                    </div>
-
-                    <div class="card">
-
-                        <div class="card-header">
-
-                            <div>
-                                <div class="card-title">
-                                    Campi personalizzati
-                                </div>
-
-                                <div style="font-size:12px;color:var(--muted);margin-top:4px">
-                                    Aggiungi nuovi campi direttamente dal portale.
-                                </div>
-                            </div>
-
-                            <button class="btn btn-primary btn-small"
-                                    onclick="openCustomFieldModal()">
-                                + Nuovo campo
-                            </button>
-
-                        </div>
-
-                        <div style="padding:0 22px"
-                             id="customFieldsList"></div>
-
-                    </div>
-
-                </div>
-
-            </section>
 
         </div>
 
-    </main>
+        <div class="card">
 
+            <div class="card-header">
+                <div class="card-title">
+                    Progetti
+                </div>
+            </div>
+
+            <div class="progress-list"
+                 id="dashboardProjects">
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CLIENTI -->
+
+<section class="page" id="page-clients">
+
+    <div class="page-header">
+
+        <div>
+            <h1 class="page-title">Clienti</h1>
+            <p class="page-subtitle">
+                Gestisci anagrafiche, progetti e documenti.
+            </p>
+        </div>
+
+        <button class="btn btn-primary"
+                onclick="openClientModal()">
+            + Nuovo cliente
+        </button>
+
+    </div>
+
+    <div class="card table-card">
+
+        <div class="toolbar">
+
+            <div class="search">
+
+                <span class="search-icon">⌕</span>
+
+                <input
+                    id="clientSearch"
+                    type="text"
+                    placeholder="Cerca cliente, P.IVA..."
+                    oninput="renderClients()">
+
+            </div>
+
+        </div>
+
+        <div id="clientsTable"></div>
+
+    </div>
+
+</section>
+
+<!-- PROGETTI -->
+
+<section class="page" id="page-projects">
+
+    <div class="page-header">
+
+        <div>
+            <h1 class="page-title">Progetti</h1>
+            <p class="page-subtitle">
+                Gestisci progetti, fasi e attività.
+            </p>
+        </div>
+
+        <button class="btn btn-primary"
+                onclick="openProjectModal()">
+            + Nuovo progetto
+        </button>
+
+    </div>
+
+    <div class="project-grid"
+         id="projectsGrid">
+    </div>
+
+</section>
+
+<!-- ATTIVITA -->
+
+<section class="page" id="page-tasks">
+
+    <div class="page-header">
+
+        <div>
+            <h1 class="page-title">Attività</h1>
+            <p class="page-subtitle">
+                Pianifica, modifica e monitora il lavoro.
+            </p>
+        </div>
+
+        <button class="btn btn-primary"
+                onclick="openTaskModal()">
+            + Nuova attività
+        </button>
+
+    </div>
+
+    <div class="card table-card">
+
+        <div id="tasksTable"></div>
+
+    </div>
+
+</section>
+
+<!-- CALENDARIO -->
+
+<section class="page" id="page-calendar">
+
+    <div class="page-header">
+
+        <div>
+            <h1 class="page-title">Calendario</h1>
+            <p class="page-subtitle">
+                Pianifica le attività e registra ciò che fai.
+            </p>
+        </div>
+
+        <button class="btn btn-primary"
+                onclick="openTaskModal()">
+            + Nuova attività
+        </button>
+
+    </div>
+
+    <div class="card calendar-card">
+
+        <div class="calendar-header">
+
+            <button class="btn btn-secondary"
+                    onclick="changeMonth(-1)">
+                ‹
+            </button>
+
+            <div class="calendar-title"
+                 id="calendarTitle">
+            </div>
+
+            <button class="btn btn-secondary"
+                    onclick="changeMonth(1)">
+                ›
+            </button>
+
+        </div>
+
+        <div class="calendar-grid"
+             id="calendar">
+        </div>
+
+    </div>
+
+</section>
+
+<!-- DOCUMENTI -->
+
+<section class="page" id="page-files">
+
+    <div class="page-header">
+
+        <div>
+            <h1 class="page-title">Documenti</h1>
+            <p class="page-subtitle">
+                Archivio dei file caricati.
+            </p>
+        </div>
+
+    </div>
+
+    <div class="card"
+         style="padding:22px">
+
+        <label class="file-upload">
+
+            <div class="file-icon">↑</div>
+
+            <strong>
+                Trascina qui i documenti
+            </strong>
+
+            <div style="margin-top:5px;font-size:12px">
+                oppure clicca per selezionare i file
+            </div>
+
+            <input
+                type="file"
+                multiple
+                onchange="uploadFiles(event)">
+
+        </label>
+
+        <div class="files-list"
+             id="filesList">
+        </div>
+
+    </div>
+
+</section>
+
+<!-- IMPOSTAZIONI -->
+
+<section class="page" id="page-settings">
+
+    <div class="page-header">
+
+        <div>
+            <h1 class="page-title">Impostazioni</h1>
+            <p class="page-subtitle">
+                Personalizza il CRM.
+            </p>
+        </div>
+
+    </div>
+
+    <div class="settings-grid">
+
+        <div class="card settings-menu">
+
+            <button class="active">
+                Campi cliente
+            </button>
+
+            <button>
+                Stati
+            </button>
+
+            <button>
+                Preferenze
+            </button>
+
+        </div>
+
+        <div class="card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <div class="card-title">
+                        Campi personalizzati
+                    </div>
+
+                    <div style="font-size:12px;color:var(--muted);margin-top:4px">
+                        Aggiungi nuovi campi direttamente dal portale.
+                    </div>
+
+                </div>
+
+                <button class="btn btn-primary btn-small"
+                        onclick="openCustomFieldModal()">
+                    + Nuovo campo
+                </button>
+
+            </div>
+
+            <div style="padding:0 22px"
+                 id="customFieldsList">
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+</div>
+</main>
 </div>
 
 <!-- CLIENT MODAL -->
 
-<div class="modal-overlay" id="clientModal">
+<div class="modal-overlay"
+     id="clientModal">
 
-    <div class="modal">
+<div class="modal">
 
-        <div class="modal-header">
+<div class="modal-header">
 
-            <div class="modal-title" id="clientModalTitle">
-                Nuovo cliente
-            </div>
-
-            <button class="modal-close"
-                    onclick="closeModal('clientModal')">
-                ×
-            </button>
-
-        </div>
-
-        <form id="clientForm"
-              onsubmit="saveClient(event)">
-
-            <div class="modal-body">
-
-                <input type="hidden" id="clientId">
-
-                <div class="form-grid">
-
-                    <div class="form-group full">
-
-                        <label class="form-label">
-                            Ragione sociale *
-                        </label>
-
-                        <input
-                            class="form-control"
-                            id="ragioneSociale"
-                            required
-                        >
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <label class="form-label">
-                            Partita IVA
-                        </label>
-
-                        <input
-                            class="form-control"
-                            id="partitaIva"
-                        >
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <label class="form-label">
-                            Codice fiscale
-                        </label>
-
-                        <input
-                            class="form-control"
-                            id="codiceFiscale"
-                        >
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <label class="form-label">
-                            Data registrazione impresa
-                        </label>
-
-                        <input
-                            type="date"
-                            class="form-control"
-                            id="dataRegistrazione"
-                        >
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <label class="form-label">
-                            Data inizio attività
-                        </label>
-
-                        <input
-                            type="date"
-                            class="form-control"
-                            id="dataInizio"
-                        >
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <label class="form-label">
-                            Codice ATECO
-                        </label>
-
-                        <input
-                            class="form-control"
-                            id="ateco"
-                        >
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <label class="form-label">
-                            Telefono
-                        </label>
-
-                        <input
-                            class="form-control"
-                            id="telefono"
-                        >
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <label class="form-label">
-                            Email
-                        </label>
-
-                        <input
-                            type="email"
-                            class="form-control"
-                            id="email"
-                        >
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <label class="form-label">
-                            PEC
-                        </label>
-
-                        <input
-                            type="email"
-                            class="form-control"
-                            id="pec"
-                        >
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <label class="form-label">
-                            Sito web
-                        </label>
-
-                        <input
-                            class="form-control"
-                            id="sito"
-                        >
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <label class="form-label">
-                            Indirizzo
-                        </label>
-
-                        <input
-                            class="form-control"
-                            id="indirizzo"
-                        >
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <label class="form-label">
-                            CAP
-                        </label>
-
-                        <input
-                            class="form-control"
-                            id="cap"
-                        >
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <label class="form-label">
-                            Comune
-                        </label>
-
-                        <input
-                            class="form-control"
-                            id="comune"
-                        >
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <label class="form-label">
-                            Provincia
-                        </label>
-
-                        <input
-                            class="form-control"
-                            id="provincia"
-                        >
-
-                    </div>
-
-                    <div class="form-group full">
-
-                        <label class="form-label">
-                            Note
-                        </label>
-
-                        <textarea
-                            class="form-control"
-                            id="note"
-                        ></textarea>
-
-                    </div>
-
-                    <div id="customClientFields"
-                         class="form-group full">
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="modal-footer">
-
-                <button
-                    type="button"
-                    class="btn btn-secondary"
-                    onclick="closeModal('clientModal')">
-                    Annulla
-                </button>
-
-                <button
-                    type="submit"
-                    class="btn btn-primary">
-                    Salva cliente
-                </button>
-
-            </div>
-
-        </form>
-
+    <div class="modal-title"
+         id="clientModalTitle">
+        Nuovo cliente
     </div>
 
+    <button class="modal-close"
+            onclick="closeModal('clientModal')">
+        ×
+    </button>
+
+</div>
+
+<form id="clientForm"
+      onsubmit="saveClient(event)">
+
+<div class="modal-body">
+
+<input type="hidden"
+       id="clientId">
+
+<div class="form-grid">
+
+<div class="form-group full">
+
+<label class="form-label">
+    Ragione sociale *
+</label>
+
+<input
+    class="form-control"
+    id="ragioneSociale"
+    required>
+
+</div>
+
+<div class="form-group">
+
+<label class="form-label">
+    Partita IVA
+</label>
+
+<input class="form-control"
+       id="partitaIva">
+
+</div>
+
+<div class="form-group">
+
+<label class="form-label">
+    Codice fiscale
+</label>
+
+<input class="form-control"
+       id="codiceFiscale">
+
+</div>
+
+<div class="form-group">
+
+<label class="form-label">
+    Data registrazione impresa
+</label>
+
+<input type="date"
+       class="form-control"
+       id="dataRegistrazione">
+
+</div>
+
+<div class="form-group">
+
+<label class="form-label">
+    Data inizio attività
+</label>
+
+<input type="date"
+       class="form-control"
+       id="dataInizio">
+
+</div>
+
+<div class="form-group">
+
+<label class="form-label">
+    Codice ATECO
+</label>
+
+<input class="form-control"
+       id="ateco">
+
+</div>
+
+<div class="form-group">
+
+<label class="form-label">
+    Telefono
+</label>
+
+<input class="form-control"
+       id="telefono">
+
+</div>
+
+<div class="form-group">
+
+<label class="form-label">
+    Email
+</label>
+
+<input type="email"
+       class="form-control"
+       id="email">
+
+</div>
+
+<div class="form-group">
+
+<label class="form-label">
+    PEC
+</label>
+
+<input type="email"
+       class="form-control"
+       id="pec">
+
+</div>
+
+<div class="form-group">
+
+<label class="form-label">
+    Sito web
+</label>
+
+<input class="form-control"
+       id="sito">
+
+</div>
+
+<div class="form-group">
+
+<label class="form-label">
+    Indirizzo
+</label>
+
+<input class="form-control"
+       id="indirizzo">
+
+</div>
+
+<div class="form-group">
+
+<label class="form-label">
+    CAP
+</label>
+
+<input class="form-control"
+       id="cap">
+
+</div>
+
+<div class="form-group">
+
+<label class="form-label">
+    Comune
+</label>
+
+<input class="form-control"
+       id="comune">
+
+</div>
+
+<div class="form-group">
+
+<label class="form-label">
+    Provincia
+</label>
+
+<input class="form-control"
+       id="provincia">
+
+</div>
+
+<div class="form-group full">
+
+<label class="form-label">
+    Note
+</label>
+
+<textarea class="form-control"
+          id="note">
+</textarea>
+
+</div>
+
+<div id="customClientFields"
+     class="form-group full">
+</div>
+
+</div>
+</div>
+
+<div class="modal-footer">
+
+<button type="button"
+        class="btn btn-secondary"
+        onclick="closeModal('clientModal')">
+    Annulla
+</button>
+
+<button type="submit"
+        class="btn btn-primary">
+    Salva cliente
+</button>
+
+</div>
+
+</form>
+</div>
 </div>
 
 <!-- PROJECT MODAL -->
 
-<div class="modal-overlay" id="projectModal">
+<div class="modal-overlay"
+     id="projectModal">
 
-    <div class="modal">
+<div class="modal">
 
-        <div class="modal-header">
+<div class="modal-header">
 
-            <div class="modal-title">
-                Nuovo progetto
-            </div>
+<div class="modal-title">
+    Nuovo progetto
+</div>
 
-            <button class="modal-close"
-                    onclick="closeModal('projectModal')">
-                ×
-            </button>
+<button class="modal-close"
+        onclick="closeModal('projectModal')">
+    ×
+</button>
 
-        </div>
+</div>
 
-        <form onsubmit="saveProject(event)">
+<form onsubmit="saveProject(event)">
 
-            <div class="modal-body">
+<div class="modal-body">
 
-                <div class="form-grid">
+<div class="form-grid">
 
-                    <div class="form-group full">
+<div class="form-group full">
 
-                        <label class="form-label">
-                            Nome progetto *
-                        </label>
+<label class="form-label">
+    Nome progetto *
+</label>
 
-                        <input
-                            class="form-control"
-                            id="projectName"
-                            required
-                        >
+<input class="form-control"
+       id="projectName"
+       required>
 
-                    </div>
+</div>
 
-                    <div class="form-group">
+<div class="form-group">
 
-                        <label class="form-label">
-                            Cliente *
-                        </label>
+<label class="form-label">
+    Cliente *
+</label>
 
-                        <select
-                            class="form-control"
-                            id="projectClient"
-                            required>
-                        </select>
+<select class="form-control"
+        id="projectClient"
+        required>
+</select>
 
-                    </div>
+</div>
 
-                    <div class="form-group">
+<div class="form-group">
 
-                        <label class="form-label">
-                            Stato
-                        </label>
+<label class="form-label">
+    Stato
+</label>
 
-                        <select
-                            class="form-control"
-                            id="projectStatus">
+<select class="form-control"
+        id="projectStatus">
 
-                            <option value="In corso">
-                                In corso
-                            </option>
+<option value="In corso">
+    In corso
+</option>
 
-                            <option value="Da iniziare">
-                                Da iniziare
-                            </option>
+<option value="Da iniziare">
+    Da iniziare
+</option>
 
-                            <option value="In pausa">
-                                In pausa
-                            </option>
+<option value="In pausa">
+    In pausa
+</option>
 
-                            <option value="Completato">
-                                Completato
-                            </option>
+<option value="Completato">
+    Completato
+</option>
 
-                        </select>
+</select>
 
-                    </div>
+</div>
 
-                    <div class="form-group">
+<div class="form-group">
 
-                        <label class="form-label">
-                            Data inizio
-                        </label>
+<label class="form-label">
+    Data inizio
+</label>
 
-                        <input
-                            type="date"
-                            class="form-control"
-                            id="projectStart"
-                        >
+<input type="date"
+       class="form-control"
+       id="projectStart">
 
-                    </div>
+</div>
 
-                    <div class="form-group">
+<div class="form-group">
 
-                        <label class="form-label">
-                            Data fine
-                        </label>
+<label class="form-label">
+    Data fine
+</label>
 
-                        <input
-                            type="date"
-                            class="form-control"
-                            id="projectEnd"
-                        >
+<input type="date"
+       class="form-control"
+       id="projectEnd">
 
-                    </div>
+</div>
 
-                    <div class="form-group full">
+<div class="form-group full">
 
-                        <label class="form-label">
-                            Descrizione
-                        </label>
+<label class="form-label">
+    Descrizione
+</label>
 
-                        <textarea
-                            class="form-control"
-                            id="projectDescription">
-                        </textarea>
+<textarea class="form-control"
+          id="projectDescription"></textarea>
 
-                    </div>
+</div>
 
-                </div>
+</div>
+</div>
 
-            </div>
+<div class="modal-footer">
 
-            <div class="modal-footer">
+<button type="button"
+        class="btn btn-secondary"
+        onclick="closeModal('projectModal')">
+    Annulla
+</button>
 
-                <button
-                    type="button"
-                    class="btn btn-secondary"
-                    onclick="closeModal('projectModal')">
-                    Annulla
-                </button>
+<button type="submit"
+        class="btn btn-primary">
+    Crea progetto
+</button>
 
-                <button
-                    type="submit"
-                    class="btn btn-primary">
-                    Crea progetto
-                </button>
+</div>
 
-            </div>
-
-        </form>
-
-    </div>
-
+</form>
+</div>
 </div>
 
 <!-- TASK MODAL -->
 
-<div class="modal-overlay" id="taskModal">
+<div class="modal-overlay"
+     id="taskModal">
 
-    <div class="modal">
+<div class="modal">
 
-        <div class="modal-header">
+<div class="modal-header">
 
-            <div class="modal-title">
-                Nuova attività
-            </div>
+<div class="modal-title"
+     id="taskModalTitle">
+    Nuova attività
+</div>
 
-            <button class="modal-close"
-                    onclick="closeModal('taskModal')">
-                ×
-            </button>
+<button class="modal-close"
+        onclick="closeModal('taskModal')">
+    ×
+</button>
 
-        </div>
+</div>
 
-        <form onsubmit="saveTask(event)">
+<form id="taskForm"
+      onsubmit="saveTask(event)">
 
-            <div class="modal-body">
+<div class="modal-body">
 
-                <div class="form-grid">
+<input type="hidden"
+       id="taskId">
 
-                    <div class="form-group full">
+<div class="form-grid">
 
-                        <label class="form-label">
-                            Attività *
-                        </label>
+<div class="form-group full">
 
-                        <input
-                            class="form-control"
-                            id="taskName"
-                            required
-                        >
+<label class="form-label">
+    Attività *
+</label>
 
-                    </div>
+<input
+    class="form-control"
+    id="taskName"
+    required>
 
-                    <div class="form-group">
+</div>
 
-                        <label class="form-label">
-                            Progetto
-                        </label>
+<div class="form-group">
 
-                        <select
-                            class="form-control"
-                            id="taskProject">
-                        </select>
+<label class="form-label">
+    Progetto
+</label>
 
-                    </div>
+<select class="form-control"
+        id="taskProject">
+</select>
 
-                    <div class="form-group">
+</div>
 
-                        <label class="form-label">
-                            Stato
-                        </label>
+<div class="form-group">
 
-                        <select
-                            class="form-control"
-                            id="taskStatus">
+<label class="form-label">
+    Fase
+</label>
 
-                            <option value="Da fare">Da fare</option>
-                            <option value="In corso">In corso</option>
-                            <option value="Completata">Completata</option>
+<select class="form-control"
+        id="taskPhase">
 
-                        </select>
+<option value="">
+    Nessuna fase
+</option>
 
-                    </div>
+</select>
 
-                    <div class="form-group">
+</div>
 
-                        <label class="form-label">
-                            Data inizio
-                        </label>
+<div class="form-group">
 
-                        <input
-                            type="date"
-                            class="form-control"
-                            id="taskStart"
-                        >
+<label class="form-label">
+    Stato
+</label>
 
-                    </div>
+<select class="form-control"
+        id="taskStatus">
 
-                    <div class="form-group">
+<option value="Da fare">
+    Da fare
+</option>
 
-                        <label class="form-label">
-                            Scadenza
-                        </label>
+<option value="In corso">
+    In corso
+</option>
 
-                        <input
-                            type="date"
-                            class="form-control"
-                            id="taskDue"
-                        >
+<option value="Completata">
+    Completata
+</option>
 
-                    </div>
+</select>
 
-                    <div class="form-group">
+</div>
 
-                        <label class="form-label">
-                            Priorità
-                        </label>
+<div class="form-group">
 
-                        <select
-                            class="form-control"
-                            id="taskPriority">
+<label class="form-label">
+    Data inizio
+</label>
 
-                            <option value="Bassa">Bassa</option>
-                            <option value="Media" selected>Media</option>
-                            <option value="Alta">Alta</option>
+<input type="date"
+       class="form-control"
+       id="taskStart">
 
-                        </select>
+</div>
 
-                    </div>
+<div class="form-group">
 
-                    <div class="form-group full">
+<label class="form-label">
+    Scadenza / data attività
+</label>
 
-                        <label class="form-label">
-                            Descrizione
-                        </label>
+<input type="date"
+       class="form-control"
+       id="taskDue">
 
-                        <textarea
-                            class="form-control"
-                            id="taskDescription">
-                        </textarea>
+</div>
 
-                    </div>
+<div class="form-group">
 
-                </div>
+<label class="form-label">
+    Priorità
+</label>
 
-            </div>
+<select class="form-control"
+        id="taskPriority">
 
-            <div class="modal-footer">
+<option value="Bassa">
+    Bassa
+</option>
 
-                <button
-                    type="button"
-                    class="btn btn-secondary"
-                    onclick="closeModal('taskModal')">
-                    Annulla
-                </button>
+<option value="Media"
+        selected>
+    Media
+</option>
 
-                <button
-                    type="submit"
-                    class="btn btn-primary">
-                    Crea attività
-                </button>
+<option value="Alta">
+    Alta
+</option>
 
-            </div>
+</select>
 
-        </form>
+</div>
 
-    </div>
+<div class="form-group full">
 
+<label class="form-label">
+    Descrizione
+</label>
+
+<textarea
+    class="form-control"
+    id="taskDescription"></textarea>
+
+</div>
+
+</div>
+</div>
+
+<div class="modal-footer">
+
+<button type="button"
+        class="btn btn-secondary"
+        onclick="closeModal('taskModal')">
+    Annulla
+</button>
+
+<button type="submit"
+        class="btn btn-primary"
+        id="taskSubmitButton">
+    Crea attività
+</button>
+
+</div>
+
+</form>
+</div>
 </div>
 
 <!-- CUSTOM FIELD MODAL -->
 
-<div class="modal-overlay" id="customFieldModal">
+<div class="modal-overlay"
+     id="customFieldModal">
 
-    <div class="modal">
+<div class="modal">
 
-        <div class="modal-header">
+<div class="modal-header">
 
-            <div class="modal-title">
-                Nuovo campo cliente
-            </div>
+<div class="modal-title">
+    Nuovo campo cliente
+</div>
 
-            <button class="modal-close"
-                    onclick="closeModal('customFieldModal')">
-                ×
-            </button>
-
-        </div>
-
-        <form onsubmit="saveCustomField(event)">
-
-            <div class="modal-body">
-
-                <div class="form-grid">
-
-                    <div class="form-group full">
-
-                        <label class="form-label">
-                            Nome campo *
-                        </label>
-
-                        <input
-                            class="form-control"
-                            id="customFieldName"
-                            placeholder="es. Fatturato annuale"
-                            required
-                        >
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <label class="form-label">
-                            Tipo
-                        </label>
-
-                        <select
-                            class="form-control"
-                            id="customFieldType">
-
-                            <option value="text">
-                                Testo
-                            </option>
-
-                            <option value="number">
-                                Numero
-                            </option>
-
-                            <option value="date">
-                                Data
-                            </option>
-
-                            <option value="select">
-                                Selezione
-                            </option>
-
-                            <option value="textarea">
-                                Testo lungo
-                            </option>
-
-                        </select>
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <label class="form-label">
-                            Opzioni
-                        </label>
-
-                        <input
-                            class="form-control"
-                            id="customFieldOptions"
-                            placeholder="Azienda, Privato, Ente"
-                        >
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="modal-footer">
-
-                <button
-                    type="button"
-                    class="btn btn-secondary"
-                    onclick="closeModal('customFieldModal')">
-                    Annulla
-                </button>
-
-                <button
-                    type="submit"
-                    class="btn btn-primary">
-                    Aggiungi campo
-                </button>
-
-            </div>
-
-        </form>
-
-    </div>
+<button class="modal-close"
+        onclick="closeModal('customFieldModal')">
+    ×
+</button>
 
 </div>
 
-<script>
-/*
-|--------------------------------------------------------------------------
-| CRM PERSONAL
-|--------------------------------------------------------------------------
-| Versione frontend standalone.
-| I dati vengono salvati nel localStorage del browser.
-|--------------------------------------------------------------------------
-*/
+<form onsubmit="saveCustomField(event)">
 
-let clients = JSON.parse(localStorage.getItem("crm_clients") || "[]");
-let projects = JSON.parse(localStorage.getItem("crm_projects") || "[]");
-let tasks = JSON.parse(localStorage.getItem("crm_tasks") || "[]");
-let customFields = JSON.parse(localStorage.getItem("crm_custom_fields") || "[]");
-let files = JSON.parse(localStorage.getItem("crm_files") || "[]");
+<div class="modal-body">
+
+<div class="form-grid">
+
+<div class="form-group full">
+
+<label class="form-label">
+    Nome campo *
+</label>
+
+<input
+    class="form-control"
+    id="customFieldName"
+    placeholder="es. Fatturato annuale"
+    required>
+
+</div>
+
+<div class="form-group">
+
+<label class="form-label">
+    Tipo
+</label>
+
+<select class="form-control"
+        id="customFieldType">
+
+<option value="text">
+    Testo
+</option>
+
+<option value="number">
+    Numero
+</option>
+
+<option value="date">
+    Data
+</option>
+
+<option value="select">
+    Selezione
+</option>
+
+<option value="textarea">
+    Testo lungo
+</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label class="form-label">
+    Opzioni
+</label>
+
+<input
+    class="form-control"
+    id="customFieldOptions"
+    placeholder="Azienda, Privato, Ente">
+
+</div>
+
+</div>
+</div>
+
+<div class="modal-footer">
+
+<button type="button"
+        class="btn btn-secondary"
+        onclick="closeModal('customFieldModal')">
+    Annulla
+</button>
+
+<button type="submit"
+        class="btn btn-primary">
+    Aggiungi campo
+</button>
+
+</div>
+
+</form>
+</div>
+</div>
+
+<script>
+
+/* ============================================================
+   CRM PERSONAL
+   ============================================================
+
+   Tutti i dati vengono salvati nel localStorage.
+
+   Modifiche principali:
+   - Fasi visibili dentro i progetti
+   - Attività associate alle fasi
+   - Modifica attività
+   - Attività dal calendario
+   - Click sul giorno per creare attività
+   - Click sull'attività per modificarla
+   - Completamento attività dal calendario
+   - Avanzamento progetto automatico
+   ============================================================ */
+
+
+/* ============================================================
+   DATA
+   ============================================================ */
+
+let clients =
+    JSON.parse(localStorage.getItem("crm_clients") || "[]");
+
+let projects =
+    JSON.parse(localStorage.getItem("crm_projects") || "[]");
+
+let tasks =
+    JSON.parse(localStorage.getItem("crm_tasks") || "[]");
+
+let customFields =
+    JSON.parse(localStorage.getItem("crm_custom_fields") || "[]");
+
+let files =
+    JSON.parse(localStorage.getItem("crm_files") || "[]");
 
 let calendarDate = new Date();
 
-/* -------------------------------------------------------------
+
+/* ============================================================
    STORAGE
-------------------------------------------------------------- */
+   ============================================================ */
 
 function saveData(){
 
@@ -2197,16 +2243,18 @@ function saveData(){
     );
 }
 
-/* -------------------------------------------------------------
+
+/* ============================================================
    HELPERS
-------------------------------------------------------------- */
+   ============================================================ */
 
 function uid(){
 
     return Date.now().toString(36) +
-           Math.random().toString(36).substring(2,8);
+        Math.random().toString(36).substring(2,8);
 
 }
+
 
 function escapeHTML(value){
 
@@ -2220,12 +2268,14 @@ function escapeHTML(value){
         .replaceAll(">","&gt;")
         .replaceAll('"',"&quot;")
         .replaceAll("'","&#039;");
-
 }
+
 
 function formatDate(date){
 
-    if(!date) return "-";
+    if(!date){
+        return "-";
+    }
 
     const d = new Date(date);
 
@@ -2236,39 +2286,57 @@ function formatDate(date){
     return d.toLocaleDateString("it-IT");
 }
 
+
 function today(){
 
-    return new Date().toISOString().split("T")[0];
+    const d = new Date();
 
+    return (
+        d.getFullYear() +
+        "-" +
+        String(d.getMonth()+1).padStart(2,"0") +
+        "-" +
+        String(d.getDate()).padStart(2,"0")
+    );
 }
+
 
 function statusBadge(status){
 
     const map = {
+
         "Completata":"green",
         "Completato":"green",
         "In corso":"blue",
         "Da iniziare":"gray",
         "Da fare":"gray",
         "In pausa":"yellow"
+
     };
 
-    return `<span class="badge ${map[status] || "gray"}">
-        ${escapeHTML(status)}
-    </span>`;
+    return `
+        <span class="badge ${map[status] || "gray"}">
+            ${escapeHTML(status)}
+        </span>
+    `;
 }
+
 
 function closeModal(id){
 
-    document.getElementById(id).classList.remove("open");
+    document
+        .getElementById(id)
+        .classList.remove("open");
 
 }
 
-/* -------------------------------------------------------------
+
+/* ============================================================
    NAVIGATION
-------------------------------------------------------------- */
+   ============================================================ */
 
 const pageTitles = {
+
     dashboard:"Dashboard",
     clients:"Clienti",
     projects:"Progetti",
@@ -2276,25 +2344,33 @@ const pageTitles = {
     calendar:"Calendario",
     files:"Documenti",
     settings:"Impostazioni"
+
 };
 
-document.querySelectorAll(".nav button").forEach(button => {
 
-    button.addEventListener("click", () => {
+document.querySelectorAll(".nav button")
+    .forEach(button => {
 
-        navigate(button.dataset.page);
+        button.addEventListener("click", () => {
+
+            navigate(button.dataset.page);
+
+        });
 
     });
 
-});
 
 function navigate(page){
 
     document.querySelectorAll(".page")
         .forEach(p => p.classList.remove("active"));
 
-    document.getElementById("page-" + page)
-        .classList.add("active");
+    const pageElement =
+        document.getElementById("page-" + page);
+
+    if(pageElement){
+        pageElement.classList.add("active");
+    }
 
     document.querySelectorAll(".nav button")
         .forEach(b => b.classList.remove("active"));
@@ -2308,16 +2384,16 @@ function navigate(page){
         navButton.classList.add("active");
     }
 
-    document.getElementById("topbarTitle").textContent =
-        pageTitles[page];
+    document.getElementById("topbarTitle")
+        .textContent = pageTitles[page] || page;
 
     renderAll();
-
 }
 
-/* -------------------------------------------------------------
+
+/* ============================================================
    CLIENTI
-------------------------------------------------------------- */
+   ============================================================ */
 
 function openClientModal(clientId = null){
 
@@ -2326,8 +2402,11 @@ function openClientModal(clientId = null){
     document.getElementById("clientId").value =
         clientId || "";
 
-    document.getElementById("clientModalTitle").textContent =
-        clientId ? "Modifica cliente" : "Nuovo cliente";
+    document.getElementById("clientModalTitle")
+        .textContent =
+        clientId
+        ? "Modifica cliente"
+        : "Nuovo cliente";
 
     renderCustomClientFields();
 
@@ -2336,7 +2415,9 @@ function openClientModal(clientId = null){
         const client =
             clients.find(c => c.id === clientId);
 
-        if(!client) return;
+        if(!client){
+            return;
+        }
 
         document.getElementById("ragioneSociale").value =
             client.ragioneSociale || "";
@@ -2386,7 +2467,9 @@ function openClientModal(clientId = null){
         customFields.forEach(field => {
 
             const input =
-                document.getElementById("custom_" + field.id);
+                document.getElementById(
+                    "custom_" + field.id
+                );
 
             if(input){
                 input.value =
@@ -2394,14 +2477,12 @@ function openClientModal(clientId = null){
             }
 
         });
-
     }
 
-    document
-        .getElementById("clientModal")
+    document.getElementById("clientModal")
         .classList.add("open");
-
 }
+
 
 function saveClient(event){
 
@@ -2415,7 +2496,9 @@ function saveClient(event){
     customFields.forEach(field => {
 
         const element =
-            document.getElementById("custom_" + field.id);
+            document.getElementById(
+                "custom_" + field.id
+            );
 
         if(element){
             custom[field.id] = element.value;
@@ -2496,8 +2579,8 @@ function saveClient(event){
     closeModal("clientModal");
 
     renderAll();
-
 }
+
 
 function renderClients(){
 
@@ -2505,16 +2588,32 @@ function renderClients(){
         document.getElementById("clientsTable");
 
     const search =
-        (document.getElementById("clientSearch")?.value || "")
-        .toLowerCase();
+        (
+            document.getElementById("clientSearch")
+            ?.value || ""
+        ).toLowerCase();
 
     const filtered =
         clients.filter(client => {
 
             return (
-                client.ragioneSociale?.toLowerCase().includes(search) ||
-                client.partitaIva?.toLowerCase().includes(search) ||
-                client.email?.toLowerCase().includes(search)
+
+                client.ragioneSociale
+                    ?.toLowerCase()
+                    .includes(search)
+
+                ||
+
+                client.partitaIva
+                    ?.toLowerCase()
+                    .includes(search)
+
+                ||
+
+                client.email
+                    ?.toLowerCase()
+                    .includes(search)
+
             );
 
         });
@@ -2568,17 +2667,24 @@ function renderClients(){
                                 </div>
 
                                 <div class="client-email">
-                                    ${escapeHTML(client.email || "Nessuna email")}
+                                    ${escapeHTML(
+                                        client.email ||
+                                        "Nessuna email"
+                                    )}
                                 </div>
 
                             </td>
 
                             <td>
-                                ${escapeHTML(client.partitaIva || "-")}
+                                ${escapeHTML(
+                                    client.partitaIva || "-"
+                                )}
                             </td>
 
                             <td>
-                                ${escapeHTML(client.ateco || "-")}
+                                ${escapeHTML(
+                                    client.ateco || "-"
+                                )}
                             </td>
 
                             <td>
@@ -2620,15 +2726,23 @@ function renderClients(){
             </tbody>
 
         </table>
-    `;
 
+    `;
 }
+
 
 function deleteClient(id){
 
-    if(!confirm("Eliminare questo cliente?")){
+    if(!confirm(
+        "Eliminare questo cliente? Verranno eliminati anche i suoi progetti e attività."
+    )){
         return;
     }
+
+    const projectIds =
+        projects
+            .filter(p => p.clientId === id)
+            .map(p => p.id);
 
     clients =
         clients.filter(c => c.id !== id);
@@ -2636,15 +2750,20 @@ function deleteClient(id){
     projects =
         projects.filter(p => p.clientId !== id);
 
+    tasks =
+        tasks.filter(
+            t => !projectIds.includes(t.projectId)
+        );
+
     saveData();
 
     renderAll();
-
 }
 
-/* -------------------------------------------------------------
+
+/* ============================================================
    CAMPI PERSONALIZZATI
-------------------------------------------------------------- */
+   ============================================================ */
 
 function openCustomFieldModal(){
 
@@ -2653,6 +2772,7 @@ function openCustomFieldModal(){
         .classList.add("open");
 
 }
+
 
 function saveCustomField(event){
 
@@ -2663,16 +2783,22 @@ function saveCustomField(event){
         id:uid(),
 
         name:
-            document.getElementById("customFieldName").value,
+            document.getElementById(
+                "customFieldName"
+            ).value,
 
         type:
-            document.getElementById("customFieldType").value,
+            document.getElementById(
+                "customFieldType"
+            ).value,
 
         options:
-            document.getElementById("customFieldOptions").value
-                .split(",")
-                .map(x => x.trim())
-                .filter(Boolean)
+            document.getElementById(
+                "customFieldOptions"
+            ).value
+            .split(",")
+            .map(x => x.trim())
+            .filter(Boolean)
 
     };
 
@@ -2682,12 +2808,17 @@ function saveCustomField(event){
 
     closeModal("customFieldModal");
 
-    document.getElementById("customFieldName").value = "";
-    document.getElementById("customFieldOptions").value = "";
+    document.getElementById(
+        "customFieldName"
+    ).value = "";
+
+    document.getElementById(
+        "customFieldOptions"
+    ).value = "";
 
     renderAll();
-
 }
+
 
 function renderCustomFields(){
 
@@ -2732,13 +2863,15 @@ function renderCustomFields(){
             </div>
 
         `).join("");
-
 }
+
 
 function renderCustomClientFields(){
 
     const container =
-        document.getElementById("customClientFields");
+        document.getElementById(
+            "customClientFields"
+        );
 
     if(!customFields.length){
 
@@ -2768,7 +2901,9 @@ function renderCustomClientFields(){
                         class="form-control"
                         id="custom_${field.id}">
 
-                        <option value="">Seleziona...</option>
+                        <option value="">
+                            Seleziona...
+                        </option>
 
                         ${field.options.map(o =>
                             `<option value="${escapeHTML(o)}">
@@ -2792,7 +2927,9 @@ function renderCustomClientFields(){
 
             return `
 
-                <div class="form-group" style="margin-bottom:16px">
+                <div
+                    class="form-group"
+                    style="margin-bottom:16px">
 
                     <label class="form-label">
                         ${escapeHTML(field.name)}
@@ -2805,17 +2942,21 @@ function renderCustomClientFields(){
             `;
 
         }).join("");
-
 }
+
 
 function deleteCustomField(id){
 
-    if(!confirm("Eliminare questo campo personalizzato?")){
+    if(!confirm(
+        "Eliminare questo campo personalizzato?"
+    )){
         return;
     }
 
     customFields =
-        customFields.filter(f => f.id !== id);
+        customFields.filter(
+            f => f.id !== id
+        );
 
     clients.forEach(client => {
 
@@ -2828,18 +2969,20 @@ function deleteCustomField(id){
     saveData();
 
     renderAll();
-
 }
 
-/* -------------------------------------------------------------
+
+/* ============================================================
    PROGETTI
-------------------------------------------------------------- */
+   ============================================================ */
 
 function openProjectModal(){
 
     if(!clients.length){
 
-        alert("Devi prima creare almeno un cliente.");
+        alert(
+            "Devi prima creare almeno un cliente."
+        );
 
         navigate("clients");
 
@@ -2847,19 +2990,24 @@ function openProjectModal(){
     }
 
     const select =
-        document.getElementById("projectClient");
+        document.getElementById(
+            "projectClient"
+        );
 
     select.innerHTML =
         clients.map(c => `
+
             <option value="${c.id}">
                 ${escapeHTML(c.ragioneSociale)}
             </option>
+
         `).join("");
 
-    document.getElementById("projectModal")
-        .classList.add("open");
-
+    document.getElementById(
+        "projectModal"
+    ).classList.add("open");
 }
+
 
 function saveProject(event){
 
@@ -2870,22 +3018,34 @@ function saveProject(event){
         id:uid(),
 
         name:
-            document.getElementById("projectName").value,
+            document.getElementById(
+                "projectName"
+            ).value,
 
         clientId:
-            document.getElementById("projectClient").value,
+            document.getElementById(
+                "projectClient"
+            ).value,
 
         status:
-            document.getElementById("projectStatus").value,
+            document.getElementById(
+                "projectStatus"
+            ).value,
 
         start:
-            document.getElementById("projectStart").value,
+            document.getElementById(
+                "projectStart"
+            ).value,
 
         end:
-            document.getElementById("projectEnd").value,
+            document.getElementById(
+                "projectEnd"
+            ).value,
 
         description:
-            document.getElementById("projectDescription").value,
+            document.getElementById(
+                "projectDescription"
+            ).value,
 
         progress:0,
 
@@ -2900,20 +3060,75 @@ function saveProject(event){
     event.target.reset();
 
     renderAll();
-
 }
+
+
+/* ============================================================
+   PROJECT PROGRESS
+   ============================================================ */
+
+function updateProjectProgress(projectId){
+
+    const project =
+        projects.find(
+            p => p.id === projectId
+        );
+
+    if(!project){
+        return;
+    }
+
+    const projectTasks =
+        tasks.filter(
+            t => t.projectId === projectId
+        );
+
+    if(!projectTasks.length){
+
+        project.progress = 0;
+
+        return;
+    }
+
+    const completed =
+        projectTasks.filter(
+            t => t.status === "Completata"
+        ).length;
+
+    project.progress =
+        Math.round(
+            (completed / projectTasks.length) * 100
+        );
+}
+
+
+/* ============================================================
+   RENDER PROJECTS
+   ============================================================ */
 
 function renderProjects(){
 
     const container =
-        document.getElementById("projectsGrid");
+        document.getElementById(
+            "projectsGrid"
+        );
+
+    projects.forEach(project => {
+        updateProjectProgress(project.id);
+    });
 
     if(!projects.length){
 
         container.innerHTML = `
-            <div class="card empty" style="grid-column:1/-1">
-                <div class="empty-icon">▣</div>
+            <div class="card empty"
+                 style="grid-column:1/-1">
+
+                <div class="empty-icon">
+                    ▣
+                </div>
+
                 Nessun progetto.
+
             </div>
         `;
 
@@ -2928,16 +3143,29 @@ function renderProjects(){
                     c => c.id === project.clientId
                 );
 
-            const taskCount =
+            const projectTasks =
                 tasks.filter(
                     t => t.projectId === project.id
-                ).length;
+                );
+
+            const phases =
+                project.phases || [];
+
+            const unassignedTasks =
+                projectTasks.filter(
+                    t => !t.phaseId
+                );
 
             return `
 
                 <div class="card project-card">
 
-                    <div style="display:flex;justify-content:space-between;gap:10px">
+                    <div style="
+                        display:flex;
+                        justify-content:space-between;
+                        gap:10px;
+                        align-items:flex-start;
+                    ">
 
                         <div>
 
@@ -2945,8 +3173,15 @@ function renderProjects(){
                                 ${escapeHTML(project.name)}
                             </h3>
 
-                            <div style="font-size:12px;color:var(--primary);font-weight:650">
-                                ${escapeHTML(client?.ragioneSociale || "Cliente eliminato")}
+                            <div style="
+                                font-size:12px;
+                                color:var(--primary);
+                                font-weight:650
+                            ">
+                                ${escapeHTML(
+                                    client?.ragioneSociale ||
+                                    "Cliente eliminato"
+                                )}
                             </div>
 
                         </div>
@@ -2956,13 +3191,19 @@ function renderProjects(){
                     </div>
 
                     <div class="project-description">
-                        ${escapeHTML(project.description || "Nessuna descrizione")}
+
+                        ${escapeHTML(
+                            project.description ||
+                            "Nessuna descrizione"
+                        )}
+
                     </div>
 
                     <div class="project-meta">
 
                         <span>
-                            ${taskCount} attività
+                            ${projectTasks.length}
+                            attività
                         </span>
 
                         <span>
@@ -2975,14 +3216,24 @@ function renderProjects(){
 
                         <div
                             class="progress-bar"
-                            style="width:${project.progress || 0}%">
+                            style="
+                                width:${project.progress || 0}%
+                            ">
                         </div>
 
                     </div>
 
-                    <div style="display:flex;justify-content:space-between;margin-top:8px;font-size:11px;color:var(--muted)">
+                    <div style="
+                        display:flex;
+                        justify-content:space-between;
+                        margin-top:8px;
+                        font-size:11px;
+                        color:var(--muted)
+                    ">
 
-                        <span>Avanzamento</span>
+                        <span>
+                            Avanzamento
+                        </span>
 
                         <strong>
                             ${project.progress || 0}%
@@ -2990,7 +3241,7 @@ function renderProjects(){
 
                     </div>
 
-                    <div style="display:flex;gap:8px;margin-top:18px">
+                    <div class="project-actions">
 
                         <button
                             class="btn btn-secondary btn-small"
@@ -2999,7 +3250,7 @@ function renderProjects(){
                         </button>
 
                         <button
-                            class="btn btn-secondary btn-small"
+                            class="btn btn-primary btn-small"
                             onclick="openTaskModal('${project.id}')">
                             + Attività
                         </button>
@@ -3012,25 +3263,265 @@ function renderProjects(){
 
                     </div>
 
+                    <div class="project-details">
+
+                        ${
+                            phases.length
+                            ?
+                            phases.map(phase =>
+                                renderPhase(
+                                    project,
+                                    phase,
+                                    projectTasks
+                                )
+                            ).join("")
+                            :
+                            `
+                                <div class="project-no-phase">
+                                    Nessuna fase creata.
+                                    Usa "+ Fase" per organizzare il progetto.
+                                </div>
+                            `
+                        }
+
+                        ${
+                            unassignedTasks.length
+                            ?
+                            `
+                                <div class="phase"
+                                     style="margin-top:12px">
+
+                                    <div class="phase-header">
+
+                                        <div class="phase-name">
+                                            Attività senza fase
+                                        </div>
+
+                                        <span class="badge gray">
+                                            ${unassignedTasks.length}
+                                        </span>
+
+                                    </div>
+
+                                    <div class="tasks">
+
+                                        ${
+                                            unassignedTasks
+                                            .map(task =>
+                                                renderProjectTask(
+                                                    task
+                                                )
+                                            )
+                                            .join("")
+                                        }
+
+                                    </div>
+
+                                </div>
+                            `
+                            :
+                            ""
+                        }
+
+                    </div>
+
                 </div>
 
             `;
 
         }).join("");
-
 }
+
+
+function renderPhase(
+    project,
+    phase,
+    projectTasks
+){
+
+    const phaseTasks =
+        projectTasks.filter(
+            t => t.phaseId === phase.id
+        );
+
+    return `
+
+        <div class="phase">
+
+            <div class="phase-header">
+
+                <div>
+
+                    <div class="phase-name">
+                        ${escapeHTML(phase.name)}
+                    </div>
+
+                    <div style="
+                        font-size:10px;
+                        color:var(--muted);
+                        margin-top:3px
+                    ">
+                        ${phaseTasks.length}
+                        attività
+                    </div>
+
+                </div>
+
+                <div class="phase-actions">
+
+                    <button
+                        class="btn btn-secondary btn-small"
+                        onclick="openTaskModal(
+                            '${project.id}',
+                            '${phase.id}'
+                        )">
+                        + Attività
+                    </button>
+
+                    <button
+                        class="icon-btn"
+                        title="Rinomina fase"
+                        onclick="renamePhase(
+                            '${project.id}',
+                            '${phase.id}'
+                        )">
+                        ✎
+                    </button>
+
+                    <button
+                        class="icon-btn"
+                        title="Elimina fase"
+                        onclick="deletePhase(
+                            '${project.id}',
+                            '${phase.id}'
+                        )">
+                        🗑
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="tasks">
+
+                ${
+                    phaseTasks.length
+                    ?
+                    phaseTasks
+                        .map(task =>
+                            renderProjectTask(task)
+                        )
+                        .join("")
+                    :
+                    `
+                        <div class="phase-empty">
+                            Nessuna attività in questa fase.
+                        </div>
+                    `
+                }
+
+            </div>
+
+        </div>
+
+    `;
+}
+
+
+function renderProjectTask(task){
+
+    return `
+
+        <div class="task">
+
+            <input
+                type="checkbox"
+                class="task-check"
+                ${task.status === "Completata" ? "checked" : ""}
+                onchange="toggleTask('${task.id}')">
+
+            <div class="task-info">
+
+                <div class="
+                    task-name
+                    ${task.status === "Completata"
+                        ? "completed"
+                        : ""}
+                ">
+
+                    ${escapeHTML(task.name)}
+
+                </div>
+
+                <div class="task-meta">
+
+                    ${formatDate(task.due)}
+
+                    ·
+
+                    <span class="badge ${
+                        task.priority === "Alta"
+                        ? "red"
+                        : task.priority === "Media"
+                        ? "yellow"
+                        : "gray"
+                    }">
+
+                        ${escapeHTML(
+                            task.priority || "Media"
+                        )}
+
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="task-actions">
+
+                <button
+                    class="icon-btn"
+                    title="Modifica"
+                    onclick="openTaskModal(
+                        '${task.projectId}',
+                        '${task.phaseId || ""}',
+                        '${task.id}'
+                    )">
+                    ✎
+                </button>
+
+                <button
+                    class="icon-btn"
+                    title="Elimina"
+                    onclick="deleteTask('${task.id}')">
+                    🗑
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+}
+
+
+/* ============================================================
+   FASI
+   ============================================================ */
 
 function addPhase(projectId){
 
     const name =
         prompt("Nome della nuova fase:");
 
-    if(!name){
+    if(!name || !name.trim()){
         return;
     }
 
     const project =
-        projects.find(p => p.id === projectId);
+        projects.find(
+            p => p.id === projectId
+        );
 
     if(!project){
         return;
@@ -3044,7 +3535,7 @@ function addPhase(projectId){
 
         id:uid(),
 
-        name,
+        name:name.trim(),
 
         tasks:[]
 
@@ -3053,111 +3544,443 @@ function addPhase(projectId){
     saveData();
 
     renderAll();
-
 }
 
-function deleteProject(id){
 
-    if(!confirm("Eliminare il progetto?")){
+function renamePhase(
+    projectId,
+    phaseId
+){
+
+    const project =
+        projects.find(
+            p => p.id === projectId
+        );
+
+    if(!project){
         return;
     }
 
-    projects =
-        projects.filter(p => p.id !== id);
+    const phase =
+        (project.phases || [])
+        .find(
+            p => p.id === phaseId
+        );
 
-    tasks =
-        tasks.filter(t => t.projectId !== id);
+    if(!phase){
+        return;
+    }
+
+    const name =
+        prompt(
+            "Nuovo nome della fase:",
+            phase.name
+        );
+
+    if(!name || !name.trim()){
+        return;
+    }
+
+    phase.name = name.trim();
 
     saveData();
 
     renderAll();
-
 }
 
-/* -------------------------------------------------------------
-   TASK
-------------------------------------------------------------- */
 
-function openTaskModal(projectId = ""){
+function deletePhase(
+    projectId,
+    phaseId
+){
 
-    const select =
-        document.getElementById("taskProject");
+    if(!confirm(
+        "Eliminare questa fase? Le attività verranno mantenute senza fase."
+    )){
+        return;
+    }
 
-    select.innerHTML =
-        `<option value="">Nessun progetto</option>` +
-        projects.map(p => {
+    const project =
+        projects.find(
+            p => p.id === projectId
+        );
 
-            const client =
-                clients.find(c => c.id === p.clientId);
+    if(!project){
+        return;
+    }
 
-            return `
-                <option value="${p.id}"
-                    ${projectId === p.id ? "selected" : ""}>
-                    ${escapeHTML(p.name)}
-                    ${client ? " — " + escapeHTML(client.ragioneSociale) : ""}
-                </option>
-            `;
+    project.phases =
+        (project.phases || [])
+        .filter(
+            p => p.id !== phaseId
+        );
 
-        }).join("");
+    tasks.forEach(task => {
 
-    document
-        .getElementById("taskModal")
-        .classList.add("open");
+        if(
+            task.projectId === projectId &&
+            task.phaseId === phaseId
+        ){
 
-}
+            task.phaseId = "";
 
-function saveTask(event){
-
-    event.preventDefault();
-
-    tasks.push({
-
-        id:uid(),
-
-        name:
-            document.getElementById("taskName").value,
-
-        projectId:
-            document.getElementById("taskProject").value,
-
-        status:
-            document.getElementById("taskStatus").value,
-
-        start:
-            document.getElementById("taskStart").value,
-
-        due:
-            document.getElementById("taskDue").value,
-
-        priority:
-            document.getElementById("taskPriority").value,
-
-        description:
-            document.getElementById("taskDescription").value
+        }
 
     });
 
     saveData();
 
-    closeModal("taskModal");
+    renderAll();
+}
 
-    event.target.reset();
+
+/* ============================================================
+   DELETE PROJECT
+   ============================================================ */
+
+function deleteProject(id){
+
+    if(!confirm(
+        "Eliminare il progetto e tutte le sue attività?"
+    )){
+        return;
+    }
+
+    projects =
+        projects.filter(
+            p => p.id !== id
+        );
+
+    tasks =
+        tasks.filter(
+            t => t.projectId !== id
+        );
+
+    saveData();
 
     renderAll();
-
 }
+
+
+/* ============================================================
+   TASK MODAL
+   ============================================================ */
+
+function populateTaskProjects(
+    selectedProject = "",
+    selectedPhase = ""
+){
+
+    const select =
+        document.getElementById(
+            "taskProject"
+        );
+
+    select.innerHTML =
+        `<option value="">
+            Nessun progetto
+        </option>` +
+
+        projects.map(project => `
+
+            <option
+                value="${project.id}"
+                ${selectedProject === project.id
+                    ? "selected"
+                    : ""}>
+
+                ${escapeHTML(project.name)}
+
+            </option>
+
+        `).join("");
+
+    populateTaskPhases(
+        selectedProject,
+        selectedPhase
+    );
+}
+
+
+function populateTaskPhases(
+    projectId,
+    selectedPhase = ""
+){
+
+    const select =
+        document.getElementById(
+            "taskPhase"
+        );
+
+    const project =
+        projects.find(
+            p => p.id === projectId
+        );
+
+    if(!project || !project.phases?.length){
+
+        select.innerHTML =
+            `<option value="">
+                Nessuna fase
+            </option>`;
+
+        return;
+    }
+
+    select.innerHTML =
+        `<option value="">
+            Nessuna fase
+        </option>` +
+
+        project.phases.map(phase => `
+
+            <option
+                value="${phase.id}"
+                ${selectedPhase === phase.id
+                    ? "selected"
+                    : ""}>
+
+                ${escapeHTML(phase.name)}
+
+            </option>
+
+        `).join("");
+}
+
+
+document.getElementById("taskProject")
+    .addEventListener(
+        "change",
+        function(){
+
+            populateTaskPhases(
+                this.value,
+                ""
+            );
+
+        }
+    );
+
+
+function openTaskModal(
+    projectId = "",
+    phaseId = "",
+    taskId = ""
+){
+
+    const form =
+        document.getElementById(
+            "taskForm"
+        );
+
+    form.reset();
+
+    document.getElementById(
+        "taskId"
+    ).value = taskId || "";
+
+    document.getElementById(
+        "taskModalTitle"
+    ).textContent =
+        taskId
+        ? "Modifica attività"
+        : "Nuova attività";
+
+    document.getElementById(
+        "taskSubmitButton"
+    ).textContent =
+        taskId
+        ? "Salva modifiche"
+        : "Crea attività";
+
+    populateTaskProjects(
+        projectId,
+        phaseId
+    );
+
+    if(taskId){
+
+        const task =
+            tasks.find(
+                t => t.id === taskId
+            );
+
+        if(!task){
+            return;
+        }
+
+        document.getElementById(
+            "taskName"
+        ).value =
+            task.name || "";
+
+        document.getElementById(
+            "taskProject"
+        ).value =
+            task.projectId || "";
+
+        populateTaskPhases(
+            task.projectId || "",
+            task.phaseId || ""
+        );
+
+        document.getElementById(
+            "taskPhase"
+        ).value =
+            task.phaseId || "";
+
+        document.getElementById(
+            "taskStatus"
+        ).value =
+            task.status || "Da fare";
+
+        document.getElementById(
+            "taskStart"
+        ).value =
+            task.start || "";
+
+        document.getElementById(
+            "taskDue"
+        ).value =
+            task.due || "";
+
+        document.getElementById(
+            "taskPriority"
+        ).value =
+            task.priority || "Media";
+
+        document.getElementById(
+            "taskDescription"
+        ).value =
+            task.description || "";
+
+    }
+
+    document.getElementById(
+        "taskModal"
+    ).classList.add("open");
+}
+
+
+/* ============================================================
+   SAVE TASK
+   ============================================================ */
+
+function saveTask(event){
+
+    event.preventDefault();
+
+    const id =
+        document.getElementById(
+            "taskId"
+        ).value;
+
+    const data = {
+
+        id: id || uid(),
+
+        name:
+            document.getElementById(
+                "taskName"
+            ).value,
+
+        projectId:
+            document.getElementById(
+                "taskProject"
+            ).value,
+
+        phaseId:
+            document.getElementById(
+                "taskPhase"
+            ).value,
+
+        status:
+            document.getElementById(
+                "taskStatus"
+            ).value,
+
+        start:
+            document.getElementById(
+                "taskStart"
+            ).value,
+
+        due:
+            document.getElementById(
+                "taskDue"
+            ).value,
+
+        priority:
+            document.getElementById(
+                "taskPriority"
+            ).value,
+
+        description:
+            document.getElementById(
+                "taskDescription"
+            ).value
+
+    };
+
+    if(id){
+
+        const index =
+            tasks.findIndex(
+                t => t.id === id
+            );
+
+        if(index >= 0){
+
+            tasks[index] = {
+                ...tasks[index],
+                ...data
+            };
+
+        }
+
+    }else{
+
+        tasks.push(data);
+
+    }
+
+    if(data.projectId){
+
+        updateProjectProgress(
+            data.projectId
+        );
+
+    }
+
+    saveData();
+
+    closeModal("taskModal");
+
+    renderAll();
+}
+
+
+/* ============================================================
+   TASKS TABLE
+   ============================================================ */
 
 function renderTasks(){
 
     const container =
-        document.getElementById("tasksTable");
+        document.getElementById(
+            "tasksTable"
+        );
 
     if(!tasks.length){
 
         container.innerHTML = `
             <div class="empty">
-                <div class="empty-icon">✓</div>
+
+                <div class="empty-icon">
+                    ✓
+                </div>
+
                 Nessuna attività.
+
             </div>
         `;
 
@@ -3171,12 +3994,15 @@ function renderTasks(){
             <thead>
 
                 <tr>
+
                     <th>Attività</th>
                     <th>Progetto</th>
+                    <th>Fase</th>
                     <th>Scadenza</th>
                     <th>Priorità</th>
                     <th>Stato</th>
                     <th></th>
+
                 </tr>
 
             </thead>
@@ -3190,6 +4016,11 @@ function renderTasks(){
                             p => p.id === task.projectId
                         );
 
+                    const phase =
+                        project?.phases?.find(
+                            p => p.id === task.phaseId
+                        );
+
                     return `
 
                         <tr>
@@ -3197,17 +4028,33 @@ function renderTasks(){
                             <td>
 
                                 <div class="client-name">
-                                    ${escapeHTML(task.name)}
+
+                                    ${escapeHTML(
+                                        task.name
+                                    )}
+
                                 </div>
 
                                 <div class="client-email">
-                                    ${escapeHTML(task.description || "")}
+
+                                    ${escapeHTML(
+                                        task.description || ""
+                                    )}
+
                                 </div>
 
                             </td>
 
                             <td>
-                                ${escapeHTML(project?.name || "-")}
+                                ${escapeHTML(
+                                    project?.name || "-"
+                                )}
+                            </td>
+
+                            <td>
+                                ${escapeHTML(
+                                    phase?.name || "-"
+                                )}
                             </td>
 
                             <td>
@@ -3224,7 +4071,9 @@ function renderTasks(){
                                     : "gray"
                                 }">
 
-                                    ${escapeHTML(task.priority)}
+                                    ${escapeHTML(
+                                        task.priority
+                                    )}
 
                                 </span>
 
@@ -3240,12 +4089,25 @@ function renderTasks(){
 
                                     <button
                                         class="icon-btn"
+                                        title="Modifica"
+                                        onclick="openTaskModal(
+                                            '${task.projectId || ""}',
+                                            '${task.phaseId || ""}',
+                                            '${task.id}'
+                                        )">
+                                        ✎
+                                    </button>
+
+                                    <button
+                                        class="icon-btn"
+                                        title="Completa"
                                         onclick="toggleTask('${task.id}')">
                                         ✓
                                     </button>
 
                                     <button
                                         class="icon-btn"
+                                        title="Elimina"
                                         onclick="deleteTask('${task.id}')">
                                         🗑
                                     </button>
@@ -3265,41 +4127,85 @@ function renderTasks(){
         </table>
 
     `;
-
 }
+
+
+/* ============================================================
+   TOGGLE TASK
+   ============================================================ */
 
 function toggleTask(id){
 
     const task =
-        tasks.find(t => t.id === id);
+        tasks.find(
+            t => t.id === id
+        );
 
-    if(!task) return;
+    if(!task){
+        return;
+    }
 
     task.status =
         task.status === "Completata"
         ? "Da fare"
         : "Completata";
 
+    if(task.projectId){
+
+        updateProjectProgress(
+            task.projectId
+        );
+
+    }
+
     saveData();
 
     renderAll();
-
 }
+
+
+/* ============================================================
+   DELETE TASK
+   ============================================================ */
 
 function deleteTask(id){
 
+    if(!confirm(
+        "Eliminare questa attività?"
+    )){
+        return;
+    }
+
+    const task =
+        tasks.find(
+            t => t.id === id
+        );
+
+    const projectId =
+        task?.projectId;
+
     tasks =
-        tasks.filter(t => t.id !== id);
+        tasks.filter(
+            t => t.id !== id
+        );
+
+    if(projectId){
+
+        updateProjectProgress(
+            projectId
+        );
+
+    }
 
     saveData();
 
     renderAll();
-
 }
 
-/* -------------------------------------------------------------
+
+/* ============================================================
    CALENDAR
-------------------------------------------------------------- */
+   ============================================================ */
 
 function changeMonth(direction){
 
@@ -3308,13 +4214,54 @@ function changeMonth(direction){
     );
 
     renderCalendar();
+}
+
+
+function calendarCreateTask(date){
+
+    openTaskModal(
+        "",
+        "",
+        ""
+    );
+
+    document.getElementById(
+        "taskDue"
+    ).value = date;
 
 }
+
+
+function calendarTaskClick(
+    event,
+    taskId
+){
+
+    event.stopPropagation();
+
+    const task =
+        tasks.find(
+            t => t.id === taskId
+        );
+
+    if(!task){
+        return;
+    }
+
+    openTaskModal(
+        task.projectId || "",
+        task.phaseId || "",
+        task.id
+    );
+}
+
 
 function renderCalendar(){
 
     const calendar =
-        document.getElementById("calendar");
+        document.getElementById(
+            "calendar"
+        );
 
     const year =
         calendarDate.getFullYear();
@@ -3331,24 +4278,41 @@ function renderCalendar(){
             }
         );
 
-    document.getElementById("calendarTitle")
-        .textContent =
+    document.getElementById(
+        "calendarTitle"
+    ).textContent =
         monthName.charAt(0).toUpperCase() +
         monthName.slice(1);
 
     const firstDay =
-        new Date(year,month,1).getDay();
+        new Date(
+            year,
+            month,
+            1
+        ).getDay();
 
     const daysInMonth =
-        new Date(year,month + 1,0).getDate();
+        new Date(
+            year,
+            month + 1,
+            0
+        ).getDate();
 
-    let start =
-        firstDay === 0 ? 6 : firstDay - 1;
+    const start =
+        firstDay === 0
+        ? 6
+        : firstDay - 1;
 
     let html = "";
 
     [
-        "Lun","Mar","Mer","Gio","Ven","Sab","Dom"
+        "Lun",
+        "Mar",
+        "Mer",
+        "Gio",
+        "Ven",
+        "Sab",
+        "Dom"
     ].forEach(day => {
 
         html += `
@@ -3359,7 +4323,7 @@ function renderCalendar(){
 
     });
 
-    for(let i=0;i<start;i++){
+    for(let i = 0; i < start; i++){
 
         html += `
             <div class="calendar-cell"></div>
@@ -3370,35 +4334,65 @@ function renderCalendar(){
     const current =
         today();
 
-    for(let day=1;day<=daysInMonth;day++){
+    for(
+        let day = 1;
+        day <= daysInMonth;
+        day++
+    ){
 
         const date =
             `${year}-${String(month+1).padStart(2,"0")}-${String(day).padStart(2,"0")}`;
 
         const dayTasks =
-            tasks.filter(t => t.due === date);
+            tasks.filter(
+                t => t.due === date
+            );
 
         html += `
 
-            <div class="calendar-cell ${
-                date === current ? "today" : ""
-            }">
+            <div
+                class="calendar-cell ${
+                    date === current
+                    ? "today"
+                    : ""
+                }"
+                onclick="calendarCreateTask('${date}')">
 
                 <div class="calendar-number">
                     ${day}
                 </div>
 
-                ${dayTasks.map(task => `
+                ${
+                    dayTasks
+                    .map(task => `
 
-                    <div
-                        class="calendar-event"
-                        title="${escapeHTML(task.name)}">
+                        <div
+                            class="calendar-event ${
+                                task.status === "Completata"
+                                ? "completed"
+                                : ""
+                            }"
+                            title="${escapeHTML(
+                                task.name
+                            )}"
+                            onclick="calendarTaskClick(
+                                event,
+                                '${task.id}'
+                            )">
 
-                        ${escapeHTML(task.name)}
+                            ${escapeHTML(
+                                task.name
+                            )}
 
-                    </div>
+                        </div>
 
-                `).join("")}
+                    `)
+                    .join("")
+                }
+
+                <div class="calendar-add">
+                    + aggiungi attività
+                </div>
 
             </div>
 
@@ -3407,12 +4401,12 @@ function renderCalendar(){
     }
 
     calendar.innerHTML = html;
-
 }
 
-/* -------------------------------------------------------------
+
+/* ============================================================
    FILES
-------------------------------------------------------------- */
+   ============================================================ */
 
 function uploadFiles(event){
 
@@ -3442,15 +4436,22 @@ function uploadFiles(event){
     renderFiles();
 
     event.target.value = "";
-
 }
+
 
 function formatBytes(bytes){
 
-    if(!bytes) return "0 B";
+    if(!bytes){
+        return "0 B";
+    }
 
     const units =
-        ["B","KB","MB","GB"];
+        [
+            "B",
+            "KB",
+            "MB",
+            "GB"
+        ];
 
     const i =
         Math.floor(
@@ -3460,27 +4461,37 @@ function formatBytes(bytes){
 
     return (
         parseFloat(
-            (bytes /
-            Math.pow(1024,i))
-            .toFixed(1)
-        ) +
-        " " +
+            (
+                bytes /
+                Math.pow(1024,i)
+            ).toFixed(1)
+        )
+        +
+        " "
+        +
         units[i]
     );
-
 }
+
 
 function renderFiles(){
 
     const container =
-        document.getElementById("filesList");
+        document.getElementById(
+            "filesList"
+        );
 
     if(!files.length){
 
         container.innerHTML = `
             <div class="empty">
-                <div class="empty-icon">📁</div>
+
+                <div class="empty-icon">
+                    📁
+                </div>
+
                 Nessun documento caricato.
+
             </div>
         `;
 
@@ -3517,38 +4528,43 @@ function renderFiles(){
             </div>
 
         `).join("");
-
 }
+
 
 function deleteFile(id){
 
     files =
-        files.filter(f => f.id !== id);
+        files.filter(
+            f => f.id !== id
+        );
 
     saveData();
 
     renderFiles();
-
 }
 
-/* -------------------------------------------------------------
+
+/* ============================================================
    DASHBOARD
-------------------------------------------------------------- */
+   ============================================================ */
 
 function renderDashboard(){
 
-    document.getElementById("statClients")
-        .textContent =
+    document.getElementById(
+        "statClients"
+    ).textContent =
         clients.length;
 
-    document.getElementById("statProjects")
-        .textContent =
+    document.getElementById(
+        "statProjects"
+    ).textContent =
         projects.filter(
             p => p.status !== "Completato"
         ).length;
 
-    document.getElementById("statTasks")
-        .textContent =
+    document.getElementById(
+        "statTasks"
+    ).textContent =
         tasks.filter(
             t => t.status !== "Completata"
         ).length;
@@ -3556,8 +4572,9 @@ function renderDashboard(){
     const todayDate =
         today();
 
-    document.getElementById("statDue")
-        .textContent =
+    document.getElementById(
+        "statDue"
+    ).textContent =
         tasks.filter(t =>
             t.status !== "Completata" &&
             t.due &&
@@ -3565,7 +4582,9 @@ function renderDashboard(){
         ).length;
 
     const activityContainer =
-        document.getElementById("recentActivities");
+        document.getElementById(
+            "recentActivities"
+        );
 
     const recent =
         [...tasks]
@@ -3607,9 +4626,20 @@ function renderDashboard(){
                             </div>
 
                             <div class="activity-meta">
-                                ${escapeHTML(project?.name || "Senza progetto")}
+
+                                ${escapeHTML(
+                                    project?.name ||
+                                    "Senza progetto"
+                                )}
+
                                 ·
+
                                 ${formatDate(task.due)}
+
+                                ·
+
+                                ${statusBadge(task.status)}
+
                             </div>
 
                         </div>
@@ -3623,7 +4653,9 @@ function renderDashboard(){
     }
 
     const projectsContainer =
-        document.getElementById("dashboardProjects");
+        document.getElementById(
+            "dashboardProjects"
+        );
 
     if(!projects.length){
 
@@ -3634,46 +4666,66 @@ function renderDashboard(){
         `;
 
         return;
-
     }
 
     projectsContainer.innerHTML =
-        projects.slice(0,5).map(project => `
+        projects.slice(0,5)
+        .map(project => {
 
-            <div class="project-progress">
+            updateProjectProgress(
+                project.id
+            );
 
-                <div class="project-progress-top">
+            return `
 
-                    <span>
-                        ${escapeHTML(project.name)}
-                    </span>
+                <div class="project-progress">
 
-                    <strong>
-                        ${project.progress || 0}%
-                    </strong>
+                    <div class="project-progress-top">
 
-                </div>
+                        <span>
+                            ${escapeHTML(
+                                project.name
+                            )}
+                        </span>
 
-                <div class="progress">
+                        <strong>
+                            ${project.progress || 0}%
+                        </strong>
 
-                    <div
-                        class="progress-bar"
-                        style="width:${project.progress || 0}%">
+                    </div>
+
+                    <div class="progress">
+
+                        <div
+                            class="progress-bar"
+                            style="
+                                width:${project.progress || 0}%
+                            ">
+                        </div>
+
                     </div>
 
                 </div>
 
-            </div>
+            `;
 
-        `).join("");
-
+        }).join("");
 }
 
-/* -------------------------------------------------------------
+
+/* ============================================================
    RENDER ALL
-------------------------------------------------------------- */
+   ============================================================ */
 
 function renderAll(){
+
+    projects.forEach(project => {
+
+        updateProjectProgress(
+            project.id
+        );
+
+    });
 
     renderDashboard();
 
@@ -3689,11 +4741,65 @@ function renderAll(){
 
     renderCustomFields();
 
+    saveData();
 }
 
-/* -------------------------------------------------------------
+
+/* ============================================================
+   CLOSE MODALS CLICK OUTSIDE
+   ============================================================ */
+
+document.querySelectorAll(
+    ".modal-overlay"
+).forEach(overlay => {
+
+    overlay.addEventListener(
+        "click",
+        function(event){
+
+            if(event.target === overlay){
+
+                overlay.classList.remove(
+                    "open"
+                );
+
+            }
+
+        }
+    );
+
+});
+
+
+/* ============================================================
+   ESC CLOSE
+   ============================================================ */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key !== "Escape"){
+            return;
+        }
+
+        document.querySelectorAll(
+            ".modal-overlay.open"
+        ).forEach(modal => {
+
+            modal.classList.remove(
+                "open"
+            );
+
+        });
+
+    }
+);
+
+
+/* ============================================================
    INIT
-------------------------------------------------------------- */
+   ============================================================ */
 
 renderAll();
 
@@ -3701,4 +4807,3 @@ renderAll();
 
 </body>
 </html>
-```
