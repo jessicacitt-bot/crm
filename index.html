@@ -8,7 +8,7 @@
 <style>
 :root{
     --bg:#f5f7fb;
-    --card:#ffffff;
+    --card:#fff;
     --sidebar:#111827;
     --sidebar-hover:#1f2937;
     --primary:#6366f1;
@@ -60,7 +60,6 @@ button{
     position:fixed;
     inset:0 auto 0 0;
     z-index:50;
-    transition:.25s;
 }
 
 .logo{
@@ -79,7 +78,6 @@ button{
     display:grid;
     place-items:center;
     background:linear-gradient(135deg,#818cf8,#6366f1);
-    box-shadow:0 8px 20px rgba(99,102,241,.35);
 }
 
 .nav{
@@ -98,7 +96,6 @@ button{
     display:flex;
     align-items:center;
     gap:12px;
-    transition:.2s;
 }
 
 .nav button:hover,
@@ -110,13 +107,6 @@ button{
 .nav-icon{
     width:20px;
     text-align:center;
-}
-
-.sidebar-bottom{
-    position:absolute;
-    left:14px;
-    right:14px;
-    bottom:20px;
 }
 
 /* MAIN */
@@ -144,12 +134,6 @@ button{
 .topbar-title{
     font-size:20px;
     font-weight:750;
-}
-
-.topbar-right{
-    display:flex;
-    align-items:center;
-    gap:14px;
 }
 
 .avatar{
@@ -190,7 +174,6 @@ button{
 .page-title{
     font-size:28px;
     font-weight:800;
-    letter-spacing:-.6px;
 }
 
 .page-subtitle{
@@ -213,12 +196,10 @@ button{
 .btn-primary{
     background:var(--primary);
     color:#fff;
-    box-shadow:0 6px 16px rgba(99,102,241,.22);
 }
 
 .btn-primary:hover{
     background:var(--primary-dark);
-    transform:translateY(-1px);
 }
 
 .btn-secondary{
@@ -227,18 +208,9 @@ button{
     color:var(--text);
 }
 
-.btn-secondary:hover{
-    background:#f8fafc;
-}
-
 .btn-danger{
     background:#fee2e2;
     color:#b91c1c;
-}
-
-.btn-success{
-    background:#d1fae5;
-    color:#047857;
 }
 
 .btn-small{
@@ -259,7 +231,6 @@ button{
     display:flex;
     align-items:center;
     justify-content:space-between;
-    gap:15px;
 }
 
 .card-title{
@@ -278,14 +249,11 @@ button{
 
 .stat{
     padding:22px;
-    position:relative;
-    overflow:hidden;
 }
 
 .stat-top{
     display:flex;
     justify-content:space-between;
-    align-items:center;
 }
 
 .stat-icon{
@@ -294,7 +262,6 @@ button{
     border-radius:12px;
     display:grid;
     place-items:center;
-    font-size:20px;
 }
 
 .stat-icon.purple{background:#ede9fe;color:#7c3aed}
@@ -311,7 +278,6 @@ button{
 .stat-label{
     color:var(--muted);
     font-size:13px;
-    margin-top:3px;
 }
 
 .dashboard-grid{
@@ -331,17 +297,12 @@ button{
     border-bottom:1px solid #f0f1f4;
 }
 
-.activity:last-child{
-    border-bottom:0;
-}
-
 .activity-dot{
     width:10px;
     height:10px;
     border-radius:50%;
     background:var(--primary);
     margin-top:6px;
-    flex-shrink:0;
 }
 
 .activity-title{
@@ -411,11 +372,6 @@ button{
     outline:none;
 }
 
-.search input:focus{
-    border-color:#a5b4fc;
-    box-shadow:0 0 0 3px #eef2ff;
-}
-
 .search-icon{
     position:absolute;
     left:13px;
@@ -442,10 +398,6 @@ td{
     padding:16px 20px;
     border-top:1px solid #f0f1f4;
     font-size:13px;
-}
-
-tbody tr{
-    transition:.15s;
 }
 
 tbody tr:hover{
@@ -602,8 +554,8 @@ textarea.form-control{
 
 .project-grid{
     display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:20px;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
 }
 
 .project-card{
@@ -611,15 +563,15 @@ textarea.form-control{
 }
 
 .project-card h3{
-    font-size:17px;
-    margin-bottom:6px;
+    font-size:16px;
+    margin-bottom:7px;
 }
 
 .project-description{
     color:var(--muted);
     font-size:12px;
     line-height:1.5;
-    margin-top:15px;
+    margin-top:12px;
 }
 
 .project-meta{
@@ -630,61 +582,67 @@ textarea.form-control{
     color:var(--muted);
 }
 
-.project-actions{
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-    margin-top:18px;
+/* PROJECT DETAIL */
+
+.project-detail{
+    display:none;
 }
 
-/* PROJECT PHASES */
+.project-detail.open{
+    display:block;
+}
 
-.project-details{
-    margin-top:20px;
-    border-top:1px solid var(--border);
-    padding-top:18px;
+.project-detail-header{
+    background:linear-gradient(135deg,#111827,#1e293b);
+    color:white;
+    padding:25px;
+    border-radius:20px;
+    margin-bottom:20px;
+}
+
+.project-detail-header h2{
+    font-size:24px;
+}
+
+.project-detail-header p{
+    color:#cbd5e1;
+    margin-top:5px;
+    font-size:13px;
 }
 
 .phase{
-    margin-bottom:12px;
+    margin-bottom:16px;
     border:1px solid var(--border);
     border-radius:13px;
     overflow:hidden;
-    background:#fff;
-}
-
-.phase:last-child{
-    margin-bottom:0;
 }
 
 .phase-header{
     background:#f8fafc;
-    padding:13px 15px;
+    padding:14px 16px;
     display:flex;
     justify-content:space-between;
     align-items:center;
-    gap:10px;
 }
 
 .phase-name{
     font-weight:750;
-    font-size:13px;
 }
 
 .phase-actions{
     display:flex;
-    gap:5px;
+    gap:6px;
 }
 
 .tasks{
-    padding:0 15px;
+    padding:0 16px;
 }
 
 .task{
     display:flex;
     align-items:center;
-    gap:10px;
-    padding:12px 0;
+    gap:12px;
+    padding:13px 0;
     border-bottom:1px solid #f0f1f4;
 }
 
@@ -692,16 +650,8 @@ textarea.form-control{
     border-bottom:0;
 }
 
-.task-check{
-    width:18px;
-    height:18px;
-    accent-color:var(--primary);
-    flex-shrink:0;
-}
-
 .task-info{
     flex:1;
-    min-width:0;
 }
 
 .task-name{
@@ -709,34 +659,10 @@ textarea.form-control{
     font-weight:650;
 }
 
-.task-name.completed{
-    text-decoration:line-through;
-    color:var(--muted);
-}
-
 .task-meta{
     font-size:11px;
     color:var(--muted);
     margin-top:3px;
-}
-
-.task-actions{
-    display:flex;
-    gap:4px;
-}
-
-.phase-empty{
-    color:var(--muted);
-    font-size:12px;
-    padding:15px 0;
-}
-
-.project-no-phase{
-    padding:15px;
-    background:#f8fafc;
-    border-radius:11px;
-    color:var(--muted);
-    font-size:12px;
 }
 
 /* CALENDAR */
@@ -750,6 +676,7 @@ textarea.form-control{
     justify-content:space-between;
     align-items:center;
     margin-bottom:20px;
+    gap:12px;
 }
 
 .calendar-title{
@@ -761,6 +688,30 @@ textarea.form-control{
     display:flex;
     gap:7px;
 }
+
+.view-switch{
+    display:flex;
+    background:#f3f4f6;
+    padding:4px;
+    border-radius:10px;
+}
+
+.view-switch button{
+    border:0;
+    background:transparent;
+    padding:8px 13px;
+    border-radius:7px;
+    font-size:12px;
+    font-weight:700;
+}
+
+.view-switch button.active{
+    background:#fff;
+    color:var(--primary);
+    box-shadow:0 2px 7px rgba(0,0,0,.08);
+}
+
+/* MONTH */
 
 .calendar-grid{
     display:grid;
@@ -785,22 +736,16 @@ textarea.form-control{
     padding:8px;
     border-right:1px solid var(--border);
     border-bottom:1px solid var(--border);
-    cursor:pointer;
-    transition:.15s;
-}
-
-.calendar-cell:hover{
-    background:#fafbff;
-}
-
-.calendar-cell.today{
-    background:#fafaff;
 }
 
 .calendar-number{
     font-size:12px;
     font-weight:700;
     margin-bottom:6px;
+}
+
+.calendar-cell.today{
+    background:#fafaff;
 }
 
 .calendar-cell.today .calendar-number{
@@ -816,31 +761,134 @@ textarea.form-control{
 .calendar-event{
     background:#eef2ff;
     color:#4338ca;
-    padding:6px 7px;
+    padding:5px 6px;
     border-radius:6px;
     font-size:10px;
-    margin-bottom:5px;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
+    margin-bottom:4px;
     cursor:pointer;
+    overflow:hidden;
 }
 
-.calendar-event.completed{
-    background:#d1fae5;
-    color:#047857;
-    text-decoration:line-through;
+/* WEEK */
+
+.week-calendar{
+    border:1px solid var(--border);
+    border-radius:12px;
+    overflow:auto;
+    background:#fff;
 }
 
-.calendar-add{
-    color:#9ca3af;
+.week-head{
+    display:grid;
+    grid-template-columns:70px repeat(7,minmax(130px,1fr));
+    min-width:980px;
+    border-bottom:1px solid var(--border);
+}
+
+.week-head-time{
+    background:#fafafa;
+    border-right:1px solid var(--border);
+}
+
+.week-day-head{
+    padding:12px 8px;
+    text-align:center;
+    border-right:1px solid var(--border);
+    background:#fafafa;
+}
+
+.week-day-head strong{
+    display:block;
+    font-size:13px;
+}
+
+.week-day-head span{
+    font-size:11px;
+    color:var(--muted);
+}
+
+.week-body{
+    display:grid;
+    grid-template-columns:70px repeat(7,minmax(130px,1fr));
+    min-width:980px;
+}
+
+.time-column{
+    position:relative;
+    border-right:1px solid var(--border);
+}
+
+.time-label{
+    height:60px;
+    border-bottom:1px solid #eef0f4;
     font-size:10px;
-    opacity:0;
-    margin-top:8px;
+    color:var(--muted);
+    text-align:right;
+    padding:4px 7px 0 0;
 }
 
-.calendar-cell:hover .calendar-add{
-    opacity:1;
+.week-day-column{
+    position:relative;
+    height:1440px;
+    border-right:1px solid var(--border);
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            transparent 0,
+            transparent 29px,
+            #eef0f4 30px,
+            #eef0f4 30px,
+            transparent 31px,
+            transparent 59px,
+            #e5e7eb 60px
+        );
+}
+
+.week-event{
+    position:absolute;
+    left:4px;
+    right:4px;
+    min-height:24px;
+    border-radius:7px;
+    padding:5px 7px;
+    background:#6366f1;
+    color:#fff;
+    font-size:11px;
+    overflow:hidden;
+    cursor:grab;
+    z-index:5;
+    box-shadow:0 3px 8px rgba(99,102,241,.25);
+}
+
+.week-event:active{
+    cursor:grabbing;
+}
+
+.week-event.completed{
+    background:#10b981;
+}
+
+.week-event.high{
+    border-left:4px solid #ef4444;
+}
+
+.event-time{
+    font-size:9px;
+    opacity:.85;
+}
+
+.event-name{
+    font-weight:700;
+    margin-top:2px;
+}
+
+.resize-handle{
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    height:7px;
+    cursor:ns-resize;
 }
 
 /* FILES */
@@ -852,21 +900,10 @@ textarea.form-control{
     text-align:center;
     color:var(--muted);
     margin-bottom:20px;
-    display:block;
-}
-
-.file-upload:hover{
-    border-color:#a5b4fc;
-    background:#fafaff;
 }
 
 .file-upload input{
     display:none;
-}
-
-.file-icon{
-    font-size:30px;
-    margin-bottom:8px;
 }
 
 .files-list{
@@ -882,19 +919,6 @@ textarea.form-control{
     border-bottom:1px solid var(--border);
 }
 
-.file-row:last-child{
-    border-bottom:0;
-}
-
-.file-type{
-    width:38px;
-    height:38px;
-    background:#f1f5f9;
-    border-radius:9px;
-    display:grid;
-    place-items:center;
-}
-
 .file-info{
     flex:1;
 }
@@ -908,55 +932,6 @@ textarea.form-control{
     font-size:11px;
     color:var(--muted);
     margin-top:3px;
-}
-
-/* SETTINGS */
-
-.settings-grid{
-    display:grid;
-    grid-template-columns:250px 1fr;
-    gap:20px;
-}
-
-.settings-menu{
-    padding:10px;
-}
-
-.settings-menu button{
-    width:100%;
-    text-align:left;
-    border:0;
-    background:transparent;
-    padding:11px 13px;
-    border-radius:9px;
-    color:var(--muted);
-}
-
-.settings-menu button.active,
-.settings-menu button:hover{
-    background:#eef2ff;
-    color:var(--primary);
-}
-
-.custom-field{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:15px 0;
-    border-bottom:1px solid var(--border);
-}
-
-.custom-field:last-child{
-    border-bottom:0;
-}
-
-.custom-field-name{
-    font-weight:650;
-}
-
-.custom-field-type{
-    color:var(--muted);
-    font-size:12px;
 }
 
 /* EMPTY */
@@ -985,7 +960,7 @@ textarea.form-control{
     }
 
     .project-grid{
-        grid-template-columns:1fr;
+        grid-template-columns:repeat(2,1fr);
     }
 
 }
@@ -997,8 +972,7 @@ textarea.form-control{
     }
 
     .logo span,
-    .nav button span,
-    .sidebar-bottom{
+    .nav button span{
         display:none;
     }
 
@@ -1015,21 +989,16 @@ textarea.form-control{
         padding:18px;
     }
 
-    .topbar{
-        padding:0 18px;
+    .form-grid{
+        grid-template-columns:1fr;
     }
 
-    .form-grid,
-    .settings-grid{
+    .project-grid{
         grid-template-columns:1fr;
     }
 
     .calendar-cell{
-        min-height:90px;
-    }
-
-    .calendar-add{
-        display:none;
+        min-height:80px;
     }
 
 }
@@ -1052,26 +1021,6 @@ textarea.form-control{
         max-width:none;
     }
 
-    th:nth-child(n+4),
-    td:nth-child(n+4){
-        display:none;
-    }
-
-    .calendar-cell{
-        min-height:70px;
-        padding:5px;
-    }
-
-    .calendar-event{
-        font-size:9px;
-        padding:4px;
-    }
-
-    .calendar-day-name{
-        padding:8px 3px;
-        font-size:9px;
-    }
-
 }
 </style>
 </head>
@@ -1079,8 +1028,6 @@ textarea.form-control{
 <body>
 
 <div class="app">
-
-<!-- SIDEBAR -->
 
 <aside class="sidebar">
 
@@ -1138,9 +1085,7 @@ textarea.form-control{
         Dashboard
     </div>
 
-    <div class="topbar-right">
-        <div class="avatar">A</div>
-    </div>
+    <div class="avatar">A</div>
 
 </header>
 
@@ -1150,386 +1095,374 @@ textarea.form-control{
 
 <section class="page active" id="page-dashboard">
 
-    <div class="page-header">
+<div class="page-header">
 
+    <div>
+        <h1 class="page-title">Buongiorno 👋</h1>
+        <p class="page-subtitle">
+            Ecco una panoramica della tua attività.
+        </p>
+    </div>
+
+    <button class="btn btn-primary" onclick="openClientModal()">
+        + Nuovo cliente
+    </button>
+
+</div>
+
+<div class="stats">
+
+<div class="card stat">
+    <div class="stat-top">
         <div>
-            <h1 class="page-title">Buongiorno 👋</h1>
-            <p class="page-subtitle">
-                Ecco una panoramica della tua attività.
-            </p>
+            <div class="stat-label">Clienti</div>
+            <div class="stat-value" id="statClients">0</div>
         </div>
-
-        <button class="btn btn-primary"
-                onclick="openClientModal()">
-            + Nuovo cliente
-        </button>
-
+        <div class="stat-icon purple">👥</div>
     </div>
+</div>
 
-    <div class="stats">
-
-        <div class="card stat">
-            <div class="stat-top">
-                <div>
-                    <div class="stat-label">Clienti</div>
-                    <div class="stat-value" id="statClients">0</div>
-                </div>
-                <div class="stat-icon purple">👥</div>
-            </div>
+<div class="card stat">
+    <div class="stat-top">
+        <div>
+            <div class="stat-label">Progetti attivi</div>
+            <div class="stat-value" id="statProjects">0</div>
         </div>
-
-        <div class="card stat">
-            <div class="stat-top">
-                <div>
-                    <div class="stat-label">Progetti attivi</div>
-                    <div class="stat-value" id="statProjects">0</div>
-                </div>
-                <div class="stat-icon blue">▣</div>
-            </div>
-        </div>
-
-        <div class="card stat">
-            <div class="stat-top">
-                <div>
-                    <div class="stat-label">Attività aperte</div>
-                    <div class="stat-value" id="statTasks">0</div>
-                </div>
-                <div class="stat-icon green">✓</div>
-            </div>
-        </div>
-
-        <div class="card stat">
-            <div class="stat-top">
-                <div>
-                    <div class="stat-label">In scadenza</div>
-                    <div class="stat-value" id="statDue">0</div>
-                </div>
-                <div class="stat-icon orange">!</div>
-            </div>
-        </div>
-
+        <div class="stat-icon blue">▣</div>
     </div>
+</div>
 
-    <div class="dashboard-grid">
-
-        <div class="card">
-
-            <div class="card-header">
-
-                <div class="card-title">
-                    Attività recenti
-                </div>
-
-                <button class="btn btn-secondary btn-small"
-                        onclick="navigate('tasks')">
-                    Vedi tutte
-                </button>
-
-            </div>
-
-            <div class="activity-list"
-                 id="recentActivities">
-            </div>
-
+<div class="card stat">
+    <div class="stat-top">
+        <div>
+            <div class="stat-label">Attività aperte</div>
+            <div class="stat-value" id="statTasks">0</div>
         </div>
-
-        <div class="card">
-
-            <div class="card-header">
-                <div class="card-title">
-                    Progetti
-                </div>
-            </div>
-
-            <div class="progress-list"
-                 id="dashboardProjects">
-            </div>
-
-        </div>
-
+        <div class="stat-icon green">✓</div>
     </div>
+</div>
+
+<div class="card stat">
+    <div class="stat-top">
+        <div>
+            <div class="stat-label">In scadenza</div>
+            <div class="stat-value" id="statDue">0</div>
+        </div>
+        <div class="stat-icon orange">!</div>
+    </div>
+</div>
+
+</div>
+
+<div class="dashboard-grid">
+
+<div class="card">
+
+<div class="card-header">
+    <div class="card-title">Attività recenti</div>
+    <button class="btn btn-secondary btn-small"
+            onclick="navigate('tasks')">
+        Vedi tutte
+    </button>
+</div>
+
+<div class="activity-list" id="recentActivities"></div>
+
+</div>
+
+<div class="card">
+
+<div class="card-header">
+    <div class="card-title">Progetti</div>
+</div>
+
+<div class="progress-list" id="dashboardProjects"></div>
+
+</div>
+
+</div>
 
 </section>
+
 
 <!-- CLIENTI -->
 
 <section class="page" id="page-clients">
 
-    <div class="page-header">
+<div class="page-header">
 
-        <div>
-            <h1 class="page-title">Clienti</h1>
-            <p class="page-subtitle">
-                Gestisci anagrafiche, progetti e documenti.
-            </p>
-        </div>
+<div>
+<h1 class="page-title">Clienti</h1>
+<p class="page-subtitle">
+Gestisci anagrafiche, progetti e documenti.
+</p>
+</div>
 
-        <button class="btn btn-primary"
-                onclick="openClientModal()">
-            + Nuovo cliente
-        </button>
+<button class="btn btn-primary"
+        onclick="openClientModal()">
++ Nuovo cliente
+</button>
 
-    </div>
+</div>
 
-    <div class="card table-card">
+<div class="card table-card">
 
-        <div class="toolbar">
+<div class="toolbar">
 
-            <div class="search">
+<div class="search">
+<span class="search-icon">⌕</span>
+<input id="clientSearch"
+       type="text"
+       placeholder="Cerca cliente, P.IVA..."
+       oninput="renderClients()">
+</div>
 
-                <span class="search-icon">⌕</span>
+</div>
 
-                <input
-                    id="clientSearch"
-                    type="text"
-                    placeholder="Cerca cliente, P.IVA..."
-                    oninput="renderClients()">
+<div id="clientsTable"></div>
 
-            </div>
-
-        </div>
-
-        <div id="clientsTable"></div>
-
-    </div>
+</div>
 
 </section>
+
 
 <!-- PROGETTI -->
 
 <section class="page" id="page-projects">
 
-    <div class="page-header">
+<div id="projectListView">
 
-        <div>
-            <h1 class="page-title">Progetti</h1>
-            <p class="page-subtitle">
-                Gestisci progetti, fasi e attività.
-            </p>
-        </div>
+<div class="page-header">
 
-        <button class="btn btn-primary"
-                onclick="openProjectModal()">
-            + Nuovo progetto
-        </button>
+<div>
+<h1 class="page-title">Progetti</h1>
+<p class="page-subtitle">
+Gestisci progetti, fasi e avanzamento.
+</p>
+</div>
 
-    </div>
+<button class="btn btn-primary"
+        onclick="openProjectModal()">
++ Nuovo progetto
+</button>
 
-    <div class="project-grid"
-         id="projectsGrid">
-    </div>
+</div>
+
+<div class="project-grid" id="projectsGrid"></div>
+
+</div>
+
+<div class="project-detail" id="projectDetail"></div>
 
 </section>
+
 
 <!-- ATTIVITA -->
 
 <section class="page" id="page-tasks">
 
-    <div class="page-header">
+<div class="page-header">
 
-        <div>
-            <h1 class="page-title">Attività</h1>
-            <p class="page-subtitle">
-                Pianifica, modifica e monitora il lavoro.
-            </p>
-        </div>
+<div>
+<h1 class="page-title">Attività</h1>
+<p class="page-subtitle">
+Pianifica, modifica e assegna le attività al calendario.
+</p>
+</div>
 
-        <button class="btn btn-primary"
-                onclick="openTaskModal()">
-            + Nuova attività
-        </button>
+<button class="btn btn-primary"
+        onclick="openTaskModal()">
++ Nuova attività
+</button>
 
-    </div>
+</div>
 
-    <div class="card table-card">
+<div class="card table-card">
 
-        <div id="tasksTable"></div>
+<div id="tasksTable"></div>
 
-    </div>
+</div>
 
 </section>
+
 
 <!-- CALENDARIO -->
 
 <section class="page" id="page-calendar">
 
-    <div class="page-header">
+<div class="page-header">
 
-        <div>
-            <h1 class="page-title">Calendario</h1>
-            <p class="page-subtitle">
-                Pianifica le attività e registra ciò che fai.
-            </p>
-        </div>
+<div>
+<h1 class="page-title">Calendario</h1>
+<p class="page-subtitle">
+Vista mensile o settimanale. Trascina le attività per cambiare orario.
+</p>
+</div>
 
-        <button class="btn btn-primary"
-                onclick="openTaskModal()">
-            + Nuova attività
-        </button>
+<button class="btn btn-primary"
+        onclick="openTaskModal()">
++ Nuova attività
+</button>
 
-    </div>
+</div>
 
-    <div class="card calendar-card">
+<div class="card calendar-card">
 
-        <div class="calendar-header">
+<div class="calendar-header">
 
-            <button class="btn btn-secondary"
-                    onclick="changeMonth(-1)">
-                ‹
-            </button>
+<div class="calendar-actions">
 
-            <div class="calendar-title"
-                 id="calendarTitle">
-            </div>
+<button class="btn btn-secondary"
+        onclick="changeCalendarPeriod(-1)">
+‹
+</button>
 
-            <button class="btn btn-secondary"
-                    onclick="changeMonth(1)">
-                ›
-            </button>
+<button class="btn btn-secondary"
+        onclick="goToday()">
+Oggi
+</button>
 
-        </div>
+<button class="btn btn-secondary"
+        onclick="changeCalendarPeriod(1)">
+›
+</button>
 
-        <div class="calendar-grid"
-             id="calendar">
-        </div>
+</div>
 
-    </div>
+<div class="calendar-title" id="calendarTitle"></div>
+
+<div class="view-switch">
+
+<button id="monthViewBtn"
+        class="active"
+        onclick="setCalendarView('month')">
+Mese
+</button>
+
+<button id="weekViewBtn"
+        onclick="setCalendarView('week')">
+Settimana
+</button>
+
+</div>
+
+</div>
+
+<div id="calendarContainer"></div>
+
+</div>
 
 </section>
+
 
 <!-- DOCUMENTI -->
 
 <section class="page" id="page-files">
 
-    <div class="page-header">
+<div class="page-header">
 
-        <div>
-            <h1 class="page-title">Documenti</h1>
-            <p class="page-subtitle">
-                Archivio dei file caricati.
-            </p>
-        </div>
+<div>
+<h1 class="page-title">Documenti</h1>
+<p class="page-subtitle">
+Archivio dei file caricati.
+</p>
+</div>
 
-    </div>
+</div>
 
-    <div class="card"
-         style="padding:22px">
+<div class="card" style="padding:22px">
 
-        <label class="file-upload">
+<label class="file-upload">
 
-            <div class="file-icon">↑</div>
+<div style="font-size:30px">↑</div>
 
-            <strong>
-                Trascina qui i documenti
-            </strong>
+<strong>
+Trascina qui i documenti
+</strong>
 
-            <div style="margin-top:5px;font-size:12px">
-                oppure clicca per selezionare i file
-            </div>
+<div style="margin-top:5px;font-size:12px">
+oppure clicca per selezionare i file
+</div>
 
-            <input
-                type="file"
-                multiple
-                onchange="uploadFiles(event)">
+<input type="file"
+       multiple
+       onchange="uploadFiles(event)">
 
-        </label>
+</label>
 
-        <div class="files-list"
-             id="filesList">
-        </div>
+<div class="files-list" id="filesList"></div>
 
-    </div>
+</div>
 
 </section>
+
 
 <!-- IMPOSTAZIONI -->
 
 <section class="page" id="page-settings">
 
-    <div class="page-header">
+<div class="page-header">
 
-        <div>
-            <h1 class="page-title">Impostazioni</h1>
-            <p class="page-subtitle">
-                Personalizza il CRM.
-            </p>
-        </div>
+<div>
+<h1 class="page-title">Impostazioni</h1>
+<p class="page-subtitle">
+Personalizza il CRM.
+</p>
+</div>
 
-    </div>
+</div>
 
-    <div class="settings-grid">
+<div class="card">
 
-        <div class="card settings-menu">
+<div class="card-header">
 
-            <button class="active">
-                Campi cliente
-            </button>
+<div>
+<div class="card-title">
+Campi personalizzati
+</div>
 
-            <button>
-                Stati
-            </button>
+<div style="font-size:12px;color:var(--muted);margin-top:4px">
+Aggiungi nuovi campi direttamente dal portale.
+</div>
+</div>
 
-            <button>
-                Preferenze
-            </button>
+<button class="btn btn-primary btn-small"
+        onclick="openCustomFieldModal()">
++ Nuovo campo
+</button>
 
-        </div>
+</div>
 
-        <div class="card">
+<div style="padding:0 22px"
+     id="customFieldsList"></div>
 
-            <div class="card-header">
-
-                <div>
-
-                    <div class="card-title">
-                        Campi personalizzati
-                    </div>
-
-                    <div style="font-size:12px;color:var(--muted);margin-top:4px">
-                        Aggiungi nuovi campi direttamente dal portale.
-                    </div>
-
-                </div>
-
-                <button class="btn btn-primary btn-small"
-                        onclick="openCustomFieldModal()">
-                    + Nuovo campo
-                </button>
-
-            </div>
-
-            <div style="padding:0 22px"
-                 id="customFieldsList">
-            </div>
-
-        </div>
-
-    </div>
+</div>
 
 </section>
 
 </div>
+
 </main>
+
 </div>
+
 
 <!-- CLIENT MODAL -->
 
-<div class="modal-overlay"
-     id="clientModal">
+<div class="modal-overlay" id="clientModal">
 
 <div class="modal">
 
 <div class="modal-header">
 
-    <div class="modal-title"
-         id="clientModalTitle">
-        Nuovo cliente
-    </div>
+<div class="modal-title" id="clientModalTitle">
+Nuovo cliente
+</div>
 
-    <button class="modal-close"
-            onclick="closeModal('clientModal')">
-        ×
-    </button>
+<button class="modal-close"
+        onclick="closeModal('clientModal')">
+×
+</button>
 
 </div>
 
@@ -1538,188 +1471,101 @@ textarea.form-control{
 
 <div class="modal-body">
 
-<input type="hidden"
-       id="clientId">
+<input type="hidden" id="clientId">
 
 <div class="form-grid">
 
 <div class="form-group full">
-
-<label class="form-label">
-    Ragione sociale *
-</label>
-
-<input
-    class="form-control"
-    id="ragioneSociale"
-    required>
-
-</div>
-
-<div class="form-group">
-
-<label class="form-label">
-    Partita IVA
-</label>
-
+<label class="form-label">Ragione sociale *</label>
 <input class="form-control"
-       id="partitaIva">
-
+       id="ragioneSociale"
+       required>
 </div>
 
 <div class="form-group">
-
-<label class="form-label">
-    Codice fiscale
-</label>
-
-<input class="form-control"
-       id="codiceFiscale">
-
+<label class="form-label">Partita IVA</label>
+<input class="form-control" id="partitaIva">
 </div>
 
 <div class="form-group">
+<label class="form-label">Codice fiscale</label>
+<input class="form-control" id="codiceFiscale">
+</div>
 
-<label class="form-label">
-    Data registrazione impresa
-</label>
-
+<div class="form-group">
+<label class="form-label">Data registrazione impresa</label>
 <input type="date"
        class="form-control"
        id="dataRegistrazione">
-
 </div>
 
 <div class="form-group">
-
-<label class="form-label">
-    Data inizio attività
-</label>
-
+<label class="form-label">Data inizio attività</label>
 <input type="date"
        class="form-control"
        id="dataInizio">
-
 </div>
 
 <div class="form-group">
-
-<label class="form-label">
-    Codice ATECO
-</label>
-
-<input class="form-control"
-       id="ateco">
-
+<label class="form-label">Codice ATECO</label>
+<input class="form-control" id="ateco">
 </div>
 
 <div class="form-group">
-
-<label class="form-label">
-    Telefono
-</label>
-
-<input class="form-control"
-       id="telefono">
-
+<label class="form-label">Telefono</label>
+<input class="form-control" id="telefono">
 </div>
 
 <div class="form-group">
-
-<label class="form-label">
-    Email
-</label>
-
+<label class="form-label">Email</label>
 <input type="email"
        class="form-control"
        id="email">
-
 </div>
 
 <div class="form-group">
-
-<label class="form-label">
-    PEC
-</label>
-
+<label class="form-label">PEC</label>
 <input type="email"
        class="form-control"
        id="pec">
-
 </div>
 
 <div class="form-group">
-
-<label class="form-label">
-    Sito web
-</label>
-
-<input class="form-control"
-       id="sito">
-
+<label class="form-label">Sito web</label>
+<input class="form-control" id="sito">
 </div>
 
 <div class="form-group">
-
-<label class="form-label">
-    Indirizzo
-</label>
-
-<input class="form-control"
-       id="indirizzo">
-
+<label class="form-label">Indirizzo</label>
+<input class="form-control" id="indirizzo">
 </div>
 
 <div class="form-group">
-
-<label class="form-label">
-    CAP
-</label>
-
-<input class="form-control"
-       id="cap">
-
+<label class="form-label">CAP</label>
+<input class="form-control" id="cap">
 </div>
 
 <div class="form-group">
-
-<label class="form-label">
-    Comune
-</label>
-
-<input class="form-control"
-       id="comune">
-
+<label class="form-label">Comune</label>
+<input class="form-control" id="comune">
 </div>
 
 <div class="form-group">
-
-<label class="form-label">
-    Provincia
-</label>
-
-<input class="form-control"
-       id="provincia">
-
+<label class="form-label">Provincia</label>
+<input class="form-control" id="provincia">
 </div>
 
 <div class="form-group full">
-
-<label class="form-label">
-    Note
-</label>
-
+<label class="form-label">Note</label>
 <textarea class="form-control"
-          id="note">
-</textarea>
-
+          id="note"></textarea>
 </div>
 
 <div id="customClientFields"
-     class="form-group full">
-</div>
+     class="form-group full"></div>
 
 </div>
+
 </div>
 
 <div class="modal-footer">
@@ -1727,36 +1573,38 @@ textarea.form-control{
 <button type="button"
         class="btn btn-secondary"
         onclick="closeModal('clientModal')">
-    Annulla
+Annulla
 </button>
 
 <button type="submit"
         class="btn btn-primary">
-    Salva cliente
+Salva cliente
 </button>
 
 </div>
 
 </form>
+
 </div>
+
 </div>
+
 
 <!-- PROJECT MODAL -->
 
-<div class="modal-overlay"
-     id="projectModal">
+<div class="modal-overlay" id="projectModal">
 
 <div class="modal">
 
 <div class="modal-header">
 
 <div class="modal-title">
-    Nuovo progetto
+Nuovo progetto
 </div>
 
 <button class="modal-close"
         onclick="closeModal('projectModal')">
-    ×
+×
 </button>
 
 </div>
@@ -1770,7 +1618,7 @@ textarea.form-control{
 <div class="form-group full">
 
 <label class="form-label">
-    Nome progetto *
+Nome progetto *
 </label>
 
 <input class="form-control"
@@ -1782,7 +1630,7 @@ textarea.form-control{
 <div class="form-group">
 
 <label class="form-label">
-    Cliente *
+Cliente *
 </label>
 
 <select class="form-control"
@@ -1795,27 +1643,16 @@ textarea.form-control{
 <div class="form-group">
 
 <label class="form-label">
-    Stato
+Stato
 </label>
 
 <select class="form-control"
         id="projectStatus">
 
-<option value="In corso">
-    In corso
-</option>
-
-<option value="Da iniziare">
-    Da iniziare
-</option>
-
-<option value="In pausa">
-    In pausa
-</option>
-
-<option value="Completato">
-    Completato
-</option>
+<option>In corso</option>
+<option>Da iniziare</option>
+<option>In pausa</option>
+<option>Completato</option>
 
 </select>
 
@@ -1824,7 +1661,7 @@ textarea.form-control{
 <div class="form-group">
 
 <label class="form-label">
-    Data inizio
+Data inizio
 </label>
 
 <input type="date"
@@ -1836,7 +1673,7 @@ textarea.form-control{
 <div class="form-group">
 
 <label class="form-label">
-    Data fine
+Data fine
 </label>
 
 <input type="date"
@@ -1848,7 +1685,7 @@ textarea.form-control{
 <div class="form-group full">
 
 <label class="form-label">
-    Descrizione
+Descrizione
 </label>
 
 <textarea class="form-control"
@@ -1857,6 +1694,7 @@ textarea.form-control{
 </div>
 
 </div>
+
 </div>
 
 <div class="modal-footer">
@@ -1864,24 +1702,26 @@ textarea.form-control{
 <button type="button"
         class="btn btn-secondary"
         onclick="closeModal('projectModal')">
-    Annulla
+Annulla
 </button>
 
 <button type="submit"
         class="btn btn-primary">
-    Crea progetto
+Crea progetto
 </button>
 
 </div>
 
 </form>
+
 </div>
+
 </div>
+
 
 <!-- TASK MODAL -->
 
-<div class="modal-overlay"
-     id="taskModal">
+<div class="modal-overlay" id="taskModal">
 
 <div class="modal">
 
@@ -1889,12 +1729,12 @@ textarea.form-control{
 
 <div class="modal-title"
      id="taskModalTitle">
-    Nuova attività
+Nuova attività
 </div>
 
 <button class="modal-close"
         onclick="closeModal('taskModal')">
-    ×
+×
 </button>
 
 </div>
@@ -1912,20 +1752,19 @@ textarea.form-control{
 <div class="form-group full">
 
 <label class="form-label">
-    Attività *
+Attività *
 </label>
 
-<input
-    class="form-control"
-    id="taskName"
-    required>
+<input class="form-control"
+       id="taskName"
+       required>
 
 </div>
 
 <div class="form-group">
 
 <label class="form-label">
-    Progetto
+Progetto
 </label>
 
 <select class="form-control"
@@ -1937,16 +1776,12 @@ textarea.form-control{
 <div class="form-group">
 
 <label class="form-label">
-    Fase
+Fase
 </label>
 
 <select class="form-control"
         id="taskPhase">
-
-<option value="">
-    Nessuna fase
-</option>
-
+<option value="">Nessuna fase</option>
 </select>
 
 </div>
@@ -1954,23 +1789,15 @@ textarea.form-control{
 <div class="form-group">
 
 <label class="form-label">
-    Stato
+Stato
 </label>
 
 <select class="form-control"
         id="taskStatus">
 
-<option value="Da fare">
-    Da fare
-</option>
-
-<option value="In corso">
-    In corso
-</option>
-
-<option value="Completata">
-    Completata
-</option>
+<option>Da fare</option>
+<option>In corso</option>
+<option>Completata</option>
 
 </select>
 
@@ -1979,19 +1806,24 @@ textarea.form-control{
 <div class="form-group">
 
 <label class="form-label">
-    Data inizio
+Priorità
 </label>
 
-<input type="date"
-       class="form-control"
-       id="taskStart">
+<select class="form-control"
+        id="taskPriority">
+
+<option>Bassa</option>
+<option selected>Media</option>
+<option>Alta</option>
+
+</select>
 
 </div>
 
 <div class="form-group">
 
 <label class="form-label">
-    Scadenza / data attività
+Data
 </label>
 
 <input type="date"
@@ -2003,42 +1835,45 @@ textarea.form-control{
 <div class="form-group">
 
 <label class="form-label">
-    Priorità
+Ora inizio
 </label>
 
-<select class="form-control"
-        id="taskPriority">
+<input type="time"
+       class="form-control"
+       id="taskStartTime"
+       value="09:00">
 
-<option value="Bassa">
-    Bassa
-</option>
+</div>
 
-<option value="Media"
-        selected>
-    Media
-</option>
+<div class="form-group">
 
-<option value="Alta">
-    Alta
-</option>
+<label class="form-label">
+Durata (ore)
+</label>
 
-</select>
+<input type="number"
+       class="form-control"
+       id="taskDuration"
+       min="0.5"
+       max="24"
+       step="0.5"
+       value="1">
 
 </div>
 
 <div class="form-group full">
 
 <label class="form-label">
-    Descrizione
+Descrizione
 </label>
 
-<textarea
-    class="form-control"
-    id="taskDescription"></textarea>
+<textarea class="form-control"
+          id="taskDescription"></textarea>
 
 </div>
 
 </div>
+
 </div>
 
 <div class="modal-footer">
@@ -2046,37 +1881,38 @@ textarea.form-control{
 <button type="button"
         class="btn btn-secondary"
         onclick="closeModal('taskModal')">
-    Annulla
+Annulla
 </button>
 
 <button type="submit"
-        class="btn btn-primary"
-        id="taskSubmitButton">
-    Crea attività
+        class="btn btn-primary">
+Salva attività
 </button>
 
 </div>
 
 </form>
+
 </div>
+
 </div>
+
 
 <!-- CUSTOM FIELD MODAL -->
 
-<div class="modal-overlay"
-     id="customFieldModal">
+<div class="modal-overlay" id="customFieldModal">
 
 <div class="modal">
 
 <div class="modal-header">
 
 <div class="modal-title">
-    Nuovo campo cliente
+Nuovo campo cliente
 </div>
 
 <button class="modal-close"
         onclick="closeModal('customFieldModal')">
-    ×
+×
 </button>
 
 </div>
@@ -2090,45 +1926,29 @@ textarea.form-control{
 <div class="form-group full">
 
 <label class="form-label">
-    Nome campo *
+Nome campo *
 </label>
 
-<input
-    class="form-control"
-    id="customFieldName"
-    placeholder="es. Fatturato annuale"
-    required>
+<input class="form-control"
+       id="customFieldName"
+       required>
 
 </div>
 
 <div class="form-group">
 
 <label class="form-label">
-    Tipo
+Tipo
 </label>
 
 <select class="form-control"
         id="customFieldType">
 
-<option value="text">
-    Testo
-</option>
-
-<option value="number">
-    Numero
-</option>
-
-<option value="date">
-    Data
-</option>
-
-<option value="select">
-    Selezione
-</option>
-
-<option value="textarea">
-    Testo lungo
-</option>
+<option value="text">Testo</option>
+<option value="number">Numero</option>
+<option value="date">Data</option>
+<option value="select">Selezione</option>
+<option value="textarea">Testo lungo</option>
 
 </select>
 
@@ -2137,17 +1957,17 @@ textarea.form-control{
 <div class="form-group">
 
 <label class="form-label">
-    Opzioni
+Opzioni
 </label>
 
-<input
-    class="form-control"
-    id="customFieldOptions"
-    placeholder="Azienda, Privato, Ente">
+<input class="form-control"
+       id="customFieldOptions"
+       placeholder="Azienda, Privato, Ente">
 
 </div>
 
 </div>
+
 </div>
 
 <div class="modal-footer">
@@ -2155,65 +1975,52 @@ textarea.form-control{
 <button type="button"
         class="btn btn-secondary"
         onclick="closeModal('customFieldModal')">
-    Annulla
+Annulla
 </button>
 
 <button type="submit"
         class="btn btn-primary">
-    Aggiungi campo
+Aggiungi campo
 </button>
 
 </div>
 
 </form>
+
 </div>
+
 </div>
+
 
 <script>
 
 /* ============================================================
-   CRM PERSONAL
-   ============================================================
-
-   Tutti i dati vengono salvati nel localStorage.
-
-   Modifiche principali:
-   - Fasi visibili dentro i progetti
-   - Attività associate alle fasi
-   - Modifica attività
-   - Attività dal calendario
-   - Click sul giorno per creare attività
-   - Click sull'attività per modificarla
-   - Completamento attività dal calendario
-   - Avanzamento progetto automatico
-   ============================================================ */
-
-
-/* ============================================================
-   DATA
-   ============================================================ */
+   DATABASE LOCALE
+============================================================ */
 
 let clients =
-    JSON.parse(localStorage.getItem("crm_clients") || "[]");
+JSON.parse(localStorage.getItem("crm_clients") || "[]");
 
 let projects =
-    JSON.parse(localStorage.getItem("crm_projects") || "[]");
+JSON.parse(localStorage.getItem("crm_projects") || "[]");
 
 let tasks =
-    JSON.parse(localStorage.getItem("crm_tasks") || "[]");
+JSON.parse(localStorage.getItem("crm_tasks") || "[]");
 
 let customFields =
-    JSON.parse(localStorage.getItem("crm_custom_fields") || "[]");
+JSON.parse(localStorage.getItem("crm_custom_fields") || "[]");
 
 let files =
-    JSON.parse(localStorage.getItem("crm_files") || "[]");
+JSON.parse(localStorage.getItem("crm_files") || "[]");
 
 let calendarDate = new Date();
+
+let calendarView = "month";
 
 
 /* ============================================================
    STORAGE
-   ============================================================ */
+============================================================ */
 
 function saveData(){
 
@@ -2241,20 +2048,20 @@ function saveData(){
         "crm_files",
         JSON.stringify(files)
     );
+
 }
 
 
 /* ============================================================
    HELPERS
-   ============================================================ */
+============================================================ */
 
 function uid(){
 
     return Date.now().toString(36) +
-        Math.random().toString(36).substring(2,8);
+           Math.random().toString(36).substring(2,8);
 
 }
-
 
 function escapeHTML(value){
 
@@ -2268,14 +2075,18 @@ function escapeHTML(value){
         .replaceAll(">","&gt;")
         .replaceAll('"',"&quot;")
         .replaceAll("'","&#039;");
+
 }
 
+function today(){
+
+    return new Date().toISOString().split("T")[0];
+
+}
 
 function formatDate(date){
 
-    if(!date){
-        return "-";
-    }
+    if(!date) return "-";
 
     const d = new Date(date);
 
@@ -2284,43 +2095,25 @@ function formatDate(date){
     }
 
     return d.toLocaleDateString("it-IT");
+
 }
-
-
-function today(){
-
-    const d = new Date();
-
-    return (
-        d.getFullYear() +
-        "-" +
-        String(d.getMonth()+1).padStart(2,"0") +
-        "-" +
-        String(d.getDate()).padStart(2,"0")
-    );
-}
-
 
 function statusBadge(status){
 
     const map = {
-
         "Completata":"green",
         "Completato":"green",
         "In corso":"blue",
         "Da iniziare":"gray",
         "Da fare":"gray",
         "In pausa":"yellow"
-
     };
 
-    return `
-        <span class="badge ${map[status] || "gray"}">
-            ${escapeHTML(status)}
-        </span>
-    `;
-}
+    return `<span class="badge ${map[status] || "gray"}">
+        ${escapeHTML(status)}
+    </span>`;
 
+}
 
 function closeModal(id){
 
@@ -2333,7 +2126,7 @@ function closeModal(id){
 
 /* ============================================================
    NAVIGATION
-   ============================================================ */
+============================================================ */
 
 const pageTitles = {
 
@@ -2347,33 +2140,35 @@ const pageTitles = {
 
 };
 
+document
+.querySelectorAll(".nav button")
+.forEach(button => {
 
-document.querySelectorAll(".nav button")
-    .forEach(button => {
+    button.addEventListener("click", () => {
 
-        button.addEventListener("click", () => {
-
-            navigate(button.dataset.page);
-
-        });
+        navigate(button.dataset.page);
 
     });
 
+});
 
 function navigate(page){
 
-    document.querySelectorAll(".page")
-        .forEach(p => p.classList.remove("active"));
+    document
+    .querySelectorAll(".page")
+    .forEach(p =>
+        p.classList.remove("active")
+    );
 
-    const pageElement =
-        document.getElementById("page-" + page);
+    document
+    .getElementById("page-" + page)
+    .classList.add("active");
 
-    if(pageElement){
-        pageElement.classList.add("active");
-    }
-
-    document.querySelectorAll(".nav button")
-        .forEach(b => b.classList.remove("active"));
+    document
+    .querySelectorAll(".nav button")
+    .forEach(b =>
+        b.classList.remove("active")
+    );
 
     const navButton =
         document.querySelector(
@@ -2384,25 +2179,33 @@ function navigate(page){
         navButton.classList.add("active");
     }
 
-    document.getElementById("topbarTitle")
-        .textContent = pageTitles[page] || page;
+    document
+    .getElementById("topbarTitle")
+    .textContent =
+        pageTitles[page];
 
     renderAll();
+
 }
 
 
 /* ============================================================
    CLIENTI
-   ============================================================ */
+============================================================ */
 
 function openClientModal(clientId = null){
 
-    document.getElementById("clientForm").reset();
+    document
+        .getElementById("clientForm")
+        .reset();
 
-    document.getElementById("clientId").value =
+    document
+        .getElementById("clientId")
+        .value =
         clientId || "";
 
-    document.getElementById("clientModalTitle")
+    document
+        .getElementById("clientModalTitle")
         .textContent =
         clientId
         ? "Modifica cliente"
@@ -2415,54 +2218,37 @@ function openClientModal(clientId = null){
         const client =
             clients.find(c => c.id === clientId);
 
-        if(!client){
-            return;
-        }
+        if(!client) return;
 
-        document.getElementById("ragioneSociale").value =
-            client.ragioneSociale || "";
+        const fields = [
+            "ragioneSociale",
+            "partitaIva",
+            "codiceFiscale",
+            "dataRegistrazione",
+            "dataInizio",
+            "ateco",
+            "telefono",
+            "email",
+            "pec",
+            "sito",
+            "indirizzo",
+            "cap",
+            "comune",
+            "provincia",
+            "note"
+        ];
 
-        document.getElementById("partitaIva").value =
-            client.partitaIva || "";
+        fields.forEach(id => {
 
-        document.getElementById("codiceFiscale").value =
-            client.codiceFiscale || "";
+            const el =
+                document.getElementById(id);
 
-        document.getElementById("dataRegistrazione").value =
-            client.dataRegistrazione || "";
+            if(el){
+                el.value =
+                    client[id] || "";
+            }
 
-        document.getElementById("dataInizio").value =
-            client.dataInizio || "";
-
-        document.getElementById("ateco").value =
-            client.ateco || "";
-
-        document.getElementById("telefono").value =
-            client.telefono || "";
-
-        document.getElementById("email").value =
-            client.email || "";
-
-        document.getElementById("pec").value =
-            client.pec || "";
-
-        document.getElementById("sito").value =
-            client.sito || "";
-
-        document.getElementById("indirizzo").value =
-            client.indirizzo || "";
-
-        document.getElementById("cap").value =
-            client.cap || "";
-
-        document.getElementById("comune").value =
-            client.comune || "";
-
-        document.getElementById("provincia").value =
-            client.provincia || "";
-
-        document.getElementById("note").value =
-            client.note || "";
+        });
 
         customFields.forEach(field => {
 
@@ -2477,12 +2263,14 @@ function openClientModal(clientId = null){
             }
 
         });
+
     }
 
-    document.getElementById("clientModal")
+    document
+        .getElementById("clientModal")
         .classList.add("open");
-}
 
+}
 
 function saveClient(event){
 
@@ -2495,20 +2283,20 @@ function saveClient(event){
 
     customFields.forEach(field => {
 
-        const element =
+        const el =
             document.getElementById(
                 "custom_" + field.id
             );
 
-        if(element){
-            custom[field.id] = element.value;
+        if(el){
+            custom[field.id] = el.value;
         }
 
     });
 
     const data = {
 
-        id: id || uid(),
+        id:id || uid(),
 
         ragioneSociale:
             document.getElementById("ragioneSociale").value,
@@ -2579,8 +2367,8 @@ function saveClient(event){
     closeModal("clientModal");
 
     renderAll();
-}
 
+}
 
 function renderClients(){
 
@@ -2589,8 +2377,9 @@ function renderClients(){
 
     const search =
         (
-            document.getElementById("clientSearch")
-            ?.value || ""
+            document.getElementById(
+                "clientSearch"
+            )?.value || ""
         ).toLowerCase();
 
     const filtered =
@@ -2623,132 +2412,110 @@ function renderClients(){
         container.innerHTML = `
             <div class="empty">
                 <div class="empty-icon">👥</div>
-                <div>Nessun cliente trovato.</div>
+                Nessun cliente trovato.
             </div>
         `;
 
         return;
+
     }
 
     container.innerHTML = `
 
-        <table>
+<table>
 
-            <thead>
+<thead>
+<tr>
+<th>Cliente</th>
+<th>P.IVA</th>
+<th>ATECO</th>
+<th>Progetti</th>
+<th>Stato</th>
+<th></th>
+</tr>
+</thead>
 
-                <tr>
-                    <th>Cliente</th>
-                    <th>P.IVA</th>
-                    <th>ATECO</th>
-                    <th>Progetti</th>
-                    <th>Stato</th>
-                    <th></th>
-                </tr>
+<tbody>
 
-            </thead>
+${filtered.map(client => {
 
-            <tbody>
+    const count =
+        projects.filter(
+            p => p.clientId === client.id
+        ).length;
 
-                ${filtered.map(client => {
+    return `
 
-                    const clientProjects =
-                        projects.filter(
-                            p => p.clientId === client.id
-                        ).length;
+<tr>
 
-                    return `
+<td>
+<div class="client-name">
+${escapeHTML(client.ragioneSociale)}
+</div>
 
-                        <tr>
+<div class="client-email">
+${escapeHTML(client.email || "Nessuna email")}
+</div>
+</td>
 
-                            <td>
+<td>${escapeHTML(client.partitaIva || "-")}</td>
 
-                                <div class="client-name">
-                                    ${escapeHTML(client.ragioneSociale)}
-                                </div>
+<td>${escapeHTML(client.ateco || "-")}</td>
 
-                                <div class="client-email">
-                                    ${escapeHTML(
-                                        client.email ||
-                                        "Nessuna email"
-                                    )}
-                                </div>
+<td>${count}</td>
 
-                            </td>
+<td>${statusBadge("Attivo")}</td>
 
-                            <td>
-                                ${escapeHTML(
-                                    client.partitaIva || "-"
-                                )}
-                            </td>
+<td>
 
-                            <td>
-                                ${escapeHTML(
-                                    client.ateco || "-"
-                                )}
-                            </td>
+<div class="actions">
 
-                            <td>
-                                ${clientProjects}
-                            </td>
+<button class="icon-btn"
+        onclick="openClientModal('${client.id}')">
+✎
+</button>
 
-                            <td>
-                                ${statusBadge("Attivo")}
-                            </td>
+<button class="icon-btn"
+        onclick="deleteClient('${client.id}')">
+🗑
+</button>
 
-                            <td>
+</div>
 
-                                <div class="actions">
+</td>
 
-                                    <button
-                                        class="icon-btn"
-                                        title="Modifica"
-                                        onclick="openClientModal('${client.id}')">
-                                        ✎
-                                    </button>
+</tr>
 
-                                    <button
-                                        class="icon-btn"
-                                        title="Elimina"
-                                        onclick="deleteClient('${client.id}')">
-                                        🗑
-                                    </button>
+`;
 
-                                </div>
+}).join("")}
 
-                            </td>
+</tbody>
 
-                        </tr>
+</table>
 
-                    `;
+`;
 
-                }).join("")}
-
-            </tbody>
-
-        </table>
-
-    `;
 }
-
 
 function deleteClient(id){
 
-    if(!confirm(
-        "Eliminare questo cliente? Verranno eliminati anche i suoi progetti e attività."
-    )){
+    if(!confirm("Eliminare questo cliente e i relativi progetti?")){
         return;
     }
-
-    const projectIds =
-        projects
-            .filter(p => p.clientId === id)
-            .map(p => p.id);
 
     clients =
         clients.filter(c => c.id !== id);
 
+    const projectIds =
+        projects
+        .filter(p => p.clientId === id)
+        .map(p => p.id);
+
     projects =
-        projects.filter(p => p.clientId !== id);
+        projects.filter(
+            p => p.clientId !== id
+        );
 
     tasks =
         tasks.filter(
@@ -2758,12 +2525,13 @@ function deleteClient(id){
     saveData();
 
     renderAll();
+
 }
 
 
 /* ============================================================
    CAMPI PERSONALIZZATI
-   ============================================================ */
+============================================================ */
 
 function openCustomFieldModal(){
 
@@ -2773,12 +2541,11 @@ function openCustomFieldModal(){
 
 }
 
-
 function saveCustomField(event){
 
     event.preventDefault();
 
-    const field = {
+    customFields.push({
 
         id:uid(),
 
@@ -2800,71 +2567,69 @@ function saveCustomField(event){
             .map(x => x.trim())
             .filter(Boolean)
 
-    };
-
-    customFields.push(field);
+    });
 
     saveData();
 
     closeModal("customFieldModal");
 
-    document.getElementById(
-        "customFieldName"
-    ).value = "";
+    document
+        .getElementById("customFieldName")
+        .value = "";
 
-    document.getElementById(
-        "customFieldOptions"
-    ).value = "";
+    document
+        .getElementById("customFieldOptions")
+        .value = "";
 
     renderAll();
-}
 
+}
 
 function renderCustomFields(){
 
     const container =
-        document.getElementById("customFieldsList");
+        document.getElementById(
+            "customFieldsList"
+        );
 
     if(!customFields.length){
 
         container.innerHTML = `
             <div class="empty">
-                <div class="empty-icon">⚙</div>
                 Nessun campo personalizzato.
             </div>
         `;
 
         return;
+
     }
 
     container.innerHTML =
         customFields.map(field => `
 
-            <div class="custom-field">
+<div class="custom-field"
+     style="display:flex;justify-content:space-between;padding:15px 0;border-bottom:1px solid var(--border)">
 
-                <div>
+<div>
+<strong>
+${escapeHTML(field.name)}
+</strong>
 
-                    <div class="custom-field-name">
-                        ${escapeHTML(field.name)}
-                    </div>
+<div style="font-size:12px;color:var(--muted)">
+${escapeHTML(field.type)}
+</div>
+</div>
 
-                    <div class="custom-field-type">
-                        ${escapeHTML(field.type)}
-                    </div>
+<button class="btn btn-danger btn-small"
+        onclick="deleteCustomField('${field.id}')">
+Elimina
+</button>
 
-                </div>
+</div>
 
-                <button
-                    class="btn btn-danger btn-small"
-                    onclick="deleteCustomField('${field.id}')">
-                    Elimina
-                </button>
+`).join("");
 
-            </div>
-
-        `).join("");
 }
-
 
 function renderCustomClientFields(){
 
@@ -2878,6 +2643,7 @@ function renderCustomClientFields(){
         container.innerHTML = "";
 
         return;
+
     }
 
     container.innerHTML =
@@ -2888,68 +2654,63 @@ function renderCustomClientFields(){
             if(field.type === "textarea"){
 
                 control = `
-                    <textarea
-                        class="form-control"
-                        id="custom_${field.id}">
-                    </textarea>
-                `;
+<textarea class="form-control"
+          id="custom_${field.id}"></textarea>
+`;
 
             }else if(field.type === "select"){
 
                 control = `
-                    <select
-                        class="form-control"
-                        id="custom_${field.id}">
+<select class="form-control"
+        id="custom_${field.id}">
 
-                        <option value="">
-                            Seleziona...
-                        </option>
+<option value="">
+Seleziona...
+</option>
 
-                        ${field.options.map(o =>
-                            `<option value="${escapeHTML(o)}">
-                                ${escapeHTML(o)}
-                            </option>`
-                        ).join("")}
+${field.options.map(option => `
 
-                    </select>
-                `;
+<option value="${escapeHTML(option)}">
+${escapeHTML(option)}
+</option>
+
+`).join("")}
+
+</select>
+`;
 
             }else{
 
                 control = `
-                    <input
-                        type="${field.type}"
-                        class="form-control"
-                        id="custom_${field.id}">
-                `;
+<input type="${field.type}"
+       class="form-control"
+       id="custom_${field.id}">
+`;
 
             }
 
             return `
 
-                <div
-                    class="form-group"
-                    style="margin-bottom:16px">
+<div class="form-group"
+     style="margin-bottom:16px">
 
-                    <label class="form-label">
-                        ${escapeHTML(field.name)}
-                    </label>
+<label class="form-label">
+${escapeHTML(field.name)}
+</label>
 
-                    ${control}
+${control}
 
-                </div>
+</div>
 
-            `;
+`;
 
         }).join("");
-}
 
+}
 
 function deleteCustomField(id){
 
-    if(!confirm(
-        "Eliminare questo campo personalizzato?"
-    )){
+    if(!confirm("Eliminare questo campo?")){
         return;
     }
 
@@ -2969,12 +2730,13 @@ function deleteCustomField(id){
     saveData();
 
     renderAll();
+
 }
 
 
 /* ============================================================
    PROGETTI
-   ============================================================ */
+============================================================ */
 
 function openProjectModal(){
 
@@ -2987,27 +2749,25 @@ function openProjectModal(){
         navigate("clients");
 
         return;
+
     }
 
-    const select =
-        document.getElementById(
-            "projectClient"
-        );
-
-    select.innerHTML =
+    document
+        .getElementById("projectClient")
+        .innerHTML =
         clients.map(c => `
 
-            <option value="${c.id}">
-                ${escapeHTML(c.ragioneSociale)}
-            </option>
+<option value="${c.id}">
+${escapeHTML(c.ragioneSociale)}
+</option>
 
-        `).join("");
+`).join("");
 
-    document.getElementById(
-        "projectModal"
-    ).classList.add("open");
+    document
+        .getElementById("projectModal")
+        .classList.add("open");
+
 }
-
 
 function saveProject(event){
 
@@ -3060,51 +2820,8 @@ function saveProject(event){
     event.target.reset();
 
     renderAll();
+
 }
-
-
-/* ============================================================
-   PROJECT PROGRESS
-   ============================================================ */
-
-function updateProjectProgress(projectId){
-
-    const project =
-        projects.find(
-            p => p.id === projectId
-        );
-
-    if(!project){
-        return;
-    }
-
-    const projectTasks =
-        tasks.filter(
-            t => t.projectId === projectId
-        );
-
-    if(!projectTasks.length){
-
-        project.progress = 0;
-
-        return;
-    }
-
-    const completed =
-        projectTasks.filter(
-            t => t.status === "Completata"
-        ).length;
-
-    project.progress =
-        Math.round(
-            (completed / projectTasks.length) * 100
-        );
-}
-
-
-/* ============================================================
-   RENDER PROJECTS
-   ============================================================ */
 
 function renderProjects(){
 
@@ -3113,26 +2830,18 @@ function renderProjects(){
             "projectsGrid"
         );
 
-    projects.forEach(project => {
-        updateProjectProgress(project.id);
-    });
-
     if(!projects.length){
 
         container.innerHTML = `
             <div class="card empty"
                  style="grid-column:1/-1">
-
-                <div class="empty-icon">
-                    ▣
-                </div>
-
+                <div class="empty-icon">▣</div>
                 Nessun progetto.
-
             </div>
         `;
 
         return;
+
     }
 
     container.innerHTML =
@@ -3143,389 +2852,451 @@ function renderProjects(){
                     c => c.id === project.clientId
                 );
 
-            const projectTasks =
+            const taskCount =
                 tasks.filter(
                     t => t.projectId === project.id
-                );
+                ).length;
 
-            const phases =
-                project.phases || [];
-
-            const unassignedTasks =
-                projectTasks.filter(
-                    t => !t.phaseId
-                );
+            const phaseCount =
+                (project.phases || []).length;
 
             return `
 
-                <div class="card project-card">
+<div class="card project-card">
 
-                    <div style="
-                        display:flex;
-                        justify-content:space-between;
-                        gap:10px;
-                        align-items:flex-start;
-                    ">
+<div style="
+display:flex;
+justify-content:space-between;
+gap:10px">
 
-                        <div>
+<div>
 
-                            <h3>
-                                ${escapeHTML(project.name)}
-                            </h3>
+<h3>
+${escapeHTML(project.name)}
+</h3>
 
-                            <div style="
-                                font-size:12px;
-                                color:var(--primary);
-                                font-weight:650
-                            ">
-                                ${escapeHTML(
-                                    client?.ragioneSociale ||
-                                    "Cliente eliminato"
-                                )}
-                            </div>
+<div style="
+font-size:12px;
+color:var(--primary);
+font-weight:650">
 
-                        </div>
+${escapeHTML(
+    client?.ragioneSociale ||
+    "Cliente eliminato"
+)}
 
-                        ${statusBadge(project.status)}
+</div>
 
-                    </div>
+</div>
 
-                    <div class="project-description">
+${statusBadge(project.status)}
 
-                        ${escapeHTML(
-                            project.description ||
-                            "Nessuna descrizione"
-                        )}
+</div>
 
-                    </div>
+<div class="project-description">
+${escapeHTML(
+    project.description ||
+    "Nessuna descrizione"
+)}
+</div>
 
-                    <div class="project-meta">
+<div class="project-meta">
 
-                        <span>
-                            ${projectTasks.length}
-                            attività
-                        </span>
+<span>
+${phaseCount} fasi · ${taskCount} attività
+</span>
 
-                        <span>
-                            ${formatDate(project.end)}
-                        </span>
+<span>
+${formatDate(project.end)}
+</span>
 
-                    </div>
+</div>
 
-                    <div class="progress">
+<div class="progress">
 
-                        <div
-                            class="progress-bar"
-                            style="
-                                width:${project.progress || 0}%
-                            ">
-                        </div>
+<div class="progress-bar"
+     style="width:${project.progress || 0}%">
+</div>
 
-                    </div>
+</div>
 
-                    <div style="
-                        display:flex;
-                        justify-content:space-between;
-                        margin-top:8px;
-                        font-size:11px;
-                        color:var(--muted)
-                    ">
+<div style="
+display:flex;
+justify-content:space-between;
+margin-top:8px;
+font-size:11px;
+color:var(--muted)">
 
-                        <span>
-                            Avanzamento
-                        </span>
+<span>Avanzamento</span>
 
-                        <strong>
-                            ${project.progress || 0}%
-                        </strong>
+<strong>
+${project.progress || 0}%
+</strong>
 
-                    </div>
+</div>
 
-                    <div class="project-actions">
+<div style="
+display:flex;
+gap:7px;
+margin-top:18px;
+flex-wrap:wrap">
 
-                        <button
-                            class="btn btn-secondary btn-small"
-                            onclick="addPhase('${project.id}')">
-                            + Fase
-                        </button>
+<button class="btn btn-primary btn-small"
+        onclick="openProjectDetail('${project.id}')">
+Apri progetto
+</button>
 
-                        <button
-                            class="btn btn-primary btn-small"
-                            onclick="openTaskModal('${project.id}')">
-                            + Attività
-                        </button>
+<button class="btn btn-secondary btn-small"
+        onclick="addPhase('${project.id}')">
++ Fase
+</button>
 
-                        <button
-                            class="btn btn-danger btn-small"
-                            onclick="deleteProject('${project.id}')">
-                            🗑
-                        </button>
+<button class="btn btn-secondary btn-small"
+        onclick="openTaskModal('${project.id}')">
++ Attività
+</button>
 
-                    </div>
+<button class="btn btn-danger btn-small"
+        onclick="deleteProject('${project.id}')">
+🗑
+</button>
 
-                    <div class="project-details">
+</div>
 
-                        ${
-                            phases.length
-                            ?
-                            phases.map(phase =>
-                                renderPhase(
-                                    project,
-                                    phase,
-                                    projectTasks
-                                )
-                            ).join("")
-                            :
-                            `
-                                <div class="project-no-phase">
-                                    Nessuna fase creata.
-                                    Usa "+ Fase" per organizzare il progetto.
-                                </div>
-                            `
-                        }
+</div>
 
-                        ${
-                            unassignedTasks.length
-                            ?
-                            `
-                                <div class="phase"
-                                     style="margin-top:12px">
-
-                                    <div class="phase-header">
-
-                                        <div class="phase-name">
-                                            Attività senza fase
-                                        </div>
-
-                                        <span class="badge gray">
-                                            ${unassignedTasks.length}
-                                        </span>
-
-                                    </div>
-
-                                    <div class="tasks">
-
-                                        ${
-                                            unassignedTasks
-                                            .map(task =>
-                                                renderProjectTask(
-                                                    task
-                                                )
-                                            )
-                                            .join("")
-                                        }
-
-                                    </div>
-
-                                </div>
-                            `
-                            :
-                            ""
-                        }
-
-                    </div>
-
-                </div>
-
-            `;
+`;
 
         }).join("");
+
 }
 
+function openProjectDetail(id){
 
-function renderPhase(
-    project,
-    phase,
-    projectTasks
-){
-
-    const phaseTasks =
-        projectTasks.filter(
-            t => t.phaseId === phase.id
+    const project =
+        projects.find(
+            p => p.id === id
         );
 
-    return `
+    if(!project) return;
 
-        <div class="phase">
+    document
+        .getElementById("projectListView")
+        .style.display = "none";
 
-            <div class="phase-header">
+    const detail =
+        document.getElementById(
+            "projectDetail"
+        );
 
-                <div>
+    detail.classList.add("open");
 
-                    <div class="phase-name">
-                        ${escapeHTML(phase.name)}
-                    </div>
+    renderProjectDetail(id);
 
-                    <div style="
-                        font-size:10px;
-                        color:var(--muted);
-                        margin-top:3px
-                    ">
-                        ${phaseTasks.length}
-                        attività
-                    </div>
-
-                </div>
-
-                <div class="phase-actions">
-
-                    <button
-                        class="btn btn-secondary btn-small"
-                        onclick="openTaskModal(
-                            '${project.id}',
-                            '${phase.id}'
-                        )">
-                        + Attività
-                    </button>
-
-                    <button
-                        class="icon-btn"
-                        title="Rinomina fase"
-                        onclick="renamePhase(
-                            '${project.id}',
-                            '${phase.id}'
-                        )">
-                        ✎
-                    </button>
-
-                    <button
-                        class="icon-btn"
-                        title="Elimina fase"
-                        onclick="deletePhase(
-                            '${project.id}',
-                            '${phase.id}'
-                        )">
-                        🗑
-                    </button>
-
-                </div>
-
-            </div>
-
-            <div class="tasks">
-
-                ${
-                    phaseTasks.length
-                    ?
-                    phaseTasks
-                        .map(task =>
-                            renderProjectTask(task)
-                        )
-                        .join("")
-                    :
-                    `
-                        <div class="phase-empty">
-                            Nessuna attività in questa fase.
-                        </div>
-                    `
-                }
-
-            </div>
-
-        </div>
-
-    `;
 }
 
+function closeProjectDetail(){
 
-function renderProjectTask(task){
+    document
+        .getElementById("projectListView")
+        .style.display = "";
+
+    document
+        .getElementById("projectDetail")
+        .classList.remove("open");
+
+}
+
+function renderProjectDetail(id){
+
+    const project =
+        projects.find(
+            p => p.id === id
+        );
+
+    if(!project) return;
+
+    if(!project.phases){
+        project.phases = [];
+    }
+
+    const client =
+        clients.find(
+            c => c.id === project.clientId
+        );
+
+    const detail =
+        document.getElementById(
+            "projectDetail"
+        );
+
+    const projectTasks =
+        tasks.filter(
+            t => t.projectId === id
+        );
+
+    let phasesHTML = "";
+
+    project.phases.forEach(phase => {
+
+        const phaseTasks =
+            projectTasks.filter(
+                t => t.phaseId === phase.id
+            );
+
+        phasesHTML += `
+
+<div class="phase">
+
+<div class="phase-header">
+
+<div>
+
+<div class="phase-name">
+${escapeHTML(phase.name)}
+</div>
+
+<div style="
+font-size:11px;
+color:var(--muted);
+margin-top:3px">
+
+${phaseTasks.length} attività
+
+</div>
+
+</div>
+
+<div class="phase-actions">
+
+<button class="btn btn-secondary btn-small"
+        onclick="openTaskModal('${id}','${phase.id}')">
++ Attività
+</button>
+
+<button class="btn btn-danger btn-small"
+        onclick="deletePhase('${id}','${phase.id}')">
+🗑
+</button>
+
+</div>
+
+</div>
+
+<div class="tasks">
+
+${
+phaseTasks.length
+?
+phaseTasks.map(task => taskHTML(task)).join("")
+:
+`<div style="
+padding:18px 0;
+font-size:12px;
+color:var(--muted)">
+Nessuna attività in questa fase.
+</div>`
+}
+
+</div>
+
+</div>
+
+`;
+
+    });
+
+    const unassigned =
+        projectTasks.filter(
+            t => !t.phaseId ||
+            !project.phases.some(
+                p => p.id === t.phaseId
+            )
+        );
+
+    if(unassigned.length){
+
+        phasesHTML += `
+
+<div class="phase">
+
+<div class="phase-header">
+
+<div class="phase-name">
+Attività senza fase
+</div>
+
+</div>
+
+<div class="tasks">
+
+${unassigned.map(
+    task => taskHTML(task)
+).join("")}
+
+</div>
+
+</div>
+
+`;
+
+    }
+
+    if(!phasesHTML){
+
+        phasesHTML = `
+<div class="empty">
+<div class="empty-icon">▣</div>
+Questo progetto non ha ancora fasi.
+</div>
+`;
+
+    }
+
+    detail.innerHTML = `
+
+<div class="project-detail-header">
+
+<div style="
+display:flex;
+justify-content:space-between;
+gap:20px;
+align-items:flex-start">
+
+<div>
+
+<h2>
+${escapeHTML(project.name)}
+</h2>
+
+<p>
+${escapeHTML(
+    client?.ragioneSociale ||
+    "Cliente eliminato"
+)}
+</p>
+
+</div>
+
+${statusBadge(project.status)}
+
+</div>
+
+<div style="
+display:flex;
+gap:8px;
+margin-top:20px;
+flex-wrap:wrap">
+
+<button class="btn btn-secondary btn-small"
+        onclick="closeProjectDetail()">
+← Progetti
+</button>
+
+<button class="btn btn-primary btn-small"
+        onclick="addPhase('${project.id}')">
++ Nuova fase
+</button>
+
+<button class="btn btn-primary btn-small"
+        onclick="openTaskModal('${project.id}')">
++ Nuova attività
+</button>
+
+</div>
+
+</div>
+
+<div style="margin-bottom:16px">
+
+<h3 style="margin-bottom:8px">
+Fasi e attività
+</h3>
+
+<div style="
+font-size:12px;
+color:var(--muted)">
+
+Le attività rimangono collegate al progetto e sono visibili anche nel calendario.
+
+</div>
+
+</div>
+
+${phasesHTML}
+
+`;
+
+}
+
+function taskHTML(task){
 
     return `
 
-        <div class="task">
+<div class="task">
 
-            <input
-                type="checkbox"
-                class="task-check"
-                ${task.status === "Completata" ? "checked" : ""}
-                onchange="toggleTask('${task.id}')">
+<input type="checkbox"
+       class="task-check"
+       ${task.status === "Completata" ? "checked" : ""}
+       onchange="toggleTask('${task.id}')">
 
-            <div class="task-info">
+<div class="task-info">
 
-                <div class="
-                    task-name
-                    ${task.status === "Completata"
-                        ? "completed"
-                        : ""}
-                ">
+<div class="task-name">
+${escapeHTML(task.name)}
+</div>
 
-                    ${escapeHTML(task.name)}
+<div class="task-meta">
 
-                </div>
+${task.due
+? "📅 " + formatDate(task.due)
+: "Senza data"}
 
-                <div class="task-meta">
+${task.startTime
+? " · 🕐 " + escapeHTML(task.startTime)
+: ""}
 
-                    ${formatDate(task.due)}
+${task.duration
+? " · " + escapeHTML(task.duration) + "h"
+: ""}
 
-                    ·
+</div>
 
-                    <span class="badge ${
-                        task.priority === "Alta"
-                        ? "red"
-                        : task.priority === "Media"
-                        ? "yellow"
-                        : "gray"
-                    }">
+</div>
 
-                        ${escapeHTML(
-                            task.priority || "Media"
-                        )}
+${statusBadge(task.status)}
 
-                    </span>
+<button class="icon-btn"
+        title="Modifica"
+        onclick="openTaskModal('', '', '${task.id}')">
+✎
+</button>
 
-                </div>
+<button class="icon-btn"
+        title="Elimina"
+        onclick="deleteTask('${task.id}')">
+🗑
+</button>
 
-            </div>
+</div>
 
-            <div class="task-actions">
+`;
 
-                <button
-                    class="icon-btn"
-                    title="Modifica"
-                    onclick="openTaskModal(
-                        '${task.projectId}',
-                        '${task.phaseId || ""}',
-                        '${task.id}'
-                    )">
-                    ✎
-                </button>
-
-                <button
-                    class="icon-btn"
-                    title="Elimina"
-                    onclick="deleteTask('${task.id}')">
-                    🗑
-                </button>
-
-            </div>
-
-        </div>
-
-    `;
 }
-
-
-/* ============================================================
-   FASI
-   ============================================================ */
 
 function addPhase(projectId){
 
     const name =
         prompt("Nome della nuova fase:");
 
-    if(!name || !name.trim()){
-        return;
-    }
+    if(!name) return;
 
     const project =
         projects.find(
             p => p.id === projectId
         );
 
-    if(!project){
-        return;
-    }
+    if(!project) return;
 
     if(!project.phases){
         project.phases = [];
@@ -3535,7 +3306,7 @@ function addPhase(projectId){
 
         id:uid(),
 
-        name:name.trim(),
+        name:name,
 
         tasks:[]
 
@@ -3544,59 +3315,20 @@ function addPhase(projectId){
     saveData();
 
     renderAll();
+
+    if(
+        document
+        .getElementById("projectDetail")
+        .classList.contains("open")
+    ){
+        renderProjectDetail(projectId);
+    }
+
 }
 
+function deletePhase(projectId, phaseId){
 
-function renamePhase(
-    projectId,
-    phaseId
-){
-
-    const project =
-        projects.find(
-            p => p.id === projectId
-        );
-
-    if(!project){
-        return;
-    }
-
-    const phase =
-        (project.phases || [])
-        .find(
-            p => p.id === phaseId
-        );
-
-    if(!phase){
-        return;
-    }
-
-    const name =
-        prompt(
-            "Nuovo nome della fase:",
-            phase.name
-        );
-
-    if(!name || !name.trim()){
-        return;
-    }
-
-    phase.name = name.trim();
-
-    saveData();
-
-    renderAll();
-}
-
-
-function deletePhase(
-    projectId,
-    phaseId
-){
-
-    if(!confirm(
-        "Eliminare questa fase? Le attività verranno mantenute senza fase."
-    )){
+    if(!confirm("Eliminare questa fase? Le attività resteranno nel progetto senza fase.")){
         return;
     }
 
@@ -3605,9 +3337,7 @@ function deletePhase(
             p => p.id === projectId
         );
 
-    if(!project){
-        return;
-    }
+    if(!project) return;
 
     project.phases =
         (project.phases || [])
@@ -3621,9 +3351,7 @@ function deletePhase(
             task.projectId === projectId &&
             task.phaseId === phaseId
         ){
-
             task.phaseId = "";
-
         }
 
     });
@@ -3631,18 +3359,14 @@ function deletePhase(
     saveData();
 
     renderAll();
+
+    renderProjectDetail(projectId);
+
 }
-
-
-/* ============================================================
-   DELETE PROJECT
-   ============================================================ */
 
 function deleteProject(id){
 
-    if(!confirm(
-        "Eliminare il progetto e tutte le sue attività?"
-    )){
+    if(!confirm("Eliminare il progetto e le sue attività?")){
         return;
     }
 
@@ -3658,18 +3382,18 @@ function deleteProject(id){
 
     saveData();
 
+    closeProjectDetail();
+
     renderAll();
+
 }
 
 
 /* ============================================================
-   TASK MODAL
-   ============================================================ */
+   TASK
+============================================================ */
 
-function populateTaskProjects(
-    selectedProject = "",
-    selectedPhase = ""
-){
+function populateTaskProjects(selectedProject = "", selectedPhase = ""){
 
     const select =
         document.getElementById(
@@ -3677,90 +3401,84 @@ function populateTaskProjects(
         );
 
     select.innerHTML =
-        `<option value="">
-            Nessun progetto
-        </option>` +
+        `<option value="">Nessun progetto</option>` +
+        projects.map(project => {
 
-        projects.map(project => `
+            const client =
+                clients.find(
+                    c => c.id === project.clientId
+                );
 
-            <option
-                value="${project.id}"
-                ${selectedProject === project.id
-                    ? "selected"
-                    : ""}>
+            return `
 
-                ${escapeHTML(project.name)}
+<option value="${project.id}"
+        ${selectedProject === project.id ? "selected" : ""}>
 
-            </option>
+${escapeHTML(project.name)}
+${client
+? " — " + escapeHTML(client.ragioneSociale)
+: ""}
 
-        `).join("");
+</option>
 
-    populateTaskPhases(
-        selectedProject,
-        selectedPhase
-    );
+`;
+
+        }).join("");
+
+    updateTaskPhases(selectedPhase);
+
 }
 
+function updateTaskPhases(selectedPhase = ""){
 
-function populateTaskPhases(
-    projectId,
-    selectedPhase = ""
-){
+    const projectId =
+        document.getElementById(
+            "taskProject"
+        ).value;
 
     const select =
         document.getElementById(
             "taskPhase"
         );
 
+    if(!projectId){
+
+        select.innerHTML =
+            `<option value="">Nessuna fase</option>`;
+
+        return;
+
+    }
+
     const project =
         projects.find(
             p => p.id === projectId
         );
 
-    if(!project || !project.phases?.length){
-
-        select.innerHTML =
-            `<option value="">
-                Nessuna fase
-            </option>`;
-
-        return;
-    }
+    const phases =
+        project?.phases || [];
 
     select.innerHTML =
-        `<option value="">
-            Nessuna fase
-        </option>` +
+        `<option value="">Nessuna fase</option>` +
+        phases.map(phase => `
 
-        project.phases.map(phase => `
+<option value="${phase.id}"
+        ${selectedPhase === phase.id ? "selected" : ""}>
 
-            <option
-                value="${phase.id}"
-                ${selectedPhase === phase.id
-                    ? "selected"
-                    : ""}>
+${escapeHTML(phase.name)}
 
-                ${escapeHTML(phase.name)}
+</option>
 
-            </option>
+`).join("");
 
-        `).join("");
 }
 
-
-document.getElementById("taskProject")
-    .addEventListener(
-        "change",
-        function(){
-
-            populateTaskPhases(
-                this.value,
-                ""
-            );
-
-        }
-    );
-
+document
+.getElementById("taskProject")
+.addEventListener(
+    "change",
+    () => updateTaskPhases()
+);
 
 function openTaskModal(
     projectId = "",
@@ -3768,35 +3486,33 @@ function openTaskModal(
     taskId = ""
 ){
 
-    const form =
-        document.getElementById(
-            "taskForm"
-        );
+    document
+        .getElementById("taskForm")
+        .reset();
 
-    form.reset();
+    document
+        .getElementById("taskId")
+        .value = "";
 
-    document.getElementById(
-        "taskId"
-    ).value = taskId || "";
+    document
+        .getElementById("taskModalTitle")
+        .textContent =
+        "Nuova attività";
 
-    document.getElementById(
-        "taskModalTitle"
-    ).textContent =
-        taskId
-        ? "Modifica attività"
-        : "Nuova attività";
+    document
+        .getElementById("taskStartTime")
+        .value = "09:00";
 
-    document.getElementById(
-        "taskSubmitButton"
-    ).textContent =
-        taskId
-        ? "Salva modifiche"
-        : "Crea attività";
+    document
+        .getElementById("taskDuration")
+        .value = "1";
 
-    populateTaskProjects(
-        projectId,
-        phaseId
-    );
+    if(
+        projectId &&
+        typeof projectId !== "string"
+    ){
+        projectId = "";
+    }
 
     if(taskId){
 
@@ -3805,66 +3521,71 @@ function openTaskModal(
                 t => t.id === taskId
             );
 
-        if(!task){
-            return;
-        }
+        if(!task) return;
 
-        document.getElementById(
-            "taskName"
-        ).value =
-            task.name || "";
-
-        document.getElementById(
-            "taskProject"
-        ).value =
+        projectId =
             task.projectId || "";
 
-        populateTaskPhases(
-            task.projectId || "",
-            task.phaseId || ""
-        );
-
-        document.getElementById(
-            "taskPhase"
-        ).value =
+        phaseId =
             task.phaseId || "";
 
-        document.getElementById(
-            "taskStatus"
-        ).value =
+        document
+            .getElementById("taskId")
+            .value =
+            task.id;
+
+        document
+            .getElementById("taskModalTitle")
+            .textContent =
+            "Modifica attività";
+
+        document
+            .getElementById("taskName")
+            .value =
+            task.name || "";
+
+        document
+            .getElementById("taskStatus")
+            .value =
             task.status || "Da fare";
 
-        document.getElementById(
-            "taskStart"
-        ).value =
-            task.start || "";
-
-        document.getElementById(
-            "taskDue"
-        ).value =
-            task.due || "";
-
-        document.getElementById(
-            "taskPriority"
-        ).value =
+        document
+            .getElementById("taskPriority")
+            .value =
             task.priority || "Media";
 
-        document.getElementById(
-            "taskDescription"
-        ).value =
+        document
+            .getElementById("taskDue")
+            .value =
+            task.due || "";
+
+        document
+            .getElementById("taskStartTime")
+            .value =
+            task.startTime || "09:00";
+
+        document
+            .getElementById("taskDuration")
+            .value =
+            task.duration || 1;
+
+        document
+            .getElementById("taskDescription")
+            .value =
             task.description || "";
 
     }
 
-    document.getElementById(
-        "taskModal"
-    ).classList.add("open");
+    populateTaskProjects(
+        projectId,
+        phaseId
+    );
+
+    document
+        .getElementById("taskModal")
+        .classList.add("open");
+
 }
-
-
-/* ============================================================
-   SAVE TASK
-   ============================================================ */
 
 function saveTask(event){
 
@@ -3875,9 +3596,14 @@ function saveTask(event){
             "taskId"
         ).value;
 
+    const existing =
+        id
+        ? tasks.find(t => t.id === id)
+        : null;
+
     const data = {
 
-        id: id || uid(),
+        id:id || uid(),
 
         name:
             document.getElementById(
@@ -3899,9 +3625,9 @@ function saveTask(event){
                 "taskStatus"
             ).value,
 
-        start:
+        priority:
             document.getElementById(
-                "taskStart"
+                "taskPriority"
             ).value,
 
         due:
@@ -3909,10 +3635,17 @@ function saveTask(event){
                 "taskDue"
             ).value,
 
-        priority:
+        startTime:
             document.getElementById(
-                "taskPriority"
+                "taskStartTime"
             ).value,
+
+        duration:
+            parseFloat(
+                document.getElementById(
+                    "taskDuration"
+                ).value
+            ) || 1,
 
         description:
             document.getElementById(
@@ -3921,33 +3654,16 @@ function saveTask(event){
 
     };
 
-    if(id){
+    if(existing){
 
-        const index =
-            tasks.findIndex(
-                t => t.id === id
-            );
-
-        if(index >= 0){
-
-            tasks[index] = {
-                ...tasks[index],
-                ...data
-            };
-
-        }
+        Object.assign(
+            existing,
+            data
+        );
 
     }else{
 
         tasks.push(data);
-
-    }
-
-    if(data.projectId){
-
-        updateProjectProgress(
-            data.projectId
-        );
 
     }
 
@@ -3956,12 +3672,45 @@ function saveTask(event){
     closeModal("taskModal");
 
     renderAll();
+
 }
 
+function toggleTask(id){
 
-/* ============================================================
-   TASKS TABLE
-   ============================================================ */
+    const task =
+        tasks.find(
+            t => t.id === id
+        );
+
+    if(!task) return;
+
+    task.status =
+        task.status === "Completata"
+        ? "Da fare"
+        : "Completata";
+
+    saveData();
+
+    renderAll();
+
+}
+
+function deleteTask(id){
+
+    if(!confirm("Eliminare questa attività?")){
+        return;
+    }
+
+    tasks =
+        tasks.filter(
+            t => t.id !== id
+        );
+
+    saveData();
+
+    renderAll();
+
+}
 
 function renderTasks(){
 
@@ -3974,293 +3723,249 @@ function renderTasks(){
 
         container.innerHTML = `
             <div class="empty">
-
-                <div class="empty-icon">
-                    ✓
-                </div>
-
+                <div class="empty-icon">✓</div>
                 Nessuna attività.
-
             </div>
         `;
 
         return;
+
     }
 
     container.innerHTML = `
 
-        <table>
+<table>
 
-            <thead>
+<thead>
 
-                <tr>
+<tr>
+<th>Attività</th>
+<th>Progetto</th>
+<th>Data</th>
+<th>Orario</th>
+<th>Priorità</th>
+<th>Stato</th>
+<th></th>
+</tr>
 
-                    <th>Attività</th>
-                    <th>Progetto</th>
-                    <th>Fase</th>
-                    <th>Scadenza</th>
-                    <th>Priorità</th>
-                    <th>Stato</th>
-                    <th></th>
+</thead>
 
-                </tr>
+<tbody>
 
-            </thead>
+${tasks.map(task => {
 
-            <tbody>
+    const project =
+        projects.find(
+            p => p.id === task.projectId
+        );
 
-                ${tasks.map(task => {
+    return `
 
-                    const project =
-                        projects.find(
-                            p => p.id === task.projectId
-                        );
+<tr>
 
-                    const phase =
-                        project?.phases?.find(
-                            p => p.id === task.phaseId
-                        );
+<td>
 
-                    return `
+<div class="client-name">
+${escapeHTML(task.name)}
+</div>
 
-                        <tr>
+<div class="client-email">
+${escapeHTML(
+    task.description || ""
+)}
+</div>
 
-                            <td>
+</td>
 
-                                <div class="client-name">
+<td>
+${escapeHTML(
+    project?.name || "-"
+)}
+</td>
 
-                                    ${escapeHTML(
-                                        task.name
-                                    )}
+<td>
+${formatDate(task.due)}
+</td>
 
-                                </div>
+<td>
+${task.startTime
+? escapeHTML(task.startTime) +
+  " · " +
+  escapeHTML(task.duration || 1) +
+  "h"
+: "-"
+}
+</td>
 
-                                <div class="client-email">
+<td>
 
-                                    ${escapeHTML(
-                                        task.description || ""
-                                    )}
+<span class="badge ${
+    task.priority === "Alta"
+    ? "red"
+    : task.priority === "Media"
+    ? "yellow"
+    : "gray"
+}">
 
-                                </div>
+${escapeHTML(task.priority)}
 
-                            </td>
+</span>
 
-                            <td>
-                                ${escapeHTML(
-                                    project?.name || "-"
-                                )}
-                            </td>
+</td>
 
-                            <td>
-                                ${escapeHTML(
-                                    phase?.name || "-"
-                                )}
-                            </td>
+<td>
+${statusBadge(task.status)}
+</td>
 
-                            <td>
-                                ${formatDate(task.due)}
-                            </td>
+<td>
 
-                            <td>
+<div class="actions">
 
-                                <span class="badge ${
-                                    task.priority === "Alta"
-                                    ? "red"
-                                    : task.priority === "Media"
-                                    ? "yellow"
-                                    : "gray"
-                                }">
+<button class="icon-btn"
+        title="Modifica"
+        onclick="openTaskModal('','','${task.id}')">
+✎
+</button>
 
-                                    ${escapeHTML(
-                                        task.priority
-                                    )}
+<button class="icon-btn"
+        title="Completa"
+        onclick="toggleTask('${task.id}')">
+✓
+</button>
 
-                                </span>
+<button class="icon-btn"
+        title="Elimina"
+        onclick="deleteTask('${task.id}')">
+🗑
+</button>
 
-                            </td>
+</div>
 
-                            <td>
-                                ${statusBadge(task.status)}
-                            </td>
+</td>
 
-                            <td>
+</tr>
 
-                                <div class="actions">
+`;
 
-                                    <button
-                                        class="icon-btn"
-                                        title="Modifica"
-                                        onclick="openTaskModal(
-                                            '${task.projectId || ""}',
-                                            '${task.phaseId || ""}',
-                                            '${task.id}'
-                                        )">
-                                        ✎
-                                    </button>
+}).join("")}
 
-                                    <button
-                                        class="icon-btn"
-                                        title="Completa"
-                                        onclick="toggleTask('${task.id}')">
-                                        ✓
-                                    </button>
+</tbody>
 
-                                    <button
-                                        class="icon-btn"
-                                        title="Elimina"
-                                        onclick="deleteTask('${task.id}')">
-                                        🗑
-                                    </button>
+</table>
 
-                                </div>
+`;
 
-                            </td>
-
-                        </tr>
-
-                    `;
-
-                }).join("")}
-
-            </tbody>
-
-        </table>
-
-    `;
 }
 
 
 /* ============================================================
-   TOGGLE TASK
-   ============================================================ */
+   CALENDARIO
+============================================================ */
 
-function toggleTask(id){
+function setCalendarView(view){
 
-    const task =
-        tasks.find(
-            t => t.id === id
+    calendarView = view;
+
+    document
+        .getElementById("monthViewBtn")
+        .classList.toggle(
+            "active",
+            view === "month"
         );
 
-    if(!task){
-        return;
-    }
-
-    task.status =
-        task.status === "Completata"
-        ? "Da fare"
-        : "Completata";
-
-    if(task.projectId){
-
-        updateProjectProgress(
-            task.projectId
+    document
+        .getElementById("weekViewBtn")
+        .classList.toggle(
+            "active",
+            view === "week"
         );
-
-    }
-
-    saveData();
-
-    renderAll();
-}
-
-
-/* ============================================================
-   DELETE TASK
-   ============================================================ */
-
-function deleteTask(id){
-
-    if(!confirm(
-        "Eliminare questa attività?"
-    )){
-        return;
-    }
-
-    const task =
-        tasks.find(
-            t => t.id === id
-        );
-
-    const projectId =
-        task?.projectId;
-
-    tasks =
-        tasks.filter(
-            t => t.id !== id
-        );
-
-    if(projectId){
-
-        updateProjectProgress(
-            projectId
-        );
-
-    }
-
-    saveData();
-
-    renderAll();
-}
-
-
-/* ============================================================
-   CALENDAR
-   ============================================================ */
-
-function changeMonth(direction){
-
-    calendarDate.setMonth(
-        calendarDate.getMonth() + direction
-    );
 
     renderCalendar();
-}
-
-
-function calendarCreateTask(date){
-
-    openTaskModal(
-        "",
-        "",
-        ""
-    );
-
-    document.getElementById(
-        "taskDue"
-    ).value = date;
 
 }
 
+function goToday(){
 
-function calendarTaskClick(
-    event,
-    taskId
-){
+    calendarDate = new Date();
 
-    event.stopPropagation();
+    renderCalendar();
 
-    const task =
-        tasks.find(
-            t => t.id === taskId
+}
+
+function changeCalendarPeriod(direction){
+
+    if(calendarView === "month"){
+
+        calendarDate.setMonth(
+            calendarDate.getMonth() +
+            direction
         );
 
-    if(!task){
-        return;
+    }else{
+
+        calendarDate.setDate(
+            calendarDate.getDate() +
+            direction * 7
+        );
+
     }
 
-    openTaskModal(
-        task.projectId || "",
-        task.phaseId || "",
-        task.id
-    );
+    renderCalendar();
+
 }
 
+function getMonday(date){
+
+    const d =
+        new Date(date);
+
+    const day =
+        d.getDay();
+
+    const diff =
+        day === 0
+        ? -6
+        : 1 - day;
+
+    d.setDate(
+        d.getDate() + diff
+    );
+
+    d.setHours(0,0,0,0);
+
+    return d;
+
+}
+
+function dateString(date){
+
+    return `${date.getFullYear()}-${
+        String(date.getMonth()+1).padStart(2,"0")
+    }-${
+        String(date.getDate()).padStart(2,"0")
+    }`;
+
+}
 
 function renderCalendar(){
 
-    const calendar =
+    if(calendarView === "week"){
+
+        renderWeekCalendar();
+
+    }else{
+
+        renderMonthCalendar();
+
+    }
+
+}
+
+function renderMonthCalendar(){
+
+    const container =
         document.getElementById(
-            "calendar"
+            "calendarContainer"
         );
 
     const year =
@@ -4269,7 +3974,7 @@ function renderCalendar(){
     const month =
         calendarDate.getMonth();
 
-    const monthName =
+    let title =
         calendarDate.toLocaleDateString(
             "it-IT",
             {
@@ -4278,11 +3983,16 @@ function renderCalendar(){
             }
         );
 
-    document.getElementById(
-        "calendarTitle"
-    ).textContent =
-        monthName.charAt(0).toUpperCase() +
-        monthName.slice(1);
+    title =
+        title.charAt(0).toUpperCase() +
+        title.slice(1);
+
+    document
+        .getElementById(
+            "calendarTitle"
+        )
+        .textContent =
+        title;
 
     const firstDay =
         new Date(
@@ -4291,19 +4001,23 @@ function renderCalendar(){
             1
         ).getDay();
 
-    const daysInMonth =
+    const start =
+        firstDay === 0
+        ? 6
+        : firstDay - 1;
+
+    const days =
         new Date(
             year,
             month + 1,
             0
         ).getDate();
 
-    const start =
-        firstDay === 0
-        ? 6
-        : firstDay - 1;
+    let html = `
 
-    let html = "";
+<div class="calendar-grid">
+
+`;
 
     [
         "Lun",
@@ -4316,29 +4030,25 @@ function renderCalendar(){
     ].forEach(day => {
 
         html += `
-            <div class="calendar-day-name">
-                ${day}
-            </div>
-        `;
+<div class="calendar-day-name">
+${day}
+</div>
+`;
 
     });
 
-    for(let i = 0; i < start; i++){
+    for(let i=0;i<start;i++){
 
         html += `
-            <div class="calendar-cell"></div>
-        `;
+<div class="calendar-cell"></div>
+`;
 
     }
 
     const current =
         today();
 
-    for(
-        let day = 1;
-        day <= daysInMonth;
-        day++
-    ){
+    for(let day=1;day<=days;day++){
 
         const date =
             `${year}-${String(month+1).padStart(2,"0")}-${String(day).padStart(2,"0")}`;
@@ -4350,70 +4060,478 @@ function renderCalendar(){
 
         html += `
 
-            <div
-                class="calendar-cell ${
-                    date === current
-                    ? "today"
-                    : ""
-                }"
-                onclick="calendarCreateTask('${date}')">
+<div class="calendar-cell ${
+    date === current
+    ? "today"
+    : ""
+}">
 
-                <div class="calendar-number">
-                    ${day}
-                </div>
+<div class="calendar-number">
+${day}
+</div>
 
-                ${
-                    dayTasks
-                    .map(task => `
+${dayTasks.map(task => `
 
-                        <div
-                            class="calendar-event ${
-                                task.status === "Completata"
-                                ? "completed"
-                                : ""
-                            }"
-                            title="${escapeHTML(
-                                task.name
-                            )}"
-                            onclick="calendarTaskClick(
-                                event,
-                                '${task.id}'
-                            )">
+<div class="calendar-event"
+     onclick="openTaskModal('','','${task.id}')">
 
-                            ${escapeHTML(
-                                task.name
-                            )}
+${task.startTime
+? escapeHTML(task.startTime) + " · "
+: ""}
 
-                        </div>
+${escapeHTML(task.name)}
 
-                    `)
-                    .join("")
-                }
+</div>
 
-                <div class="calendar-add">
-                    + aggiungi attività
-                </div>
+`).join("")}
 
-            </div>
+</div>
 
-        `;
+`;
 
     }
 
-    calendar.innerHTML = html;
+    html += `
+</div>
+`;
+
+    container.innerHTML = html;
+
+}
+
+
+/* ============================================================
+   WEEK CALENDAR
+============================================================ */
+
+function renderWeekCalendar(){
+
+    const container =
+        document.getElementById(
+            "calendarContainer"
+        );
+
+    const monday =
+        getMonday(calendarDate);
+
+    const sunday =
+        new Date(monday);
+
+    sunday.setDate(
+        monday.getDate() + 6
+    );
+
+    const title =
+        `${monday.toLocaleDateString(
+            "it-IT",
+            {
+                day:"numeric",
+                month:"short"
+            }
+        )} – ${sunday.toLocaleDateString(
+            "it-IT",
+            {
+                day:"numeric",
+                month:"short",
+                year:"numeric"
+            }
+        )}`;
+
+    document
+        .getElementById(
+            "calendarTitle"
+        )
+        .textContent =
+        title;
+
+    let html = `
+
+<div class="week-calendar">
+
+<div class="week-head">
+
+<div class="week-head-time"></div>
+`;
+
+    for(let i=0;i<7;i++){
+
+        const d =
+            new Date(monday);
+
+        d.setDate(
+            monday.getDate() + i
+        );
+
+        const dayName =
+            d.toLocaleDateString(
+                "it-IT",
+                {weekday:"short"}
+            );
+
+        html += `
+
+<div class="week-day-head">
+
+<strong>
+${dayName.charAt(0).toUpperCase() +
+  dayName.slice(1)}
+</strong>
+
+<span>
+${d.getDate()}/${d.getMonth()+1}
+</span>
+
+</div>
+
+`;
+
+    }
+
+    html += `
+</div>
+
+<div class="week-body">
+
+<div class="time-column">
+`;
+
+    for(let hour=0;hour<24;hour++){
+
+        html += `
+<div class="time-label">
+${String(hour).padStart(2,"0")}:00
+</div>
+`;
+
+    }
+
+    html += `
+</div>
+`;
+
+    for(let dayIndex=0;dayIndex<7;dayIndex++){
+
+        const d =
+            new Date(monday);
+
+        d.setDate(
+            monday.getDate() +
+            dayIndex
+        );
+
+        const date =
+            dateString(d);
+
+        const dayTasks =
+            tasks.filter(
+                task =>
+                    task.due === date
+            );
+
+        html += `
+
+<div class="week-day-column"
+     data-date="${date}"
+     ondragover="allowCalendarDrop(event)"
+     ondrop="dropCalendarTask(event)">
+
+`;
+
+        dayTasks.forEach(task => {
+
+            const parts =
+                (task.startTime || "09:00")
+                .split(":");
+
+            const hour =
+                parseInt(parts[0],10) || 0;
+
+            const minute =
+                parseInt(parts[1],10) || 0;
+
+            const top =
+                hour * 60 + minute;
+
+            const duration =
+                parseFloat(
+                    task.duration
+                ) || 1;
+
+            const height =
+                Math.max(
+                    duration * 60,
+                    30
+                );
+
+            html += `
+
+<div class="week-event ${
+    task.status === "Completata"
+    ? "completed"
+    : ""
+} ${
+    task.priority === "Alta"
+    ? "high"
+    : ""
+}"
+
+draggable="true"
+
+data-task-id="${task.id}"
+
+style="
+top:${top}px;
+height:${height}px;
+"
+
+ondragstart="startCalendarDrag(event,'${task.id}')"
+
+ondblclick="openTaskModal('','','${task.id}')">
+
+<div class="event-time">
+${escapeHTML(
+    task.startTime || "09:00"
+)}
+ · ${duration}h
+</div>
+
+<div class="event-name">
+${escapeHTML(task.name)}
+</div>
+
+<div class="resize-handle"
+     onmousedown="startResize(event,'${task.id}')">
+</div>
+
+</div>
+
+`;
+
+        });
+
+        html += `
+</div>
+`;
+
+    }
+
+    html += `
+</div>
+</div>
+`;
+
+    container.innerHTML = html;
+
+}
+
+
+/* ============================================================
+   DRAG ATTIVITA
+============================================================ */
+
+let draggedTaskId = null;
+
+function startCalendarDrag(event,id){
+
+    draggedTaskId = id;
+
+    event.dataTransfer.effectAllowed =
+        "move";
+
+    event.dataTransfer.setData(
+        "text/plain",
+        id
+    );
+
+}
+
+function allowCalendarDrop(event){
+
+    event.preventDefault();
+
+    event.dataTransfer.dropEffect =
+        "move";
+
+}
+
+function dropCalendarTask(event){
+
+    event.preventDefault();
+
+    const id =
+        event.dataTransfer.getData(
+            "text/plain"
+        ) || draggedTaskId;
+
+    if(!id) return;
+
+    const column =
+        event.currentTarget;
+
+    const date =
+        column.dataset.date;
+
+    const rect =
+        column.getBoundingClientRect();
+
+    let y =
+        event.clientY -
+        rect.top;
+
+    y =
+        Math.max(
+            0,
+            Math.min(
+                1439,
+                y
+            )
+        );
+
+    let minutes =
+        Math.round(y / 15) * 15;
+
+    if(minutes >= 1440){
+        minutes = 1425;
+    }
+
+    const hour =
+        Math.floor(
+            minutes / 60
+        );
+
+    const minute =
+        minutes % 60;
+
+    const task =
+        tasks.find(
+            t => t.id === id
+        );
+
+    if(!task) return;
+
+    task.due = date;
+
+    task.startTime =
+        `${String(hour).padStart(2,"0")}:${
+            String(minute).padStart(2,"0")
+        }`;
+
+    saveData();
+
+    draggedTaskId = null;
+
+    renderAll();
+
+}
+
+
+/* ============================================================
+   RESIZE ATTIVITA
+============================================================ */
+
+let resizingTask = null;
+let resizeStartY = 0;
+let resizeStartDuration = 1;
+
+function startResize(event,id){
+
+    event.stopPropagation();
+
+    event.preventDefault();
+
+    const task =
+        tasks.find(
+            t => t.id === id
+        );
+
+    if(!task) return;
+
+    resizingTask = task;
+
+    resizeStartY =
+        event.clientY;
+
+    resizeStartDuration =
+        parseFloat(
+            task.duration
+        ) || 1;
+
+    document.addEventListener(
+        "mousemove",
+        resizeMove
+    );
+
+    document.addEventListener(
+        "mouseup",
+        resizeEnd
+    );
+
+}
+
+function resizeMove(event){
+
+    if(!resizingTask) return;
+
+    const diff =
+        event.clientY -
+        resizeStartY;
+
+    let duration =
+        resizeStartDuration +
+        diff / 60;
+
+    duration =
+        Math.max(
+            .5,
+            Math.round(
+                duration * 2
+            ) / 2
+        );
+
+    duration =
+        Math.min(
+            24,
+            duration
+        );
+
+    resizingTask.duration =
+        duration;
+
+    renderWeekCalendar();
+
+}
+
+function resizeEnd(){
+
+    if(!resizingTask) return;
+
+    saveData();
+
+    resizingTask = null;
+
+    document.removeEventListener(
+        "mousemove",
+        resizeMove
+    );
+
+    document.removeEventListener(
+        "mouseup",
+        resizeEnd
+    );
+
+    renderAll();
+
 }
 
 
 /* ============================================================
    FILES
-   ============================================================ */
+============================================================ */
 
 function uploadFiles(event){
 
-    const selected =
-        [...event.target.files];
-
-    selected.forEach(file => {
+    [...event.target.files]
+    .forEach(file => {
 
         files.push({
 
@@ -4436,22 +4554,15 @@ function uploadFiles(event){
     renderFiles();
 
     event.target.value = "";
-}
 
+}
 
 function formatBytes(bytes){
 
-    if(!bytes){
-        return "0 B";
-    }
+    if(!bytes) return "0 B";
 
     const units =
-        [
-            "B",
-            "KB",
-            "MB",
-            "GB"
-        ];
+        ["B","KB","MB","GB"];
 
     const i =
         Math.floor(
@@ -4467,12 +4578,11 @@ function formatBytes(bytes){
             ).toFixed(1)
         )
         +
-        " "
-        +
+        " " +
         units[i]
     );
-}
 
+}
 
 function renderFiles(){
 
@@ -4485,51 +4595,52 @@ function renderFiles(){
 
         container.innerHTML = `
             <div class="empty">
-
-                <div class="empty-icon">
-                    📁
-                </div>
-
+                <div class="empty-icon">📁</div>
                 Nessun documento caricato.
-
             </div>
         `;
 
         return;
+
     }
 
     container.innerHTML =
         files.map(file => `
 
-            <div class="file-row">
+<div class="file-row">
 
-                <div class="file-type">
-                    📄
-                </div>
+<div style="
+width:38px;
+height:38px;
+background:#f1f5f9;
+border-radius:9px;
+display:grid;
+place-items:center">
+📄
+</div>
 
-                <div class="file-info">
+<div class="file-info">
 
-                    <div class="file-name">
-                        ${escapeHTML(file.name)}
-                    </div>
+<div class="file-name">
+${escapeHTML(file.name)}
+</div>
 
-                    <div class="file-size">
-                        ${formatBytes(file.size)}
-                    </div>
+<div class="file-size">
+${formatBytes(file.size)}
+</div>
 
-                </div>
+</div>
 
-                <button
-                    class="icon-btn"
-                    onclick="deleteFile('${file.id}')">
-                    🗑
-                </button>
+<button class="icon-btn"
+        onclick="deleteFile('${file.id}')">
+🗑
+</button>
 
-            </div>
+</div>
 
-        `).join("");
+`).join("");
+
 }
-
 
 function deleteFile(id){
 
@@ -4541,191 +4652,160 @@ function deleteFile(id){
     saveData();
 
     renderFiles();
+
 }
 
 
 /* ============================================================
    DASHBOARD
-   ============================================================ */
+============================================================ */
 
 function renderDashboard(){
 
-    document.getElementById(
-        "statClients"
-    ).textContent =
+    document
+        .getElementById("statClients")
+        .textContent =
         clients.length;
 
-    document.getElementById(
-        "statProjects"
-    ).textContent =
+    document
+        .getElementById("statProjects")
+        .textContent =
         projects.filter(
             p => p.status !== "Completato"
         ).length;
 
-    document.getElementById(
-        "statTasks"
-    ).textContent =
+    document
+        .getElementById("statTasks")
+        .textContent =
         tasks.filter(
             t => t.status !== "Completata"
         ).length;
 
-    const todayDate =
-        today();
-
-    document.getElementById(
-        "statDue"
-    ).textContent =
-        tasks.filter(t =>
-            t.status !== "Completata" &&
-            t.due &&
-            t.due <= todayDate
+    document
+        .getElementById("statDue")
+        .textContent =
+        tasks.filter(
+            t =>
+                t.status !== "Completata" &&
+                t.due &&
+                t.due <= today()
         ).length;
-
-    const activityContainer =
-        document.getElementById(
-            "recentActivities"
-        );
 
     const recent =
         [...tasks]
         .sort(
             (a,b) =>
-                new Date(b.due || 0) -
-                new Date(a.due || 0)
+                new Date(
+                    b.due || "1900-01-01"
+                ) -
+                new Date(
+                    a.due || "1900-01-01"
+                )
         )
         .slice(0,5);
 
-    if(!recent.length){
+    document
+        .getElementById(
+            "recentActivities"
+        )
+        .innerHTML =
+        recent.length
+        ?
+        recent.map(task => {
 
-        activityContainer.innerHTML = `
-            <div class="empty">
-                Nessuna attività.
-            </div>
-        `;
-
-    }else{
-
-        activityContainer.innerHTML =
-            recent.map(task => {
-
-                const project =
-                    projects.find(
-                        p => p.id === task.projectId
-                    );
-
-                return `
-
-                    <div class="activity">
-
-                        <div class="activity-dot"></div>
-
-                        <div>
-
-                            <div class="activity-title">
-                                ${escapeHTML(task.name)}
-                            </div>
-
-                            <div class="activity-meta">
-
-                                ${escapeHTML(
-                                    project?.name ||
-                                    "Senza progetto"
-                                )}
-
-                                ·
-
-                                ${formatDate(task.due)}
-
-                                ·
-
-                                ${statusBadge(task.status)}
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                `;
-
-            }).join("");
-
-    }
-
-    const projectsContainer =
-        document.getElementById(
-            "dashboardProjects"
-        );
-
-    if(!projects.length){
-
-        projectsContainer.innerHTML = `
-            <div class="empty">
-                Nessun progetto.
-            </div>
-        `;
-
-        return;
-    }
-
-    projectsContainer.innerHTML =
-        projects.slice(0,5)
-        .map(project => {
-
-            updateProjectProgress(
-                project.id
-            );
+            const project =
+                projects.find(
+                    p => p.id === task.projectId
+                );
 
             return `
 
-                <div class="project-progress">
+<div class="activity">
 
-                    <div class="project-progress-top">
+<div class="activity-dot"></div>
 
-                        <span>
-                            ${escapeHTML(
-                                project.name
-                            )}
-                        </span>
+<div>
 
-                        <strong>
-                            ${project.progress || 0}%
-                        </strong>
+<div class="activity-title">
+${escapeHTML(task.name)}
+</div>
 
-                    </div>
+<div class="activity-meta">
 
-                    <div class="progress">
+${escapeHTML(
+    project?.name ||
+    "Senza progetto"
+)}
 
-                        <div
-                            class="progress-bar"
-                            style="
-                                width:${project.progress || 0}%
-                            ">
-                        </div>
+ ·
 
-                    </div>
+${formatDate(task.due)}
 
-                </div>
+${task.startTime
+? " · " + escapeHTML(task.startTime)
+: ""}
 
-            `;
+</div>
 
-        }).join("");
+</div>
+
+</div>
+
+`;
+
+        }).join("")
+        :
+        `<div class="empty">
+        Nessuna attività.
+        </div>`;
+
+    document
+        .getElementById(
+            "dashboardProjects"
+        )
+        .innerHTML =
+        projects.length
+        ?
+        projects.slice(0,5).map(project => `
+
+<div class="project-progress">
+
+<div class="project-progress-top">
+
+<span>
+${escapeHTML(project.name)}
+</span>
+
+<strong>
+${project.progress || 0}%
+</strong>
+
+</div>
+
+<div class="progress">
+
+<div class="progress-bar"
+     style="width:${project.progress || 0}%">
+</div>
+
+</div>
+
+</div>
+
+`).join("")
+        :
+        `<div class="empty">
+        Nessun progetto.
+        </div>`;
+
 }
 
 
 /* ============================================================
-   RENDER ALL
-   ============================================================ */
+   RENDER
+============================================================ */
 
 function renderAll(){
-
-    projects.forEach(project => {
-
-        updateProjectProgress(
-            project.id
-        );
-
-    });
 
     renderDashboard();
 
@@ -4741,65 +4821,36 @@ function renderAll(){
 
     renderCustomFields();
 
-    saveData();
+    if(
+        document
+        .getElementById("projectDetail")
+        .classList.contains("open")
+    ){
+
+        const project =
+            projects.find(
+                p =>
+                    document
+                    .getElementById(
+                        "projectDetail"
+                    )
+                    .dataset?.projectId
+            );
+
+        if(project){
+            renderProjectDetail(
+                project.id
+            );
+        }
+
+    }
+
 }
 
 
 /* ============================================================
-   CLOSE MODALS CLICK OUTSIDE
-   ============================================================ */
-
-document.querySelectorAll(
-    ".modal-overlay"
-).forEach(overlay => {
-
-    overlay.addEventListener(
-        "click",
-        function(event){
-
-            if(event.target === overlay){
-
-                overlay.classList.remove(
-                    "open"
-                );
-
-            }
-
-        }
-    );
-
-});
-
-
-/* ============================================================
-   ESC CLOSE
-   ============================================================ */
-
-document.addEventListener(
-    "keydown",
-    function(event){
-
-        if(event.key !== "Escape"){
-            return;
-        }
-
-        document.querySelectorAll(
-            ".modal-overlay.open"
-        ).forEach(modal => {
-
-            modal.classList.remove(
-                "open"
-            );
-
-        });
-
-    }
-);
-
-
-/* ============================================================
    INIT
-   ============================================================ */
+============================================================ */
 
 renderAll();
 
