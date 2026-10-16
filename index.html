@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -108,6 +109,19 @@ body.access-locked .app { display: none !important; }
 #sitePasswordGate .gate-error { min-height:18px; margin-top:10px; color:#b91c1c; font-size:12px; }
 #sitePasswordGate .gate-note { margin-top:16px; margin-bottom:0; font-size:11px; color:#9ca3af; }
 
+
+/* Campi personalizzati, filtri e menu riordinabile */
+.custom-fields-area{grid-column:1/-1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.custom-field-filter{min-width:155px;max-width:220px}
+.nav button{cursor:grab;user-select:none}
+.nav button.dragging{opacity:.45;outline:1px dashed #a5b4fc}
+.nav button.drag-over{box-shadow:inset 0 0 0 2px #818cf8}
+.nav .nav-reorder-hint{font-size:10px;color:#9ca3af;padding:10px 12px 0;line-height:1.5}
+.custom-field-row{display:grid;grid-template-columns:1.1fr .8fr .7fr auto;gap:8px;align-items:center;margin-top:8px}
+.custom-field-row input,.custom-field-row select{min-width:0}
+.custom-value{display:inline-block;color:#4b5563;font-size:11px;margin-top:3px}
+@media(max-width:800px){.custom-fields-area{grid-template-columns:1fr}.custom-field-row{grid-template-columns:1fr 1fr}.custom-field-row button{justify-self:start}}
+
 </style>
 </head>
 
@@ -204,6 +218,7 @@ body.access-locked .app { display: none !important; }
         <select class="form-control" id="filterStatus" onchange="renderPractices()"><option value="">Tutti gli stati</option><option>Da analizzare</option><option>In lavorazione</option><option>Da inviare</option><option>In istruttoria</option><option>Approvata</option><option>Critica</option><option>Integrazione</option><option>Respinta</option><option>Persa</option></select>
         <select class="form-control" id="filterBando" onchange="renderPractices()"><option value="">Tutti i bandi</option></select>
         <select class="form-control" id="filterPriority" onchange="renderPractices()"><option value="">Tutte le priorità</option><option>Alta</option><option>Media</option><option>Bassa</option></select>
+        <div class="filters" id="customFilters-practices"></div>
       </div>
     </div>
     <div class="table-scroll" id="practicesTable"></div>
@@ -212,12 +227,12 @@ body.access-locked .app { display: none !important; }
 
 <section class="page" id="page-clients">
   <div class="page-header"><div><h1 class="page-title">Clienti</h1><p class="page-subtitle">Anagrafiche e pratiche collegate.</p></div><button class="btn btn-primary" onclick="openClientModal()">+ Nuovo cliente</button></div>
-  <div class="card"><div class="toolbar"><div class="search"><span class="search-icon">⌕</span><input id="clientSearch" placeholder="Cerca cliente, P.IVA, ATECO..." oninput="renderClients()"></div></div><div class="table-scroll" id="clientsTable"></div></div>
+  <div class="card"><div class="toolbar"><div class="search"><span class="search-icon">⌕</span><input id="clientSearch" placeholder="Cerca cliente, P.IVA, ATECO..." oninput="renderClients()"></div><div class="filters" id="customFilters-clients"></div></div><div class="table-scroll" id="clientsTable"></div></div>
 </section>
 
 <section class="page" id="page-tasks">
   <div class="page-header"><div><h1 class="page-title">Attività</h1><p class="page-subtitle">Azioni operative collegate alle pratiche.</p></div><button class="btn btn-primary" onclick="openTaskModal()">+ Nuova attività</button></div>
-  <div class="card"><div class="table-scroll" id="tasksTable"></div></div>
+  <div class="card"><div class="toolbar"><div class="small muted">Filtra le attività per i campi personalizzati</div><div class="filters" id="customFilters-tasks"></div></div><div class="table-scroll" id="tasksTable"></div></div>
 </section>
 
 <section class="page" id="page-calendar">
@@ -229,7 +244,7 @@ body.access-locked .app { display: none !important; }
 
 <section class="page" id="page-projects">
  <div class="page-header"><div><h1 class="page-title">Progetti</h1><p class="page-subtitle">Organizza ogni progetto in fasi e ogni fase in attività, con stato e scadenze.</p></div><button class="btn btn-primary" onclick="openProjectModal()">+ Nuovo progetto</button></div>
- <div id="projectsList" class="projects-list"></div>
+ <div class="card" style="margin-bottom:16px"><div class="toolbar"><div class="small muted">Filtra i progetti per i campi personalizzati</div><div class="filters" id="customFilters-projects"></div></div></div><div id="projectsList" class="projects-list"></div>
 </section>
 
 <section class="page" id="page-passwords">
@@ -267,6 +282,23 @@ body.access-locked .app { display: none !important; }
       <label class="btn btn-secondary" for="backupInput">↑ Importa backup JSON<input id="backupInput" type="file" accept="application/json,.json" style="display:none" onchange="importBackup(event)"></label>
     </div><p class="small muted" style="margin-top:12px">Il database resta nella cartella <strong>data</strong> del programma. Per aggiornare il programma, sostituisci i file dell'applicazione senza eliminare questa cartella.</p></div>
   </div>
+  <div class="card" style="margin-top:18px">
+    <div class="card-header"><div><div class="card-title">Campi personalizzati</div><div class="small muted">Aggiungi campi alle schede di clienti, pratiche, attività e progetti. I valori restano salvati nei record.</div></div></div>
+    <div style="padding:20px">
+      <div class="form-grid">
+        <div class="form-group"><label class="form-label">Sezione</label><select class="form-control" id="customFieldEntity" onchange="renderCustomFieldManager()"><option value="clients">Clienti</option><option value="practices">Pratiche</option><option value="tasks">Attività</option><option value="projects">Progetti</option></select></div>
+        <div class="form-group"><label class="form-label">Nome del campo</label><input class="form-control" id="customFieldName" placeholder="Es. Referente, Regione, Importo preventivo"></div>
+        <div class="form-group"><label class="form-label">Tipo di campo</label><select class="form-control" id="customFieldType"><option value="text">Testo</option><option value="number">Numero</option><option value="date">Data</option><option value="select">Elenco a scelta</option><option value="checkbox">Sì / No</option><option value="textarea">Testo lungo</option></select></div>
+        <div class="form-group"><label class="form-label">Opzioni (solo elenco a scelta)</label><input class="form-control" id="customFieldOptions" placeholder="Es. Da contattare, In corso, Chiuso"></div>
+      </div>
+      <button class="btn btn-primary" style="margin-top:14px" onclick="addCustomField()">＋ Aggiungi campo</button>
+      <div id="customFieldManagerList" style="margin-top:18px"></div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:18px">
+    <div class="card-header"><div><div class="card-title">Personalizza menu laterale</div><div class="small muted">Trascina le voci del menu per cambiarne l'ordine.</div></div><button class="btn btn-secondary btn-small" onclick="resetNavOrder()">Ripristina ordine</button></div>
+    <div style="padding:18px 20px" class="small muted">Puoi trascinare direttamente le voci nella barra laterale. Il nuovo ordine viene salvato automaticamente su questo browser.</div>
+  </div>
 </section>
 
 </div>
@@ -299,6 +331,7 @@ body.access-locked .app { display: none !important; }
 <div class="form-group"><label class="form-label">Domanda respinta</label><select class="form-control" id="pRejected"><option value="no">No</option><option value="yes">Sì</option></select></div>
 <div class="form-group"><label class="form-label">Persa per scadenza</label><select class="form-control" id="pLost"><option value="no">No</option><option value="yes">Sì</option></select></div>
 <div class="form-group full"><label class="form-label">Criticità / prossima attività</label><textarea class="form-control" id="pNotes" placeholder="Es. manca DURC, integrazione entro il..."></textarea></div>
+<div id="customFields-practices" class="custom-fields-area"></div>
 </div></div><div class="modal-footer"><button type="button" class="btn btn-secondary" onclick="closeModal('practiceModal')">Annulla</button><button class="btn btn-primary" type="submit">Salva pratica</button></div></form>
 </div></div>
 
@@ -314,6 +347,7 @@ body.access-locked .app { display: none !important; }
 <div class="form-group"><label class="form-label">Telefono</label><input class="form-control" id="cPhone"></div>
 <div class="form-group"><label class="form-label">Comune</label><input class="form-control" id="cCity"></div>
 <div class="form-group full"><label class="form-label">Note</label><textarea class="form-control" id="cNotes"></textarea></div>
+<div id="customFields-clients" class="custom-fields-area"></div>
 </div></div><div class="modal-footer"><button type="button" class="btn btn-secondary" onclick="closeModal('clientModal')">Annulla</button><button class="btn btn-primary">Salva cliente</button></div></form>
 </div></div>
 
@@ -327,13 +361,14 @@ body.access-locked .app { display: none !important; }
 <div class="form-group"><label class="form-label">Priorità</label><select class="form-control" id="tPriority"><option>Bassa</option><option selected>Media</option><option>Alta</option></select></div>
 <div class="form-group"><label class="form-label">Data</label><input type="date" class="form-control" id="tDue"></div>
 <div class="form-group full"><label class="form-label">Descrizione</label><textarea class="form-control" id="tDesc"></textarea></div>
+<div id="customFields-tasks" class="custom-fields-area"></div>
 </div></div><div class="modal-footer"><button type="button" class="btn btn-secondary" onclick="closeModal('taskModal')">Annulla</button><button class="btn btn-primary">Salva attività</button></div></form>
 </div></div>
 
 <!-- CALENDAR LOG MODAL -->
 <div class="modal-overlay" id="logModal"><div class="modal"><div class="modal-header"><div class="modal-title">Registra attività svolta</div><button class="modal-close" onclick="closeModal('logModal')">×</button></div><form id="logForm" onsubmit="saveLog(event)"><div class="modal-body"><div class="form-grid"><div class="form-group full"><label class="form-label">Attività svolta *</label><input class="form-control" id="logTitle" required placeholder="Es. Telefonata cliente, analisi bando, invio documenti"></div><div class="form-group"><label class="form-label">Data *</label><input class="form-control" type="date" id="logDate" required></div><div class="form-group"><label class="form-label">Categoria</label><select class="form-control" id="logCategory"><option>Attività svolta</option><option>Commerciale</option><option>Analisi tecnica</option><option>Documentazione</option><option>Invio domanda</option><option>Rendicontazione</option><option>Riunione</option><option>Follow-up</option></select></div><div class="form-group"><label class="form-label">Durata (minuti)</label><input class="form-control" type="number" min="0" id="logDuration"></div><div class="form-group full"><label class="form-label">Note / risultato</label><textarea class="form-control" id="logDetails" placeholder="Cosa è stato fatto, esito e prossimi passi"></textarea></div></div></div><div class="modal-footer"><button type="button" class="btn btn-secondary" onclick="closeModal('logModal')">Annulla</button><button class="btn btn-primary">Salva attività</button></div></form></div></div>
 <!-- PROJECT MODAL -->
-<div class="modal-overlay" id="projectModal"><div class="modal"><div class="modal-header"><div class="modal-title" id="projectModalTitle">Nuovo progetto</div><button class="modal-close" onclick="closeModal('projectModal')">×</button></div><form id="projectForm" onsubmit="saveProject(event)"><div class="modal-body"><input type="hidden" id="projectId"><div class="form-grid"><div class="form-group full"><label class="form-label">Nome progetto *</label><input class="form-control" id="projectName" required></div><div class="form-group"><label class="form-label">Cliente / committente</label><input class="form-control" id="projectClient"></div><div class="form-group"><label class="form-label">Responsabile</label><input class="form-control" id="projectOwner"></div><div class="form-group"><label class="form-label">Stato</label><select class="form-control" id="projectStatus"><option>Da avviare</option><option>In corso</option><option>In pausa</option><option>Completato</option></select></div><div class="form-group"><label class="form-label">Data inizio</label><input class="form-control" type="date" id="projectStart"></div><div class="form-group"><label class="form-label">Data fine prevista</label><input class="form-control" type="date" id="projectEnd"></div><div class="form-group full"><label class="form-label">Descrizione / obiettivo</label><textarea class="form-control" id="projectDescription"></textarea></div></div></div><div class="modal-footer"><button type="button" class="btn btn-secondary" onclick="closeModal('projectModal')">Annulla</button><button class="btn btn-primary">Salva progetto</button></div></form></div></div>
+<div class="modal-overlay" id="projectModal"><div class="modal"><div class="modal-header"><div class="modal-title" id="projectModalTitle">Nuovo progetto</div><button class="modal-close" onclick="closeModal('projectModal')">×</button></div><form id="projectForm" onsubmit="saveProject(event)"><div class="modal-body"><input type="hidden" id="projectId"><div class="form-grid"><div class="form-group full"><label class="form-label">Nome progetto *</label><input class="form-control" id="projectName" required></div><div class="form-group"><label class="form-label">Cliente / committente</label><input class="form-control" id="projectClient"></div><div class="form-group"><label class="form-label">Responsabile</label><input class="form-control" id="projectOwner"></div><div class="form-group"><label class="form-label">Stato</label><select class="form-control" id="projectStatus"><option>Da avviare</option><option>In corso</option><option>In pausa</option><option>Completato</option></select></div><div class="form-group"><label class="form-label">Data inizio</label><input class="form-control" type="date" id="projectStart"></div><div class="form-group"><label class="form-label">Data fine prevista</label><input class="form-control" type="date" id="projectEnd"></div><div class="form-group full"><label class="form-label">Descrizione / obiettivo</label><textarea class="form-control" id="projectDescription"></textarea></div><div id="customFields-projects" class="custom-fields-area"></div></div></div><div class="modal-footer"><button type="button" class="btn btn-secondary" onclick="closeModal('projectModal')">Annulla</button><button class="btn btn-primary">Salva progetto</button></div></form></div></div>
 <!-- PASSWORD MODAL -->
 <div class="modal-overlay" id="passwordModal"><div class="modal"><div class="modal-header"><div class="modal-title">Nuova credenziale</div><button class="modal-close" onclick="closeModal('passwordModal')">×</button></div><form id="passwordForm" onsubmit="savePassword(event)"><div class="modal-body"><div class="form-grid"><div class="form-group"><label class="form-label">Servizio / sito *</label><input class="form-control" id="pwSite" required></div><div class="form-group"><label class="form-label">Nome utente / email</label><input class="form-control" id="pwUser" autocomplete="off"></div><div class="form-group"><label class="form-label">Password *</label><input class="form-control" id="pwValue" type="password" required autocomplete="new-password"></div><div class="form-group"><label class="form-label">URL</label><input class="form-control" id="pwUrl" type="url" placeholder="https://..."></div><div class="form-group full"><label class="form-label">Note</label><textarea class="form-control" id="pwNotes"></textarea></div></div><p class="small muted" style="margin-top:12px">Le credenziali sono cifrate nel browser. L’archivio resta su questo dispositivo; usa una password principale robusta e conserva un backup sicuro.</p></div><div class="modal-footer"><button type="button" class="btn btn-secondary" onclick="closeModal('passwordModal')">Annulla</button><button class="btn btn-primary">Salva credenziale</button></div></form></div></div>
 
@@ -345,7 +380,7 @@ function loadDatabase(){
  try{return JSON.parse(localStorage.getItem(KEY)||"null")}catch(e){return null}
 }
 let db=loadDatabase()||{clients:[],practices:[],tasks:[],files:[],logs:[],projects:[],vault:null,settings:{deptName:"Finanza Agevolata",manager:""}};
-db.logs ||= []; db.projects ||= []; db.vault ??= null; db.files ||= []; let calendarCursor=new Date(); let selectedDay=today(); let vaultKey=null, vaultItems=[];
+db.logs ||= []; db.projects ||= []; db.vault ??= null; db.files ||= []; db.customFields ||= {clients:[],practices:[],tasks:[],projects:[]}; db.customFields.clients ||= []; db.customFields.practices ||= []; db.customFields.tasks ||= []; db.customFields.projects ||= []; db.settings ||= {deptName:"Finanza Agevolata",manager:""}; let calendarCursor=new Date(); let selectedDay=today(); let vaultKey=null, vaultItems=[];
 
 function save(){
  try{localStorage.setItem(KEY,JSON.stringify(db));}
@@ -368,6 +403,50 @@ function badge(s){
 }
 function closeModal(id){document.getElementById(id).classList.remove("open")}
 function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2200)}
+function entityLabel(entity){return ({clients:"Clienti",practices:"Pratiche",tasks:"Attività",projects:"Progetti"})[entity]||entity}
+function getCustomFields(entity){db.customFields ||= {};db.customFields[entity] ||= [];return db.customFields[entity]}
+function customValue(record,fieldId){return record?.custom?.[fieldId]??""}
+function renderCustomInputs(entity,record={}){
+ const box=document.getElementById("customFields-"+entity);if(!box)return;
+ box.innerHTML=getCustomFields(entity).map(f=>{const id="cf_"+entity+"_"+f.id, val=customValue(record,f.id);let input="";
+  if(f.type==="textarea")input=`<textarea class="form-control" id="${id}">${esc(val)}</textarea>`;
+  else if(f.type==="select")input=`<select class="form-control" id="${id}"><option value="">Seleziona...</option>${(f.options||[]).map(o=>`<option value="${esc(o)}" ${String(val)===o?"selected":""}>${esc(o)}</option>`).join("")}</select>`;
+  else if(f.type==="checkbox")input=`<select class="form-control" id="${id}"><option value="">—</option><option value="Sì" ${String(val)==="Sì"?"selected":""}>Sì</option><option value="No" ${String(val)==="No"?"selected":""}>No</option></select>`;
+  else input=`<input class="form-control" id="${id}" type="${["number","date"].includes(f.type)?f.type:"text"}" value="${esc(val)}">`;
+  return `<div class="form-group ${f.type==="textarea"?"full":""}"><label class="form-label" for="${id}">${esc(f.name)}</label>${input}</div>`;
+ }).join("");
+}
+function readCustomValues(entity){const out={};getCustomFields(entity).forEach(f=>{const el=document.getElementById("cf_"+entity+"_"+f.id);if(el)out[f.id]=el.value});return out}
+function addCustomField(){
+ const entity=v("customFieldEntity"),name=v("customFieldName").trim(),type=v("customFieldType"),raw=v("customFieldOptions");
+ if(!name){toast("Inserisci il nome del campo");document.getElementById("customFieldName").focus();return}
+ const fields=getCustomFields(entity);if(fields.some(f=>f.name.toLowerCase()===name.toLowerCase())){toast("Esiste già un campo con questo nome");return}
+ const options=type==="select"?raw.split(",").map(x=>x.trim()).filter(Boolean):[];
+ if(type==="select"&&!options.length){toast("Inserisci le opzioni separate da virgola");return}
+ fields.push({id:uid(),name,type,options});save();document.getElementById("customFieldName").value="";document.getElementById("customFieldOptions").value="";renderCustomFieldManager();renderAll();toast("Campo aggiunto")
+}
+function deleteCustomField(entity,id){if(!confirm("Eliminare questo campo? I valori già inseriti per il campo verranno rimossi."))return;db.customFields[entity]=getCustomFields(entity).filter(f=>f.id!==id);[...(db[entity]||[])].forEach(r=>{if(r.custom)delete r.custom[id]});save();renderCustomFieldManager();renderAll();toast("Campo eliminato")}
+function renderCustomFieldManager(){
+ const entity=document.getElementById("customFieldEntity")?.value||"clients",box=document.getElementById("customFieldManagerList");if(!box)return;
+ const fields=getCustomFields(entity);box.innerHTML=`<div class="card-title">Campi configurati per ${entityLabel(entity)}</div>`+(fields.length?fields.map(f=>`<div class="custom-field-row"><strong>${esc(f.name)}</strong><span class="small muted">${({text:"Testo",number:"Numero",date:"Data",select:"Elenco",checkbox:"Sì/No",textarea:"Testo lungo"})[f.type]||f.type}</span><span class="small muted">${f.type==="select"?esc((f.options||[]).join(", ")):""}</span><button class="btn btn-secondary btn-small" onclick="deleteCustomField('${entity}','${f.id}')">Elimina</button></div>`).join(""):`<p class="small muted" style="margin-top:10px">Nessun campo personalizzato. Aggiungine uno con il modulo qui sopra.</p>`);
+}
+function renderCustomFilters(entity,records,rerender){
+ const box=document.getElementById("customFilters-"+entity);if(!box)return;
+ const fields=getCustomFields(entity);const previous={};box.querySelectorAll("select[data-custom-filter]").forEach(el=>previous[el.dataset.customFilter]=el.value);
+ box.innerHTML=fields.map(f=>{const vals=[...new Set(records.map(r=>String(customValue(r,f.id))).filter(x=>x!==""))].sort();return `<select class="form-control custom-field-filter" data-custom-filter="${f.id}" aria-label="Filtra per ${esc(f.name)}" onchange="${rerender}()"><option value="">Tutti · ${esc(f.name)}</option>${vals.map(x=>`<option value="${esc(x)}" ${previous[f.id]===x?"selected":""}>${esc(x)}</option>`).join("")}</select>`}).join("");
+}
+function customFiltersMatch(entity,record){const box=document.getElementById("customFilters-"+entity);if(!box)return true;return [...box.querySelectorAll("select[data-custom-filter]")].every(el=>!el.value||String(customValue(record,el.dataset.customFilter))===el.value)}
+function customCells(entity,record){return getCustomFields(entity).map(f=>`<td>${esc(customValue(record,f.id)||"—")}</td>`).join("")}
+function customHeaders(entity){return getCustomFields(entity).map(f=>`<th>${esc(f.name)}</th>`).join("")}
+function initNavReordering(){
+ const nav=document.querySelector(".nav");if(!nav)return;let saved=[];try{saved=JSON.parse(localStorage.getItem("fa_nav_order")||"[]")}catch(e){}
+ const reorder=()=>{const buttons=[...nav.querySelectorAll("button[data-page]")];buttons.sort((a,b)=>{let ai=saved.indexOf(a.dataset.page),bi=saved.indexOf(b.dataset.page);return (ai<0?999:ai)-(bi<0?999:bi)}).forEach(b=>nav.appendChild(b));};
+ if(saved.length)reorder();let dragging=null;
+ nav.querySelectorAll("button[data-page]").forEach(btn=>{btn.draggable=true;btn.addEventListener("dragstart",e=>{dragging=btn;btn.classList.add("dragging");e.dataTransfer.effectAllowed="move";e.dataTransfer.setData("text/plain",btn.dataset.page)});btn.addEventListener("dragend",()=>{btn.classList.remove("dragging");nav.querySelectorAll(".drag-over").forEach(x=>x.classList.remove("drag-over"));dragging=null;persist()});btn.addEventListener("dragover",e=>{if(!dragging||dragging===btn)return;e.preventDefault();btn.classList.add("drag-over")});btn.addEventListener("dragleave",()=>btn.classList.remove("drag-over"));btn.addEventListener("drop",e=>{e.preventDefault();btn.classList.remove("drag-over");if(!dragging||dragging===btn)return;const rect=btn.getBoundingClientRect();if(e.clientY<rect.top+rect.height/2)nav.insertBefore(dragging,btn);else nav.insertBefore(dragging,btn.nextSibling);persist()})});
+ function persist(){saved=[...nav.querySelectorAll("button[data-page]")].map(b=>b.dataset.page);localStorage.setItem("fa_nav_order",JSON.stringify(saved))}
+}
+function resetNavOrder(){localStorage.removeItem("fa_nav_order");const nav=document.querySelector(".nav");const order=["dashboard","practices","clients","tasks","calendar","projects","passwords","files","settings"];order.forEach(id=>{const b=nav.querySelector(`[data-page="${id}"]`);if(b)nav.appendChild(b)});initNavReordering();toast("Ordine del menu ripristinato")}
+
 function navigate(page){
  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
  document.getElementById("page-"+page).classList.add("active");
@@ -384,6 +463,7 @@ function openPracticeModal(id=null){
  document.getElementById("practiceModalTitle").textContent=id?"Modifica pratica":"Nuova pratica";
  fillClientSelect();
  const p=id?getPractice(id):null;
+ renderCustomInputs("practices",p||{});
  if(p){
   const map={pClient:"clientId",pBando:"bando",pStatus:"status",pPriority:"priority",pCommercial:"commercial",pTechnician:"technician",pInterestDate:"interestDate",pQuoteDate:"quoteDate",pAccepted:"accepted",pStartDate:"startDate",pEndDate:"endDate",pDeadline:"deadline",pInvestment:"investment",pRequested:"requested",pObtained:"obtained",pRevenue:"revenue",pErrors:"errors",pIntegrations:"integrations",pRejected:"rejected",pLost:"lost",pNotes:"notes"};
   Object.entries(map).forEach(([el,k])=>document.getElementById(el).value=p[k]??"");
@@ -398,7 +478,7 @@ function fillClientSelect(){
 function savePractice(e){
  e.preventDefault();
  const id=document.getElementById("practiceId").value;
- const p={id:id||uid(),clientId:v("pClient"),bando:v("pBando"),status:v("pStatus"),priority:v("pPriority"),commercial:v("pCommercial"),technician:v("pTechnician"),interestDate:v("pInterestDate"),quoteDate:v("pQuoteDate"),accepted:v("pAccepted"),startDate:v("pStartDate"),endDate:v("pEndDate"),deadline:v("pDeadline"),investment:n("pInvestment"),requested:n("pRequested"),obtained:n("pObtained"),revenue:n("pRevenue"),errors:n("pErrors"),integrations:n("pIntegrations"),rejected:v("pRejected"),lost:v("pLost"),notes:v("pNotes"),updated:today()};
+ const p={id:id||uid(),clientId:v("pClient"),bando:v("pBando"),status:v("pStatus"),priority:v("pPriority"),commercial:v("pCommercial"),technician:v("pTechnician"),interestDate:v("pInterestDate"),quoteDate:v("pQuoteDate"),accepted:v("pAccepted"),startDate:v("pStartDate"),endDate:v("pEndDate"),deadline:v("pDeadline"),investment:n("pInvestment"),requested:n("pRequested"),obtained:n("pObtained"),revenue:n("pRevenue"),errors:n("pErrors"),integrations:n("pIntegrations"),rejected:v("pRejected"),lost:v("pLost"),notes:v("pNotes"),custom:readCustomValues("practices"),updated:today()};
  const old=id?getPractice(id):null;
  if(old) Object.assign(old,p); else db.practices.push(p);
  save();closeModal("practiceModal");renderAll();toast(old?"Pratica aggiornata":"Pratica creata");
@@ -446,32 +526,34 @@ function setText(id,x){document.getElementById(id).textContent=x}
 function renderPractices(){
  fillClientSelect();
  const q=(document.getElementById("practiceSearch")?.value||"").toLowerCase(), st=document.getElementById("filterStatus")?.value||"", bd=document.getElementById("filterBando")?.value||"", pr=document.getElementById("filterPriority")?.value||"";
+ renderCustomFilters("practices",db.practices,"renderPractices");
  const list=db.practices.filter(p=>{
   const c=getClient(p.clientId)?.name||"";
-  return (!q||(c+" "+p.bando+" "+p.technician+" "+p.commercial).toLowerCase().includes(q))&&(!st||p.status===st)&&(!bd||p.bando===bd)&&(!pr||p.priority===pr)
+  return (!q||(c+" "+p.bando+" "+p.technician+" "+p.commercial).toLowerCase().includes(q))&&(!st||p.status===st)&&(!bd||p.bando===bd)&&(!pr||p.priority===pr)&&customFiltersMatch("practices",p)
  }).sort((a,b)=>(a.deadline||"9999").localeCompare(b.deadline||"9999"));
  document.getElementById("filterBando").innerHTML=`<option value="">Tutti i bandi</option>`+[...new Set(db.practices.map(p=>p.bando))].sort().map(x=>`<option ${x===bd?"selected":""}>${esc(x)}</option>`).join("");
- document.getElementById("practicesTable").innerHTML=list.length?`<table><thead><tr><th>Cliente</th><th>Bando</th><th>Stato</th><th>Responsabili</th><th>Scadenza</th><th>Investimento</th><th>Agevolazione</th><th>Qualità</th><th></th></tr></thead><tbody>${list.map(p=>{
-  const d=daysTo(p.deadline);return `<tr><td><div class="client-name">${esc(getClient(p.clientId)?.name||"—")}</div><div class="client-email">${esc(p.id)}</div></td><td>${esc(p.bando)}</td><td>${badge(p.status)} ${badge(p.priority)}</td><td>${esc(p.technician||"—")}<div class="client-email">${esc(p.commercial||"")}</div></td><td>${date(p.deadline)}<div class="client-email">${p.deadline?(d<0?"SCADUTA":d+" gg"):""}</div></td><td>${money(p.investment)}</td><td>${money(p.requested)}<div class="client-email">ottenuta: ${money(p.obtained)}</div></td><td>${p.errors?`❌ ${p.errors}`:"✓"} ${p.integrations?` · ⚠ ${p.integrations}`:""}</td><td><div class="actions"><button class="icon-btn" title="Modifica" onclick="openPracticeModal('${p.id}')">✎</button><button class="icon-btn" title="Elimina" onclick="deletePractice('${p.id}')">🗑</button></div></td></tr>`
+ document.getElementById("practicesTable").innerHTML=list.length?`<table><thead><tr><th>Cliente</th><th>Bando</th><th>Stato</th><th>Responsabili</th><th>Scadenza</th><th>Investimento</th><th>Agevolazione</th><th>Qualità</th>${customHeaders("practices")}<th></th></tr></thead><tbody>${list.map(p=>{
+  const d=daysTo(p.deadline);return `<tr><td><div class="client-name">${esc(getClient(p.clientId)?.name||"—")}</div><div class="client-email">${esc(p.id)}</div></td><td>${esc(p.bando)}</td><td>${badge(p.status)} ${badge(p.priority)}</td><td>${esc(p.technician||"—")}<div class="client-email">${esc(p.commercial||"")}</div></td><td>${date(p.deadline)}<div class="client-email">${p.deadline?(d<0?"SCADUTA":d+" gg"):""}</div></td><td>${money(p.investment)}</td><td>${money(p.requested)}<div class="client-email">ottenuta: ${money(p.obtained)}</div></td><td>${p.errors?`❌ ${p.errors}`:"✓"} ${p.integrations?` · ⚠ ${p.integrations}`:""}</td>${customCells("practices",p)}<td><div class="actions"><button class="icon-btn" title="Modifica" onclick="openPracticeModal('${p.id}')">✎</button><button class="icon-btn" title="Elimina" onclick="deletePractice('${p.id}')">🗑</button></div></td></tr>`
  }).join("")}</tbody></table>`:`<div class="empty"><div class="empty-icon">▣</div>Nessuna pratica trovata.</div>`;
 }
 function deletePractice(id){if(confirm("Eliminare la pratica?")){db.practices=db.practices.filter(p=>p.id!==id);db.tasks=db.tasks.filter(t=>t.practiceId!==id);save();renderAll();toast("Pratica eliminata")}}
 
 function openClientModal(id=null){
  const f=document.querySelector("#clientModal form");f.reset();document.getElementById("clientId").value=id||"";document.getElementById("clientModalTitle").textContent=id?"Modifica cliente":"Nuovo cliente";
+ const existing=id?getClient(id):{};renderCustomInputs("clients",existing||{});
  if(id){const c=getClient(id);const map={cName:"name",cVat:"vat",cAteco:"ateco",cEmail:"email",cPec:"pec",cPhone:"phone",cCity:"city",cNotes:"notes"};Object.entries(map).forEach(([a,b])=>document.getElementById(a).value=c[b]||"")}
  document.getElementById("clientModal").classList.add("open");
 }
-function saveClient(e){e.preventDefault();const id=v("clientId");const c={id:id||uid(),name:v("cName"),vat:v("cVat"),ateco:v("cAteco"),email:v("cEmail"),pec:v("cPec"),phone:v("cPhone"),city:v("cCity"),notes:v("cNotes")};const i=db.clients.findIndex(x=>x.id===id);if(i>=0)db.clients[i]=c;else db.clients.push(c);save();closeModal("clientModal");renderAll();toast("Cliente salvato")}
+function saveClient(e){e.preventDefault();const id=v("clientId");const c={id:id||uid(),name:v("cName"),vat:v("cVat"),ateco:v("cAteco"),email:v("cEmail"),pec:v("cPec"),phone:v("cPhone"),city:v("cCity"),notes:v("cNotes"),custom:readCustomValues("clients")};const i=db.clients.findIndex(x=>x.id===id);if(i>=0)db.clients[i]=c;else db.clients.push(c);save();closeModal("clientModal");renderAll();toast("Cliente salvato")}
 function renderClients(){
- const q=(document.getElementById("clientSearch")?.value||"").toLowerCase();const list=db.clients.filter(c=>(c.name+" "+c.vat+" "+c.ateco).toLowerCase().includes(q));
- document.getElementById("clientsTable").innerHTML=list.length?`<table><thead><tr><th>Cliente</th><th>P.IVA</th><th>ATECO</th><th>Pratiche</th><th>Investimenti</th><th>Agevolazioni</th><th></th></tr></thead><tbody>${list.map(c=>{const ps=db.practices.filter(p=>p.clientId===c.id);return `<tr><td><div class="client-name">${esc(c.name)}</div><div class="client-email">${esc(c.email||"")}</div></td><td>${esc(c.vat||"—")}</td><td>${esc(c.ateco||"—")}</td><td>${ps.length}</td><td>${money(ps.reduce((a,p)=>a+Number(p.investment||0),0))}</td><td>${money(ps.reduce((a,p)=>a+Number(p.obtained||0),0))}</td><td><div class="actions"><button class="icon-btn" onclick="openClientModal('${c.id}')">✎</button><button class="icon-btn" onclick="deleteClient('${c.id}')">🗑</button></div></td></tr>`}).join("")}</tbody></table>`:`<div class="empty"><div class="empty-icon">👥</div>Nessun cliente.</div>`;
+ const q=(document.getElementById("clientSearch")?.value||"").toLowerCase();renderCustomFilters("clients",db.clients,"renderClients");const list=db.clients.filter(c=>(c.name+" "+c.vat+" "+c.ateco).toLowerCase().includes(q)&&customFiltersMatch("clients",c));
+ document.getElementById("clientsTable").innerHTML=list.length?`<table><thead><tr><th>Cliente</th><th>P.IVA</th><th>ATECO</th><th>Pratiche</th><th>Investimenti</th><th>Agevolazioni</th>${customHeaders("clients")}<th></th></tr></thead><tbody>${list.map(c=>{const ps=db.practices.filter(p=>p.clientId===c.id);return `<tr><td><div class="client-name">${esc(c.name)}</div><div class="client-email">${esc(c.email||"")}</div></td><td>${esc(c.vat||"—")}</td><td>${esc(c.ateco||"—")}</td><td>${ps.length}</td><td>${money(ps.reduce((a,p)=>a+Number(p.investment||0),0))}</td><td>${money(ps.reduce((a,p)=>a+Number(p.obtained||0),0))}</td>${customCells("clients",c)}<td><div class="actions"><button class="icon-btn" onclick="openClientModal('${c.id}')">✎</button><button class="icon-btn" onclick="deleteClient('${c.id}')">🗑</button></div></td></tr>`}).join("")}</tbody></table>`:`<div class="empty"><div class="empty-icon">👥</div>Nessun cliente.</div>`;
 }
 function deleteClient(id){if(confirm("Eliminare il cliente? Le pratiche collegate resteranno senza cliente.")){db.clients=db.clients.filter(c=>c.id!==id);save();renderAll()}}
 
-function openTaskModal(){document.querySelector("#taskModal form").reset();fillClientSelect();document.getElementById("taskModal").classList.add("open")}
-function saveTask(e){e.preventDefault();const t={id:uid(),name:v("tName"),practiceId:v("tPractice"),status:v("tStatus"),priority:v("tPriority"),due:v("tDue"),desc:v("tDesc")};db.tasks.push(t);save();closeModal("taskModal");renderAll();toast("Attività salvata")}
-function renderTasks(){const list=db.tasks.slice().sort((a,b)=>(a.due||"9999").localeCompare(b.due||"9999"));document.getElementById("tasksTable").innerHTML=list.length?`<table><thead><tr><th>Attività</th><th>Pratica</th><th>Stato</th><th>Priorità</th><th>Scadenza</th><th></th></tr></thead><tbody>${list.map(t=>`<tr><td><strong>${esc(t.name)}</strong><div class="client-email">${esc(t.desc||"")}</div></td><td>${esc(getPractice(t.practiceId)?.bando||"—")}</td><td>${badge(t.status)}</td><td>${badge(t.priority)}</td><td>${date(t.due)}</td><td><button class="icon-btn" onclick="deleteTask('${t.id}')">🗑</button></td></tr>`).join("")}</tbody></table>`:`<div class="empty">Nessuna attività.</div>`}
+function openTaskModal(id=null){document.querySelector("#taskModal form").reset();fillClientSelect();document.getElementById("taskId").value=id||"";const t=id?db.tasks.find(x=>x.id===id):null;if(t){const map={tName:"name",tPractice:"practiceId",tStatus:"status",tPriority:"priority",tDue:"due",tDesc:"desc"};Object.entries(map).forEach(([el,k])=>document.getElementById(el).value=t[k]??"")}renderCustomInputs("tasks",t||{});document.getElementById("taskModal").classList.add("open")}
+function saveTask(e){e.preventDefault();const id=v("taskId"),t={id:id||uid(),name:v("tName"),practiceId:v("tPractice"),status:v("tStatus"),priority:v("tPriority"),due:v("tDue"),desc:v("tDesc"),custom:readCustomValues("tasks")};const i=db.tasks.findIndex(x=>x.id===id);if(i>=0)db.tasks[i]=t;else db.tasks.push(t);save();closeModal("taskModal");renderAll();toast("Attività salvata")}
+function renderTasks(){renderCustomFilters("tasks",db.tasks,"renderTasks");const list=db.tasks.filter(t=>customFiltersMatch("tasks",t)).slice().sort((a,b)=>(a.due||"9999").localeCompare(b.due||"9999"));document.getElementById("tasksTable").innerHTML=list.length?`<table><thead><tr><th>Attività</th><th>Pratica</th><th>Stato</th><th>Priorità</th><th>Scadenza</th>${customHeaders("tasks")}<th></th></tr></thead><tbody>${list.map(t=>`<tr><td><strong>${esc(t.name)}</strong><div class="client-email">${esc(t.desc||"")}</div></td><td>${esc(getPractice(t.practiceId)?.bando||"—")}</td><td>${badge(t.status)}</td><td>${badge(t.priority)}</td><td>${date(t.due)}</td>${customCells("tasks",t)}<td><div class="actions"><button class="icon-btn" title="Modifica" onclick="openTaskModal('${t.id}')">✎</button><button class="icon-btn" onclick="deleteTask('${t.id}')">🗑</button></div></td></tr>`).join("")}</tbody></table>`:`<div class="empty">Nessuna attività.</div>`}
 function deleteTask(id){db.tasks=db.tasks.filter(t=>t.id!==id);save();renderAll()}
 function renderDeadlines(){const list=db.practices.filter(p=>p.deadline).sort((a,b)=>a.deadline.localeCompare(b.deadline));document.getElementById("deadlineTable").innerHTML=list.length?`<table><thead><tr><th>Scadenza</th><th>Giorni</th><th>Cliente</th><th>Bando</th><th>Stato</th><th>Responsabile</th><th>Criticità</th></tr></thead><tbody>${list.map(p=>{const d=daysTo(p.deadline);return `<tr><td><strong>${date(p.deadline)}</strong></td><td>${badge(d<0?"Scaduta":d<=3?"Critica":"Normale")}</td><td>${esc(getClient(p.clientId)?.name||"—")}</td><td>${esc(p.bando)}</td><td>${badge(p.status)}</td><td>${esc(p.technician||"—")}</td><td>${esc(p.notes||"—")}</td></tr>`}).join("")}</tbody></table>`:`<div class="empty">Nessuna scadenza inserita.</div>`}
 async function uploadFiles(e){
@@ -526,15 +608,15 @@ function renderDayEntries(){const box=document.getElementById('dayEntries');if(!
 function deleteLog(id){if(confirm('Eliminare questa registrazione?')){db.logs=db.logs.filter(x=>x.id!==id);save();renderCalendar()}}
 
 // PROGETTI, FASI E ATTIVITÀ
-function openProjectModal(){document.getElementById('projectForm').reset();document.getElementById('projectId').value='';document.getElementById('projectModalTitle').textContent='Nuovo progetto';document.getElementById('projectModal').classList.add('open')}
-function saveProject(e){e.preventDefault();const id=v('projectId');const item={id:id||uid(),name:v('projectName'),client:v('projectClient'),owner:v('projectOwner'),status:v('projectStatus'),start:v('projectStart'),end:v('projectEnd'),description:v('projectDescription'),phases:id?(db.projects.find(p=>p.id===id)?.phases||[]):[]};const old=db.projects.findIndex(p=>p.id===id);if(old>=0)db.projects[old]=item;else db.projects.push(item);save();closeModal('projectModal');renderProjects();toast('Progetto salvato')}
-function editProject(id){const p=db.projects.find(x=>x.id===id);if(!p)return;openProjectModal();document.getElementById('projectId').value=id;document.getElementById('projectModalTitle').textContent='Modifica progetto';const map={projectName:'name',projectClient:'client',projectOwner:'owner',projectStatus:'status',projectStart:'start',projectEnd:'end',projectDescription:'description'};Object.entries(map).forEach(([el,k])=>document.getElementById(el).value=p[k]||'')}
+function openProjectModal(){document.getElementById('projectForm').reset();document.getElementById('projectId').value='';document.getElementById('projectModalTitle').textContent='Nuovo progetto';renderCustomInputs('projects',{});document.getElementById('projectModal').classList.add('open')}
+function saveProject(e){e.preventDefault();const id=v('projectId');const item={id:id||uid(),name:v('projectName'),client:v('projectClient'),owner:v('projectOwner'),status:v('projectStatus'),start:v('projectStart'),end:v('projectEnd'),description:v('projectDescription'),custom:readCustomValues('projects'),phases:id?(db.projects.find(p=>p.id===id)?.phases||[]):[]};const old=db.projects.findIndex(p=>p.id===id);if(old>=0)db.projects[old]=item;else db.projects.push(item);save();closeModal('projectModal');renderProjects();toast('Progetto salvato')}
+function editProject(id){const p=db.projects.find(x=>x.id===id);if(!p)return;openProjectModal();document.getElementById('projectId').value=id;document.getElementById('projectModalTitle').textContent='Modifica progetto';const map={projectName:'name',projectClient:'client',projectOwner:'owner',projectStatus:'status',projectStart:'start',projectEnd:'end',projectDescription:'description'};Object.entries(map).forEach(([el,k])=>document.getElementById(el).value=p[k]||'');renderCustomInputs('projects',p)}
 function addPhase(pid){const name=prompt('Nome della fase (es. Analisi e requisiti):');if(!name?.trim())return;const p=db.projects.find(x=>x.id===pid);p.phases ||= [];p.phases.push({id:uid(),name:name.trim(),status:'Da fare',tasks:[]});save();renderProjects()}
 function addProjectTask(pid,phid){const title=prompt('Descrizione dell’attività:');if(!title?.trim())return;const p=db.projects.find(x=>x.id===pid),ph=p?.phases.find(x=>x.id===phid);if(!ph)return;ph.tasks ||= [];ph.tasks.push({id:uid(),title:title.trim(),status:'Da fare',due:''});save();renderProjects()}
 function setPhaseStatus(pid,phid,status){const p=db.projects.find(x=>x.id===pid),ph=p?.phases.find(x=>x.id===phid);if(ph){ph.status=status;save();renderProjects()}}
 function setProjectTaskStatus(pid,phid,tid,status){const p=db.projects.find(x=>x.id===pid),ph=p?.phases.find(x=>x.id===phid),t=ph?.tasks.find(x=>x.id===tid);if(t){t.status=status;save();renderProjects()}}
 function removeProject(pid){if(confirm('Eliminare il progetto e le sue fasi?')){db.projects=db.projects.filter(x=>x.id!==pid);save();renderProjects()}}
-function renderProjects(){const box=document.getElementById('projectsList');if(!box)return;box.innerHTML=db.projects.length?db.projects.map(p=>{const phases=p.phases||[], tasks=phases.flatMap(x=>x.tasks||[]), done=tasks.filter(t=>t.status==='Completata').length, pct=tasks.length?Math.round(done/tasks.length*100):0;return `<div class="card project-card"><div class="card-header"><div><div class="card-title">${esc(p.name)}</div><div class="small muted" style="margin-top:5px">${esc(p.client||'Progetto interno')} · Responsabile: ${esc(p.owner||'—')} · ${p.start?date(p.start):'Data non definita'}${p.end?' → '+date(p.end):''}</div></div><div class="actions"><button class="btn btn-secondary btn-small" onclick="editProject('${p.id}')">Modifica</button><button class="btn btn-secondary btn-small" onclick="addPhase('${p.id}')">+ Fase</button><button class="icon-btn" onclick="removeProject('${p.id}')">🗑</button></div></div><div style="padding:16px 20px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:7px"><span>${badge(p.status||'In corso')} ${esc(p.description||'')}</span><strong>${pct}% attività completate</strong></div><div class="progress"><div class="progress-bar" style="width:${pct}%"></div></div>${phases.length?phases.map(ph=>`<div class="phase"><div class="phase-head"><div><strong>${esc(ph.name)}</strong><div class="small muted">${(ph.tasks||[]).filter(t=>t.status==='Completata').length}/${(ph.tasks||[]).length} attività completate</div></div><div class="filters"><select class="form-control phase-select" onchange="setPhaseStatus('${p.id}','${ph.id}',this.value)">${['Da fare','In corso','Completata','Bloccata'].map(st=>`<option ${ph.status===st?'selected':''}>${st}</option>`).join('')}</select><button class="btn btn-secondary btn-small" onclick="addProjectTask('${p.id}','${ph.id}')">+ Attività</button></div></div>${(ph.tasks||[]).map(t=>`<div class="project-task"><span>${esc(t.title)}</span><select class="form-control task-select" onchange="setProjectTaskStatus('${p.id}','${ph.id}','${t.id}',this.value)">${['Da fare','In corso','Completata','Bloccata'].map(st=>`<option ${t.status===st?'selected':''}>${st}</option>`).join('')}</select></div>`).join('')||'<div class="small muted" style="padding:10px 0">Nessuna attività nella fase.</div>'}</div>`).join(''):'<div class="empty">Crea il progetto e aggiungi le fasi; ogni fase può contenere più attività.</div>'}</div></div>`}).join(''):'<div class="card empty"><div class="empty-icon">◫</div>Nessun progetto creato. Usa “Nuovo progetto” per iniziare.</div>'}
+function renderProjects(){const box=document.getElementById('projectsList');if(!box)return;renderCustomFilters('projects',db.projects,'renderProjects');const visibleProjects=db.projects.filter(p=>customFiltersMatch('projects',p));box.innerHTML=visibleProjects.length?visibleProjects.map(p=>{const phases=p.phases||[], tasks=phases.flatMap(x=>x.tasks||[]), done=tasks.filter(t=>t.status==='Completata').length, pct=tasks.length?Math.round(done/tasks.length*100):0;return `<div class="card project-card"><div class="card-header"><div><div class="card-title">${esc(p.name)}</div><div class="small muted" style="margin-top:5px">${esc(p.client||'Progetto interno')} · Responsabile: ${esc(p.owner||'—')} · ${p.start?date(p.start):'Data non definita'}${p.end?' → '+date(p.end):''}</div></div><div class="actions"><button class="btn btn-secondary btn-small" onclick="editProject('${p.id}')">Modifica</button><button class="btn btn-secondary btn-small" onclick="addPhase('${p.id}')">+ Fase</button><button class="icon-btn" onclick="removeProject('${p.id}')">🗑</button></div></div><div style="padding:16px 20px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:7px"><span>${badge(p.status||'In corso')} ${esc(p.description||'')} ${getCustomFields('projects').map(f=>customValue(p,f.id)?`<span class="custom-value">· ${esc(f.name)}: ${esc(customValue(p,f.id))}</span>`:'').join('')}</span><strong>${pct}% attività completate</strong></div><div class="progress"><div class="progress-bar" style="width:${pct}%"></div></div>${phases.length?phases.map(ph=>`<div class="phase"><div class="phase-head"><div><strong>${esc(ph.name)}</strong><div class="small muted">${(ph.tasks||[]).filter(t=>t.status==='Completata').length}/${(ph.tasks||[]).length} attività completate</div></div><div class="filters"><select class="form-control phase-select" onchange="setPhaseStatus('${p.id}','${ph.id}',this.value)">${['Da fare','In corso','Completata','Bloccata'].map(st=>`<option ${ph.status===st?'selected':''}>${st}</option>`).join('')}</select><button class="btn btn-secondary btn-small" onclick="addProjectTask('${p.id}','${ph.id}')">+ Attività</button></div></div>${(ph.tasks||[]).map(t=>`<div class="project-task"><span>${esc(t.title)}</span><select class="form-control task-select" onchange="setProjectTaskStatus('${p.id}','${ph.id}','${t.id}',this.value)">${['Da fare','In corso','Completata','Bloccata'].map(st=>`<option ${t.status===st?'selected':''}>${st}</option>`).join('')}</select></div>`).join('')||'<div class="small muted" style="padding:10px 0">Nessuna attività nella fase.</div>'}</div>`).join(''):'<div class="empty">Crea il progetto e aggiungi le fasi; ogni fase può contenere più attività.</div>'}</div></div>`}).join(''):'<div class="card empty"><div class="empty-icon">◫</div>Nessun progetto creato. Usa “Nuovo progetto” per iniziare.</div>'}
 
 // PASSWORD VAULT: AES-GCM + PBKDF2, cifratura lato browser
 const enc=new TextEncoder(), dec=new TextDecoder();
@@ -553,7 +635,7 @@ async function deletePassword(id){if(confirm('Eliminare questa credenziale?')){v
 
 function setupDocumentDropzone(){const zone=document.getElementById("documentDropzone");if(!zone)return;["dragenter","dragover"].forEach(ev=>zone.addEventListener(ev,e=>{e.preventDefault();e.stopPropagation();zone.classList.add("dragover")}));["dragleave","dragend"].forEach(ev=>zone.addEventListener(ev,e=>{e.preventDefault();zone.classList.remove("dragover")}));zone.addEventListener("drop",e=>{e.preventDefault();e.stopPropagation();zone.classList.remove("dragover");uploadFiles(e)})}
 function renderAll(){renderDashboard();renderPractices();renderClients();renderTasks();renderDeadlines();renderFiles();loadSettings();renderCalendar();renderProjects()}
-renderAll();setupDocumentDropzone();
+renderAll();renderCustomFieldManager();initNavReordering();setupDocumentDropzone();
 
 // Blocco di accesso iniziale (password di accesso: 0852).
 // Nota: su un sito statico GitHub Pages questa è una barriera d'accesso lato client,
