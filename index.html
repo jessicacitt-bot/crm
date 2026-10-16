@@ -119,6 +119,11 @@ body.access-locked .app { display: none !important; }
 .custom-field-row{display:grid;grid-template-columns:1.1fr .8fr .7fr auto;gap:8px;align-items:center;margin-top:8px}
 .custom-field-row input,.custom-field-row select{min-width:0}
 .custom-value{display:inline-block;color:#4b5563;font-size:11px;margin-top:3px}
+.nav-order-row{display:flex;align-items:center;gap:10px;padding:9px 10px;margin-top:6px;border:1px solid var(--border);border-radius:10px;background:#fff}
+.nav-order-name{flex:1;font-size:13px;font-weight:700}
+.nav-order-actions{display:flex;gap:5px}
+.nav-order-actions .btn{min-width:34px;padding:6px 9px}
+.custom-field-empty{padding:12px;border:1px dashed var(--border);border-radius:10px;color:var(--muted);font-size:12px;margin-top:12px}
 @media(max-width:800px){.custom-fields-area{grid-template-columns:1fr}.custom-field-row{grid-template-columns:1fr 1fr}.custom-field-row button{justify-self:start}}
 
 </style>
@@ -296,7 +301,7 @@ body.access-locked .app { display: none !important; }
   </div>
   <div class="card" style="margin-top:18px">
     <div class="card-header"><div><div class="card-title">Personalizza menu laterale</div><div class="small muted">Trascina le voci del menu per cambiarne l'ordine.</div></div><button class="btn btn-secondary btn-small" onclick="resetNavOrder()">Ripristina ordine</button></div>
-    <div style="padding:18px 20px" class="small muted">Puoi trascinare direttamente le voci nella barra laterale. Il nuovo ordine viene salvato automaticamente su questo browser.</div>
+    <div style="padding:18px 20px"><p class="small muted" style="margin:0 0 12px">Usa le frecce per spostare le voci senza trascinarle. Puoi anche trascinare direttamente le voci nella barra laterale. L’ordine viene salvato automaticamente in questo browser.</p><div id="navOrderManager" class="nav-order-manager"></div></div>
   </div>
 </section>
 
@@ -379,7 +384,7 @@ function loadDatabase(){
  try{return JSON.parse(localStorage.getItem(KEY)||"null")}catch(e){return null}
 }
 let db=loadDatabase()||{clients:[],practices:[],tasks:[],files:[],logs:[],projects:[],vault:null,settings:{deptName:"Finanza Agevolata",manager:""}};
-db.logs ||= []; db.projects ||= []; db.vault ??= null; db.files ||= []; db.customFields ||= {clients:[],practices:[],tasks:[],projects:[]}; db.customFields.clients ||= []; db.customFields.practices ||= []; db.customFields.tasks ||= []; db.customFields.projects ||= []; db.settings ||= {deptName:"Finanza Agevolata",manager:""}; let calendarCursor=new Date(); let selectedDay=today(); let vaultKey=null, vaultItems=[];
+db.clients ||= []; db.practices ||= []; db.tasks ||= []; db.logs ||= []; db.projects ||= []; db.vault ??= null; db.files ||= []; db.customFields ||= {clients:[],practices:[],tasks:[],projects:[]}; db.customFields.clients ||= []; db.customFields.practices ||= []; db.customFields.tasks ||= []; db.customFields.projects ||= []; db.settings ||= {deptName:"Finanza Agevolata",manager:""}; let calendarCursor=new Date(); let selectedDay=today(); let vaultKey=null, vaultItems=[];
 
 function save(){
  try{localStorage.setItem(KEY,JSON.stringify(db));}
@@ -417,17 +422,28 @@ function renderCustomInputs(entity,record={}){
 }
 function readCustomValues(entity){const out={};getCustomFields(entity).forEach(f=>{const el=document.getElementById("cf_"+entity+"_"+f.id);if(el)out[f.id]=el.value});return out}
 function addCustomField(){
- const entity=v("customFieldEntity"),name=v("customFieldName").trim(),type=v("customFieldType"),raw=v("customFieldOptions");
- if(!name){toast("Inserisci il nome del campo");document.getElementById("customFieldName").focus();return}
- const fields=getCustomFields(entity);if(fields.some(f=>f.name.toLowerCase()===name.toLowerCase())){toast("Esiste già un campo con questo nome");return}
+ const entity=document.getElementById("customFieldEntity")?.value||"clients";
+ const name=(document.getElementById("customFieldName")?.value||"").trim();
+ const type=document.getElementById("customFieldType")?.value||"text";
+ const raw=document.getElementById("customFieldOptions")?.value||"";
+ if(!name){toast("Inserisci il nome del campo");document.getElementById("customFieldName")?.focus();return}
+ const fields=getCustomFields(entity);
+ if(fields.some(f=>String(f.name).toLocaleLowerCase("it")===name.toLocaleLowerCase("it"))){toast("Esiste già un campo con questo nome in questa sezione");return}
  const options=type==="select"?raw.split(",").map(x=>x.trim()).filter(Boolean):[];
- if(type==="select"&&!options.length){toast("Inserisci le opzioni separate da virgola");return}
- fields.push({id:uid(),name,type,options});save();document.getElementById("customFieldName").value="";document.getElementById("customFieldOptions").value="";renderCustomFieldManager();renderAll();toast("Campo aggiunto")
+ if(type==="select"&&!options.length){toast("Per un elenco a scelta, inserisci le opzioni separate da virgola");document.getElementById("customFieldOptions")?.focus();return}
+ fields.push({id:uid(),name,type,options});
+ db.customFields[entity]=fields;
+ save();
+ document.getElementById("customFieldName").value="";
+ document.getElementById("customFieldOptions").value="";
+ renderCustomFieldManager();
+ renderAll();
+ toast("Campo aggiunto e salvato nella sezione "+entityLabel(entity));
 }
 function deleteCustomField(entity,id){if(!confirm("Eliminare questo campo? I valori già inseriti per il campo verranno rimossi."))return;db.customFields[entity]=getCustomFields(entity).filter(f=>f.id!==id);[...(db[entity]||[])].forEach(r=>{if(r.custom)delete r.custom[id]});save();renderCustomFieldManager();renderAll();toast("Campo eliminato")}
 function renderCustomFieldManager(){
  const entity=document.getElementById("customFieldEntity")?.value||"clients",box=document.getElementById("customFieldManagerList");if(!box)return;
- const fields=getCustomFields(entity);box.innerHTML=`<div class="card-title">Campi configurati per ${entityLabel(entity)}</div>`+(fields.length?fields.map(f=>`<div class="custom-field-row"><strong>${esc(f.name)}</strong><span class="small muted">${({text:"Testo",number:"Numero",date:"Data",select:"Elenco",checkbox:"Sì/No",textarea:"Testo lungo"})[f.type]||f.type}</span><span class="small muted">${f.type==="select"?esc((f.options||[]).join(", ")):""}</span><button class="btn btn-secondary btn-small" onclick="deleteCustomField('${entity}','${f.id}')">Elimina</button></div>`).join(""):`<p class="small muted" style="margin-top:10px">Nessun campo personalizzato. Aggiungine uno con il modulo qui sopra.</p>`);
+ const fields=getCustomFields(entity);box.innerHTML=`<div class="card-title">Campi configurati per ${entityLabel(entity)}</div>`+(fields.length?fields.map(f=>`<div class="custom-field-row"><strong>${esc(f.name)}</strong><span class="small muted">${({text:"Testo",number:"Numero",date:"Data",select:"Elenco",checkbox:"Sì/No",textarea:"Testo lungo"})[f.type]||f.type}</span><span class="small muted">${f.type==="select"?esc((f.options||[]).join(", ")):""}</span><button class="btn btn-secondary btn-small" onclick="deleteCustomField('${entity}','${f.id}')">Elimina</button></div>`).join(""):`<div class="custom-field-empty">Nessun campo personalizzato per questa sezione. Compila il modulo qui sopra e premi <strong>＋ Aggiungi campo</strong>.</div>`);
 }
 function renderCustomFilters(entity,records,rerender){
  const box=document.getElementById("customFilters-"+entity);if(!box)return;
@@ -437,14 +453,44 @@ function renderCustomFilters(entity,records,rerender){
 function customFiltersMatch(entity,record){const box=document.getElementById("customFilters-"+entity);if(!box)return true;return [...box.querySelectorAll("select[data-custom-filter]")].every(el=>!el.value||String(customValue(record,el.dataset.customFilter))===el.value)}
 function customCells(entity,record){return getCustomFields(entity).map(f=>`<td>${esc(customValue(record,f.id)||"—")}</td>`).join("")}
 function customHeaders(entity){return getCustomFields(entity).map(f=>`<th>${esc(f.name)}</th>`).join("")}
-function initNavReordering(){
- const nav=document.querySelector(".nav");if(!nav)return;let saved=[];try{saved=JSON.parse(localStorage.getItem("fa_nav_order")||"[]")}catch(e){}
- const reorder=()=>{const buttons=[...nav.querySelectorAll("button[data-page]")];buttons.sort((a,b)=>{let ai=saved.indexOf(a.dataset.page),bi=saved.indexOf(b.dataset.page);return (ai<0?999:ai)-(bi<0?999:bi)}).forEach(b=>nav.appendChild(b));};
- if(saved.length)reorder();let dragging=null;
- nav.querySelectorAll("button[data-page]").forEach(btn=>{btn.draggable=true;btn.addEventListener("dragstart",e=>{dragging=btn;btn.classList.add("dragging");e.dataTransfer.effectAllowed="move";e.dataTransfer.setData("text/plain",btn.dataset.page)});btn.addEventListener("dragend",()=>{btn.classList.remove("dragging");nav.querySelectorAll(".drag-over").forEach(x=>x.classList.remove("drag-over"));dragging=null;persist()});btn.addEventListener("dragover",e=>{if(!dragging||dragging===btn)return;e.preventDefault();btn.classList.add("drag-over")});btn.addEventListener("dragleave",()=>btn.classList.remove("drag-over"));btn.addEventListener("drop",e=>{e.preventDefault();btn.classList.remove("drag-over");if(!dragging||dragging===btn)return;const rect=btn.getBoundingClientRect();if(e.clientY<rect.top+rect.height/2)nav.insertBefore(dragging,btn);else nav.insertBefore(dragging,btn.nextSibling);persist()})});
- function persist(){saved=[...nav.querySelectorAll("button[data-page]")].map(b=>b.dataset.page);localStorage.setItem("fa_nav_order",JSON.stringify(saved))}
+function getNavButtons(){return [...document.querySelectorAll(".nav button[data-page]")];}
+function persistNavOrder(){
+ const order=getNavButtons().map(b=>b.dataset.page);
+ try{localStorage.setItem("fa_nav_order",JSON.stringify(order));}catch(e){console.error("Impossibile salvare l'ordine del menu",e);toast("Il browser non consente di salvare l'ordine del menu")}
+ renderNavOrderManager();
 }
-function resetNavOrder(){localStorage.removeItem("fa_nav_order");const nav=document.querySelector(".nav");const order=["dashboard","practices","clients","tasks","calendar","projects","passwords","files","settings"];order.forEach(id=>{const b=nav.querySelector(`[data-page="${id}"]`);if(b)nav.appendChild(b)});initNavReordering();toast("Ordine del menu ripristinato")}
+function renderNavOrderManager(){
+ const box=document.getElementById("navOrderManager");if(!box)return;
+ const labels={dashboard:"Dashboard",practices:"Pratiche",clients:"Clienti",tasks:"Attività",calendar:"Calendario",projects:"Progetti",passwords:"Password",files:"Documenti",settings:"Impostazioni"};
+ box.innerHTML=getNavButtons().map((b,i)=>`<div class="nav-order-row"><span class="nav-order-name">${i+1}. ${labels[b.dataset.page]||b.dataset.page}</span><div class="nav-order-actions"><button type="button" class="btn btn-secondary btn-small" title="Sposta su" aria-label="Sposta ${labels[b.dataset.page]} su" onclick="moveNavItem('${b.dataset.page}',-1)" ${i===0?'disabled':''}>↑</button><button type="button" class="btn btn-secondary btn-small" title="Sposta giù" aria-label="Sposta ${labels[b.dataset.page]} giù" onclick="moveNavItem('${b.dataset.page}',1)" ${i===getNavButtons().length-1?'disabled':''}>↓</button></div></div>`).join("");
+}
+function moveNavItem(page,direction){
+ const nav=document.querySelector(".nav");const buttons=getNavButtons();const index=buttons.findIndex(b=>b.dataset.page===page);const target=index+direction;
+ if(!nav||index<0||target<0||target>=buttons.length)return;
+ const item=buttons[index],other=buttons[target];
+ if(direction<0)nav.insertBefore(item,other);else nav.insertBefore(other,item);
+ persistNavOrder();
+}
+function initNavReordering(){
+ const nav=document.querySelector(".nav");if(!nav)return;
+ let saved=[];try{saved=JSON.parse(localStorage.getItem("fa_nav_order")||"[]")}catch(e){saved=[]}
+ if(Array.isArray(saved)&&saved.length){const buttons=getNavButtons();buttons.sort((a,b)=>{const ai=saved.indexOf(a.dataset.page),bi=saved.indexOf(b.dataset.page);return (ai<0?999:ai)-(bi<0?999:bi)}).forEach(b=>nav.appendChild(b));}
+ nav.querySelectorAll("button[data-page]").forEach(btn=>{
+  btn.draggable=true;
+  btn.addEventListener("dragstart",e=>{nav.dataset.draggingPage=btn.dataset.page;btn.classList.add("dragging");e.dataTransfer.effectAllowed="move";e.dataTransfer.setData("text/plain",btn.dataset.page)});
+  btn.addEventListener("dragend",()=>{btn.classList.remove("dragging");nav.querySelectorAll(".drag-over").forEach(x=>x.classList.remove("drag-over"));delete nav.dataset.draggingPage;persistNavOrder()});
+  btn.addEventListener("dragover",e=>{if(!nav.dataset.draggingPage||nav.dataset.draggingPage===btn.dataset.page)return;e.preventDefault();btn.classList.add("drag-over")});
+  btn.addEventListener("dragleave",()=>btn.classList.remove("drag-over"));
+  btn.addEventListener("drop",e=>{e.preventDefault();btn.classList.remove("drag-over");const dragged=nav.querySelector(`[data-page="${nav.dataset.draggingPage}"]`);if(!dragged||dragged===btn)return;const rect=btn.getBoundingClientRect();if(e.clientY<rect.top+rect.height/2)nav.insertBefore(dragged,btn);else nav.insertBefore(dragged,btn.nextSibling);persistNavOrder()});
+ });
+ renderNavOrderManager();
+}
+function resetNavOrder(){
+ const nav=document.querySelector(".nav");const order=["dashboard","practices","clients","tasks","calendar","projects","passwords","files","settings"];
+ order.forEach(id=>{const b=nav?.querySelector(`[data-page="${id}"]`);if(b)nav.appendChild(b)});
+ try{localStorage.removeItem("fa_nav_order")}catch(e){}
+ renderNavOrderManager();toast("Ordine del menu ripristinato");
+}
 
 function navigate(page){
  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
@@ -634,7 +680,7 @@ async function deletePassword(id){if(confirm('Eliminare questa credenziale?')){v
 
 function setupDocumentDropzone(){const zone=document.getElementById("documentDropzone");if(!zone)return;["dragenter","dragover"].forEach(ev=>zone.addEventListener(ev,e=>{e.preventDefault();e.stopPropagation();zone.classList.add("dragover")}));["dragleave","dragend"].forEach(ev=>zone.addEventListener(ev,e=>{e.preventDefault();zone.classList.remove("dragover")}));zone.addEventListener("drop",e=>{e.preventDefault();e.stopPropagation();zone.classList.remove("dragover");uploadFiles(e)})}
 function renderAll(){renderDashboard();renderPractices();renderClients();renderTasks();renderDeadlines();renderFiles();loadSettings();renderCalendar();renderProjects()}
-renderAll();renderCustomFieldManager();initNavReordering();setupDocumentDropzone();
+renderAll();renderCustomFieldManager();initNavReordering();renderNavOrderManager();setupDocumentDropzone();
 
 // Blocco di accesso iniziale (password di accesso: 0852).
 // Nota: su un sito statico GitHub Pages questa è una barriera d'accesso lato client,
