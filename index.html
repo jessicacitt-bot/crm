@@ -75,9 +75,56 @@ table{width:100%;border-collapse:collapse}th{text-align:left;font-size:10px;text
 @media(max-width:1200px){.kpi-grid,.kpi-area{grid-template-columns:repeat(2,1fr)}.status-grid{grid-template-columns:repeat(3,1fr)}.dashboard-grid{grid-template-columns:1fr}}
 @media(max-width:800px){.sidebar{width:72px}.logo span,.nav button span{display:none}.nav button{justify-content:center}.main{margin-left:72px;width:calc(100% - 72px)}.content{padding:18px}.form-grid{grid-template-columns:1fr}.kpi-grid,.kpi-area{grid-template-columns:1fr 1fr}.status-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:560px){.kpi-grid,.kpi-area,.status-grid{grid-template-columns:1fr}.page-header{flex-direction:column}.topbar{padding:0 16px}.content{padding:12px}.search{min-width:100%}}
+
+/* Accesso iniziale al portale */
+body.access-locked .app { display: none !important; }
+#sitePasswordGate {
+  position: fixed; inset: 0; z-index: 9999; display: flex;
+  align-items: center; justify-content: center; padding: 22px;
+  background: radial-gradient(circle at top right, #e0e7ff 0, #f5f7fb 48%, #eef2ff 100%);
+}
+#sitePasswordGate .gate-card {
+  width: min(420px, 100%); background: #fff; border: 1px solid #e5e7eb;
+  border-radius: 22px; padding: 32px; box-shadow: 0 24px 70px rgba(15,23,42,.14);
+}
+#sitePasswordGate .gate-logo {
+  width: 54px; height: 54px; border-radius: 16px; display: grid; place-items: center;
+  margin-bottom: 20px; background: linear-gradient(135deg,#818cf8,#4f46e5);
+  color: #fff; font-size: 26px; font-weight: 900;
+}
+#sitePasswordGate h1 { font-size: 24px; margin-bottom: 8px; color: #111827; }
+#sitePasswordGate p { color: #6b7280; font-size: 13px; line-height: 1.55; margin-bottom: 20px; }
+#sitePasswordGate label { display:block; font-size:12px; font-weight:800; margin-bottom:7px; color:#374151; }
+#sitePasswordGate input {
+  width:100%; padding:13px 14px; border:1px solid #d1d5db; border-radius:11px;
+  margin-bottom:12px; font-size:18px; letter-spacing:.18em; outline:none;
+}
+#sitePasswordGate input:focus { border-color:#6366f1; box-shadow:0 0 0 3px #eef2ff; }
+#sitePasswordGate button {
+  width:100%; border:0; border-radius:11px; padding:13px; background:#4f46e5;
+  color:#fff; font-weight:800; cursor:pointer;
+}
+#sitePasswordGate button:hover { background:#4338ca; }
+#sitePasswordGate .gate-error { min-height:18px; margin-top:10px; color:#b91c1c; font-size:12px; }
+#sitePasswordGate .gate-note { margin-top:16px; margin-bottom:0; font-size:11px; color:#9ca3af; }
+
 </style>
 </head>
-<body>
+
+<body class="access-locked">
+<div id="sitePasswordGate" role="dialog" aria-modal="true" aria-labelledby="gateTitle">
+  <form class="gate-card" id="sitePasswordForm">
+    <div class="gate-logo">€</div>
+    <h1 id="gateTitle">Portale Finanza Agevolata</h1>
+    <p>Inserisci la password per accedere al gestionale.</p>
+    <label for="sitePasswordInput">Password di accesso</label>
+    <input id="sitePasswordInput" type="password" inputmode="numeric" autocomplete="current-password" autofocus required>
+    <button type="submit">Accedi al portale</button>
+    <div class="gate-error" id="sitePasswordError" aria-live="polite"></div>
+    <p class="gate-note">Accesso richiesto a ogni nuova sessione del browser.</p>
+  </form>
+</div>
+
 <div class="app">
 <aside class="sidebar">
   <div class="logo"><div class="logo-icon">€</div><span>Finanza Agevolata</span></div>
@@ -507,6 +554,38 @@ async function deletePassword(id){if(confirm('Eliminare questa credenziale?')){v
 function setupDocumentDropzone(){const zone=document.getElementById("documentDropzone");if(!zone)return;["dragenter","dragover"].forEach(ev=>zone.addEventListener(ev,e=>{e.preventDefault();e.stopPropagation();zone.classList.add("dragover")}));["dragleave","dragend"].forEach(ev=>zone.addEventListener(ev,e=>{e.preventDefault();zone.classList.remove("dragover")}));zone.addEventListener("drop",e=>{e.preventDefault();e.stopPropagation();zone.classList.remove("dragover");uploadFiles(e)})}
 function renderAll(){renderDashboard();renderPractices();renderClients();renderTasks();renderDeadlines();renderFiles();loadSettings();renderCalendar();renderProjects()}
 renderAll();setupDocumentDropzone();
+
+// Blocco di accesso iniziale (password di accesso: 0852).
+// Nota: su un sito statico GitHub Pages questa è una barriera d'accesso lato client,
+// non una protezione forte: la password è presente nel codice sorgente.
+(function setupSitePasswordGate(){
+  const gate = document.getElementById("sitePasswordGate");
+  const form = document.getElementById("sitePasswordForm");
+  const input = document.getElementById("sitePasswordInput");
+  const error = document.getElementById("sitePasswordError");
+  if (!gate || !form) return;
+  const unlock = () => {
+    document.body.classList.remove("access-locked");
+    gate.remove();
+    sessionStorage.setItem("fa_site_unlocked", "1");
+  };
+  if (sessionStorage.getItem("fa_site_unlocked") === "1") {
+    document.body.classList.remove("access-locked");
+    gate.remove();
+    return;
+  }
+  form.addEventListener("submit", function(event){
+    event.preventDefault();
+    if (input.value === "0852") {
+      unlock();
+    } else {
+      error.textContent = "Password non corretta. Riprova.";
+      input.value = "";
+      input.focus();
+    }
+  });
+})();
+
 </script>
 </body>
 </html>
