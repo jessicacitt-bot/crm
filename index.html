@@ -76,82 +76,19 @@ table{width:100%;border-collapse:collapse}th{text-align:left;font-size:10px;text
 @media(max-width:800px){.sidebar{width:72px}.logo span,.nav button span{display:none}.nav button{justify-content:center}.main{margin-left:72px;width:calc(100% - 72px)}.content{padding:18px}.form-grid{grid-template-columns:1fr}.kpi-grid,.kpi-area{grid-template-columns:1fr 1fr}.status-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:560px){.kpi-grid,.kpi-area,.status-grid{grid-template-columns:1fr}.page-header{flex-direction:column}.topbar{padding:0 16px}.content{padding:12px}.search{min-width:100%}}
 
-/* Accesso iniziale al portale */
-body.access-locked .app { display: none !important; }
-#sitePasswordGate {
-  position: fixed; inset: 0; z-index: 9999; display: flex;
-  align-items: center; justify-content: center; padding: 22px;
-  background: radial-gradient(circle at top right, #e0e7ff 0, #f5f7fb 48%, #eef2ff 100%);
-}
-#sitePasswordGate .gate-card {
-  width: min(420px, 100%); background: #fff; border: 1px solid #e5e7eb;
-  border-radius: 22px; padding: 32px; box-shadow: 0 24px 70px rgba(15,23,42,.14);
-}
-#sitePasswordGate .gate-logo {
-  width: 54px; height: 54px; border-radius: 16px; display: grid; place-items: center;
-  margin-bottom: 20px; background: linear-gradient(135deg,#818cf8,#4f46e5);
-  color: #fff; font-size: 26px; font-weight: 900;
-}
-#sitePasswordGate h1 { font-size: 24px; margin-bottom: 8px; color: #111827; }
-#sitePasswordGate p { color: #6b7280; font-size: 13px; line-height: 1.55; margin-bottom: 20px; }
-#sitePasswordGate label { display:block; font-size:12px; font-weight:800; margin-bottom:7px; color:#374151; }
-#sitePasswordGate input {
-  width:100%; padding:13px 14px; border:1px solid #d1d5db; border-radius:11px;
-  margin-bottom:12px; font-size:18px; letter-spacing:.18em; outline:none;
-}
-#sitePasswordGate input:focus { border-color:#6366f1; box-shadow:0 0 0 3px #eef2ff; }
-#sitePasswordGate button {
-  width:100%; border:0; border-radius:11px; padding:13px; background:#4f46e5;
-  color:#fff; font-weight:800; cursor:pointer;
-}
-#sitePasswordGate button:hover { background:#4338ca; }
-#sitePasswordGate .gate-error { min-height:18px; margin-top:10px; color:#b91c1c; font-size:12px; }
-#sitePasswordGate .gate-note { margin-top:16px; margin-bottom:0; font-size:11px; color:#9ca3af; }
-
-
-/* Campi personalizzati, filtri e menu riordinabile */
-.custom-fields-area{grid-column:1/-1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
-.custom-field-filter{min-width:155px;max-width:220px}
-.nav button{cursor:grab;user-select:none}
-.nav button.dragging{opacity:.45;outline:1px dashed #a5b4fc}
-.nav button.drag-over{box-shadow:inset 0 0 0 2px #818cf8}
-.nav .nav-reorder-hint{font-size:10px;color:#9ca3af;padding:10px 12px 0;line-height:1.5}
-.custom-field-row{display:grid;grid-template-columns:1.1fr .8fr .7fr auto;gap:8px;align-items:center;margin-top:8px}
-.custom-field-row input,.custom-field-row select{min-width:0}
-.custom-value{display:inline-block;color:#4b5563;font-size:11px;margin-top:3px}
-.nav-order-row{display:flex;align-items:center;gap:10px;padding:9px 10px;margin-top:6px;border:1px solid var(--border);border-radius:10px;background:#fff}
-.nav-order-name{flex:1;font-size:13px;font-weight:700}
-.nav-order-actions{display:flex;gap:5px}
-.nav-order-actions .btn{min-width:34px;padding:6px 9px}
-.custom-field-empty{padding:12px;border:1px dashed var(--border);border-radius:10px;color:var(--muted);font-size:12px;margin-top:12px}
-@media(max-width:800px){.custom-fields-area{grid-template-columns:1fr}.custom-field-row{grid-template-columns:1fr 1fr}.custom-field-row button{justify-self:start}}
-
-
-/* Accesso rapido alla gestione dei campi personalizzati */
-.custom-fields-callout{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:16px 18px;margin-bottom:18px;border:1px solid #c7d2fe;border-radius:14px;background:linear-gradient(120deg,#eef2ff,#fff)}
-.custom-fields-callout strong{display:block;font-size:14px;color:#312e81;margin-bottom:4px}
-.custom-fields-callout p{font-size:12px;color:#4b5563;line-height:1.5}
-.page-header-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.custom-field-guide{padding:12px 14px;margin-bottom:16px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;font-size:12px;line-height:1.6;color:#334155}
-.custom-field-guide strong{color:#1e293b}
+/* Accesso iniziale */
+body.access-locked .app, body.access-locked .modal-overlay, body.access-locked .toast {display:none!important}
+#sitePasswordGate{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:22px;background:radial-gradient(circle at top right,#e0e7ff 0,#f5f7fb 48%,#eef2ff 100%)}
+.gate-card{width:min(420px,100%);background:#fff;border:1px solid #e5e7eb;border-radius:22px;padding:32px;box-shadow:0 24px 70px rgba(15,23,42,.14)}
+.gate-logo{width:54px;height:54px;border-radius:16px;display:grid;place-items:center;margin-bottom:20px;background:linear-gradient(135deg,#818cf8,#4f46e5);color:#fff;font-size:26px;font-weight:900}
+.gate-card h1{font-size:24px;margin-bottom:8px;color:#111827}.gate-card p{color:#6b7280;font-size:13px;line-height:1.55;margin-bottom:20px}.gate-card label{display:block;font-size:12px;font-weight:800;margin-bottom:7px;color:#374151}.gate-card input{width:100%;padding:13px 14px;border:1px solid #d1d5db;border-radius:11px;margin-bottom:12px;font-size:18px}.gate-card button{width:100%;border:0;border-radius:11px;padding:13px;background:#4f46e5;color:#fff;font-weight:800;cursor:pointer}.gate-error{min-height:18px;margin-top:10px;color:#b91c1c;font-size:12px}
+.custom-fields-panel{padding:18px 20px;border-bottom:1px solid var(--border);background:#fbfcff}.custom-field-row{display:grid;grid-template-columns:1.4fr 1fr 2fr auto;gap:8px;align-items:center;padding:8px 0}.custom-field-row input,.custom-field-row select{min-width:0}.custom-values{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:16px}.custom-values .form-group{min-width:0}.field-manager{margin-top:18px}.field-manager .card-header{padding:14px 16px}.project-flow-wrap{overflow-x:auto;padding:18px 20px 22px}.project-flow{display:flex;align-items:stretch;gap:12px;min-width:max-content}.flow-phase{width:270px;white-space:normal;border:1px solid var(--border);border-radius:14px;background:#fff;overflow:hidden;box-shadow:0 4px 14px rgba(15,23,42,.04)}.flow-phase-head{padding:13px;background:#eef2ff;border-bottom:1px solid #dbeafe}.flow-phase-head strong{display:block;margin-bottom:6px}.flow-phase-body{padding:12px}.flow-arrow{align-self:center;color:#818cf8;font-size:22px;font-weight:800}.project-link{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:9px;font-size:12px}.project-link select{max-width:360px}.nav-reorder{display:flex;gap:5px;margin-left:auto}.nav-reorder button{padding:2px 6px;border:1px solid #374151;background:#1f2937;color:#fff;border-radius:5px;font-size:11px}
+@media(max-width:700px){.custom-field-row{grid-template-columns:1fr}.custom-values{grid-template-columns:1fr}.flow-phase{width:245px}}
 
 </style>
 </head>
-
 <body class="access-locked">
-<div id="sitePasswordGate" role="dialog" aria-modal="true" aria-labelledby="gateTitle">
-  <form class="gate-card" id="sitePasswordForm">
-    <div class="gate-logo">€</div>
-    <h1 id="gateTitle">Portale Finanza Agevolata</h1>
-    <p>Inserisci la password per accedere al gestionale.</p>
-    <label for="sitePasswordInput">Password di accesso</label>
-    <input id="sitePasswordInput" type="password" inputmode="numeric" autocomplete="current-password" autofocus required>
-    <button type="submit">Accedi al portale</button>
-    <div class="gate-error" id="sitePasswordError" aria-live="polite"></div>
-    <p class="gate-note">Accesso richiesto a ogni nuova sessione del browser.</p>
-  </form>
-</div>
-
+<div id="sitePasswordGate" role="dialog" aria-modal="true" aria-labelledby="gateTitle"><form id="sitePasswordForm" class="gate-card"><div class="gate-logo">€</div><h1 id="gateTitle">Portale Finanza Agevolata</h1><p>Inserisci la password per accedere al gestionale.</p><label for="sitePasswordInput">Password di accesso</label><input id="sitePasswordInput" type="password" inputmode="numeric" autocomplete="current-password" required><button type="submit">Accedi al portale</button><div id="sitePasswordError" class="gate-error" aria-live="polite"></div></form></div>
 <div class="app">
 <aside class="sidebar">
   <div class="logo"><div class="logo-icon">€</div><span>Finanza Agevolata</span></div>
@@ -223,15 +160,14 @@ body.access-locked .app { display: none !important; }
 </section>
 
 <section class="page" id="page-practices">
-  <div class="page-header"><div><h1 class="page-title">Pratiche</h1><p class="page-subtitle">Gestisci il ciclo completo commerciale → tecnico → istruttoria → esito.</p></div><div class="page-header-actions"><button class="btn btn-secondary" onclick="openCustomFieldSettings('practices')">⚙ Campi personalizzati</button><button class="btn btn-primary" onclick="openPracticeModal()">+ Nuova pratica</button></div></div>
+  <div class="page-header"><div><h1 class="page-title">Pratiche</h1><p class="page-subtitle">Gestisci il ciclo completo commerciale → tecnico → istruttoria → esito.</p></div><div class="actions"><button class="btn btn-secondary" onclick="openFieldSettings('practices')">⚙ Campi e filtri</button><button class="btn btn-primary" onclick="openPracticeModal()">+ Nuova pratica</button></div></div>
   <div class="card table-card">
     <div class="toolbar">
       <div class="search"><span class="search-icon">⌕</span><input id="practiceSearch" placeholder="Cerca cliente, pratica, bando..." oninput="renderPractices()"></div>
       <div class="filters">
         <select class="form-control" id="filterStatus" onchange="renderPractices()"><option value="">Tutti gli stati</option><option>Da analizzare</option><option>In lavorazione</option><option>Da inviare</option><option>In istruttoria</option><option>Approvata</option><option>Critica</option><option>Integrazione</option><option>Respinta</option><option>Persa</option></select>
         <select class="form-control" id="filterBando" onchange="renderPractices()"><option value="">Tutti i bandi</option></select>
-        <select class="form-control" id="filterPriority" onchange="renderPractices()"><option value="">Tutte le priorità</option><option>Alta</option><option>Media</option><option>Bassa</option></select>
-        <div class="filters" id="customFilters-practices"></div>
+        <select class="form-control" id="filterPriority" onchange="renderPractices()"><option value="">Tutte le priorità</option><option>Alta</option><option>Media</option><option>Bassa</option></select><span id="practiceCustomFilters" class="filters"></span>
       </div>
     </div>
     <div class="table-scroll" id="practicesTable"></div>
@@ -239,13 +175,13 @@ body.access-locked .app { display: none !important; }
 </section>
 
 <section class="page" id="page-clients">
-  <div class="page-header"><div><h1 class="page-title">Clienti</h1><p class="page-subtitle">Anagrafiche e pratiche collegate.</p></div><div class="page-header-actions"><button class="btn btn-secondary" onclick="openCustomFieldSettings('clients')">⚙ Campi personalizzati</button><button class="btn btn-primary" onclick="openClientModal()">+ Nuovo cliente</button></div></div>
-  <div class="card"><div class="toolbar"><div class="search"><span class="search-icon">⌕</span><input id="clientSearch" placeholder="Cerca cliente, P.IVA, ATECO..." oninput="renderClients()"></div><div class="filters" id="customFilters-clients"></div></div><div class="table-scroll" id="clientsTable"></div></div>
+  <div class="page-header"><div><h1 class="page-title">Clienti</h1><p class="page-subtitle">Anagrafiche e pratiche collegate.</p></div><div class="actions"><button class="btn btn-secondary" onclick="openFieldSettings('clients')">⚙ Campi e filtri</button><button class="btn btn-primary" onclick="openClientModal()">+ Nuovo cliente</button></div></div>
+  <div class="card"><div class="toolbar"><div class="search"><span class="search-icon">⌕</span><input id="clientSearch" placeholder="Cerca cliente, P.IVA, ATECO..." oninput="renderClients()"></div><div class="filters" id="clientCustomFilters"></div></div><div class="table-scroll" id="clientsTable"></div></div>
 </section>
 
 <section class="page" id="page-tasks">
-  <div class="page-header"><div><h1 class="page-title">Attività</h1><p class="page-subtitle">Azioni operative collegate alle pratiche.</p></div><div class="page-header-actions"><button class="btn btn-secondary" onclick="openCustomFieldSettings('tasks')">⚙ Campi personalizzati</button><button class="btn btn-primary" onclick="openTaskModal()">+ Nuova attività</button></div></div>
-  <div class="card"><div class="toolbar"><div class="small muted">Filtra le attività per i campi personalizzati</div><div class="filters" id="customFilters-tasks"></div></div><div class="table-scroll" id="tasksTable"></div></div>
+  <div class="page-header"><div><h1 class="page-title">Attività</h1><p class="page-subtitle">Azioni operative collegate alle pratiche.</p></div><div class="actions"><button class="btn btn-secondary" onclick="openFieldSettings('tasks')">⚙ Campi e filtri</button><button class="btn btn-primary" onclick="openTaskModal()">+ Nuova attività</button></div></div>
+  <div class="card"><div class="toolbar"><div class="filters" id="taskCustomFilters"></div></div><div class="table-scroll" id="tasksTable"></div></div>
 </section>
 
 <section class="page" id="page-calendar">
@@ -256,14 +192,13 @@ body.access-locked .app { display: none !important; }
 </section>
 
 <section class="page" id="page-projects">
- <div class="page-header"><div><h1 class="page-title">Progetti</h1><p class="page-subtitle">Organizza ogni progetto in fasi e ogni fase in attività, con stato e scadenze.</p></div><div class="page-header-actions"><button class="btn btn-secondary" onclick="openCustomFieldSettings('projects')">⚙ Campi personalizzati</button><button class="btn btn-primary" onclick="openProjectModal()">+ Nuovo progetto</button></div></div>
- <div class="card" style="margin-bottom:16px"><div class="toolbar"><div class="small muted">Filtra i progetti per i campi personalizzati</div><div class="filters" id="customFilters-projects"></div></div></div><div id="projectsList" class="projects-list"></div>
+ <div class="page-header"><div><h1 class="page-title">Progetti</h1><p class="page-subtitle">Ogni progetto è collegato a una pratica, si articola in fasi orizzontali e ogni fase contiene attività.</p></div><div class="actions"><button class="btn btn-secondary" onclick="openFieldSettings('projects')">⚙ Campi e filtri</button><button class="btn btn-primary" onclick="openProjectModal()">+ Nuovo progetto</button></div></div>
+ <div class="card" style="margin-bottom:14px"><div class="toolbar"><div class="filters" id="projectCustomFilters"></div></div></div><div id="projectsList" class="projects-list"></div>
 </section>
 
 <section class="page" id="page-passwords">
- <div class="page-header"><div><h1 class="page-title">Archivio password</h1><p class="page-subtitle">Archivio locale cifrato con una password principale.</p></div></div>
- <div class="card" id="vaultGate"><div class="card-header"><div class="card-title">🔐 Cassaforte digitale</div></div><div style="padding:20px;max-width:650px"><p class="muted" style="font-size:13px;margin-bottom:14px">Le credenziali vengono cifrate nel browser con una chiave derivata dalla password principale. Se la dimentichi, non sarà possibile recuperarle. Usa una password principale robusta e non condividere il file HTML con credenziali in chiaro.</p><div class="form-grid"><div class="form-group full"><label class="form-label">Password principale</label><input class="form-control" type="password" id="masterPassword" autocomplete="current-password" placeholder="Inserisci o crea la password principale"></div></div><button class="btn btn-primary" style="margin-top:14px" onclick="unlockVault()">Apri / crea cassaforte</button><div class="small muted" style="margin-top:10px" id="vaultMessage"></div></div></div>
- <div id="vaultContent" style="display:none"><div class="card"><div class="card-header"><div class="card-title">Credenziali salvate</div><button class="btn btn-primary btn-small" onclick="openPasswordModal()">+ Nuova credenziale</button></div><div class="table-scroll" id="passwordTable"></div></div><button class="btn btn-secondary" style="margin-top:12px" onclick="lockVault()">Blocca cassaforte</button></div>
+ <div class="page-header"><div><h1 class="page-title">Archivio password</h1><p class="page-subtitle">Archivio locale senza password principale.</p></div></div>
+ <div class="card"><div class="card-header"><div class="card-title">🔐 Archivio credenziali</div><button class="btn btn-primary btn-small" onclick="openPasswordModal()">+ Nuova credenziale</button></div><div style="padding:12px 20px 0"><p class="muted" style="font-size:13px;margin-bottom:12px">Le credenziali sono salvate nel browser senza una password principale. Chiunque possa accedere al gestionale e ai suoi dati potrebbe leggerle: non inserire password particolarmente sensibili.</p></div><div class="table-scroll" id="passwordTable"></div></div>
 </section>
 
 <section class="page" id="page-files">
@@ -284,35 +219,30 @@ body.access-locked .app { display: none !important; }
 
 <section class="page" id="page-settings">
   <div class="page-header"><div><h1 class="page-title">Impostazioni</h1><p class="page-subtitle">Anagrafiche e configurazioni del portale.</p></div></div>
-  <div class="custom-fields-callout"><div><strong>Vuoi aggiungere un campo alle schede?</strong><p>Seleziona la sezione, scrivi il nome del campo, scegli il tipo e premi <b>＋ Aggiungi campo</b>. Poi apri una nuova scheda o modifica un record per compilare il campo.</p></div><button class="btn btn-primary" onclick="document.getElementById('customFieldsSettings').scrollIntoView({behavior:'smooth',block:'start'})">Vai a Campi personalizzati ↓</button></div>
   <div class="card">
     <div class="card-header"><div><div class="card-title">Configurazione reparto</div><div class="small muted">I dati sono salvati nel database SQLite sul disco del computer.</div></div></div>
     <div style="padding:20px"><div class="form-grid">
       <div class="form-group"><label class="form-label">Nome reparto</label><input class="form-control" id="deptName" value="Finanza Agevolata"></div>
       <div class="form-group"><label class="form-label">Responsabile</label><input class="form-control" id="deptManager" placeholder="Nome responsabile"></div>
     </div><button class="btn btn-primary" style="margin-top:16px" onclick="saveSettings()">Salva impostazioni</button>
+    <div class="card" style="margin-top:22px;box-shadow:none"><div class="card-header"><div><div class="card-title">Ordine del menu laterale</div><div class="small muted">Trascina le voci del menu a sinistra per cambiare disposizione; l'ordine viene salvato nel browser.</div></div><button class="btn btn-secondary btn-small" onclick="resetMenuOrder()">Ripristina ordine</button></div></div>
+    <div class="field-manager card" style="margin-top:22px;box-shadow:none">
+      <div class="card-header"><div><div class="card-title">Gestione campi personalizzati e filtri</div><div class="small muted">Crea campi aggiuntivi per le schede e abilita il filtro sulle liste.</div></div></div>
+      <div class="custom-fields-panel">
+        <div class="form-grid">
+          <div class="form-group"><label class="form-label">Sezione</label><select class="form-control" id="customEntity" onchange="renderCustomFieldManager()"><option value="clients">Clienti</option><option value="practices">Pratiche</option><option value="projects">Progetti</option><option value="tasks">Attività</option></select></div>
+          <div class="form-group"><label class="form-label">Nome campo</label><input class="form-control" id="customFieldName" placeholder="Es. Referente commerciale"></div>
+          <div class="form-group"><label class="form-label">Tipo di campo</label><select class="form-control" id="customFieldType"><option value="text">Testo</option><option value="number">Numero</option><option value="date">Data</option><option value="select">Elenco a scelta</option><option value="yesno">Sì / No</option><option value="textarea">Testo lungo</option></select></div>
+          <div class="form-group"><label class="form-label">Opzioni (per elenco)</label><input class="form-control" id="customFieldOptions" placeholder="Es. Nuovo, In corso, Chiuso"></div>
+        </div>
+        <button class="btn btn-primary" style="margin-top:12px" onclick="addCustomField()">＋ Aggiungi campo</button>
+        <div id="customFieldManagerList" style="margin-top:14px"></div>
+      </div>
+    </div>
     <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px">
       <button class="btn btn-secondary" onclick="exportBackup()">↓ Esporta backup</button>
       <label class="btn btn-secondary" for="backupInput">↑ Importa backup JSON<input id="backupInput" type="file" accept="application/json,.json" style="display:none" onchange="importBackup(event)"></label>
     </div><p class="small muted" style="margin-top:12px">Il database resta nella cartella <strong>data</strong> del programma. Per aggiornare il programma, sostituisci i file dell'applicazione senza eliminare questa cartella.</p></div>
-  </div>
-  <div class="card" id="customFieldsSettings" style="margin-top:18px;scroll-margin-top:95px">
-    <div class="card-header"><div><div class="card-title">Campi personalizzati</div><div class="small muted">Aggiungi campi alle schede di clienti, pratiche, attività e progetti. I valori restano salvati nei record.</div></div></div>
-    <div style="padding:20px">
-      <div class="custom-field-guide"><strong>Come fare:</strong> 1. Scegli dove vuoi il campo (Clienti, Pratiche, Attività o Progetti). 2. Inserisci il nome. 3. Scegli il tipo. 4. Se scegli “Elenco a scelta”, scrivi le opzioni separate da virgole. 5. Premi <strong>＋ Aggiungi campo</strong>. Il campo apparirà nella finestra di inserimento/modifica e nella tabella della sezione.</div>
-      <div class="form-grid">
-        <div class="form-group"><label class="form-label">Sezione</label><select class="form-control" id="customFieldEntity" onchange="renderCustomFieldManager()"><option value="clients">Clienti</option><option value="practices">Pratiche</option><option value="tasks">Attività</option><option value="projects">Progetti</option></select></div>
-        <div class="form-group"><label class="form-label">Nome del campo</label><input class="form-control" id="customFieldName" placeholder="Es. Referente, Regione, Importo preventivo"></div>
-        <div class="form-group"><label class="form-label">Tipo di campo</label><select class="form-control" id="customFieldType"><option value="text">Testo</option><option value="number">Numero</option><option value="date">Data</option><option value="select">Elenco a scelta</option><option value="checkbox">Sì / No</option><option value="textarea">Testo lungo</option></select></div>
-        <div class="form-group"><label class="form-label">Opzioni (solo elenco a scelta)</label><input class="form-control" id="customFieldOptions" placeholder="Es. Da contattare, In corso, Chiuso"></div>
-      </div>
-      <button class="btn btn-primary" style="margin-top:14px" onclick="addCustomField()">＋ Aggiungi campo</button>
-      <div id="customFieldManagerList" style="margin-top:18px"></div>
-    </div>
-  </div>
-  <div class="card" style="margin-top:18px">
-    <div class="card-header"><div><div class="card-title">Personalizza menu laterale</div><div class="small muted">Trascina le voci del menu per cambiarne l'ordine.</div></div><button class="btn btn-secondary btn-small" onclick="resetNavOrder()">Ripristina ordine</button></div>
-    <div style="padding:18px 20px"><p class="small muted" style="margin:0 0 12px">Usa le frecce per spostare le voci senza trascinarle. Puoi anche trascinare direttamente le voci nella barra laterale. L’ordine viene salvato automaticamente in questo browser.</p><div id="navOrderManager" class="nav-order-manager"></div></div>
   </div>
 </section>
 
@@ -345,8 +275,7 @@ body.access-locked .app { display: none !important; }
 <div class="form-group"><label class="form-label">Integrazioni richieste</label><input type="number" min="0" class="form-control" id="pIntegrations" value="0"></div>
 <div class="form-group"><label class="form-label">Domanda respinta</label><select class="form-control" id="pRejected"><option value="no">No</option><option value="yes">Sì</option></select></div>
 <div class="form-group"><label class="form-label">Persa per scadenza</label><select class="form-control" id="pLost"><option value="no">No</option><option value="yes">Sì</option></select></div>
-<div class="form-group full"><label class="form-label">Criticità / prossima attività</label><textarea class="form-control" id="pNotes" placeholder="Es. manca DURC, integrazione entro il..."></textarea></div>
-<div id="customFields-practices" class="custom-fields-area"></div>
+<div class="form-group full"><label class="form-label">Criticità / prossima attività</label><textarea class="form-control" id="pNotes" placeholder="Es. manca DURC, integrazione entro il..."></textarea></div><div id="customFields-practices" class="custom-values form-group full"></div>
 </div></div><div class="modal-footer"><button type="button" class="btn btn-secondary" onclick="closeModal('practiceModal')">Annulla</button><button class="btn btn-primary" type="submit">Salva pratica</button></div></form>
 </div></div>
 
@@ -361,8 +290,7 @@ body.access-locked .app { display: none !important; }
 <div class="form-group"><label class="form-label">PEC</label><input class="form-control" id="cPec"></div>
 <div class="form-group"><label class="form-label">Telefono</label><input class="form-control" id="cPhone"></div>
 <div class="form-group"><label class="form-label">Comune</label><input class="form-control" id="cCity"></div>
-<div class="form-group full"><label class="form-label">Note</label><textarea class="form-control" id="cNotes"></textarea></div>
-<div id="customFields-clients" class="custom-fields-area"></div>
+<div class="form-group full"><label class="form-label">Note</label><textarea class="form-control" id="cNotes"></textarea></div><div id="customFields-clients" class="custom-values form-group full"></div>
 </div></div><div class="modal-footer"><button type="button" class="btn btn-secondary" onclick="closeModal('clientModal')">Annulla</button><button class="btn btn-primary">Salva cliente</button></div></form>
 </div></div>
 
@@ -375,15 +303,14 @@ body.access-locked .app { display: none !important; }
 <div class="form-group"><label class="form-label">Stato</label><select class="form-control" id="tStatus"><option>Da fare</option><option>In corso</option><option>Completata</option></select></div>
 <div class="form-group"><label class="form-label">Priorità</label><select class="form-control" id="tPriority"><option>Bassa</option><option selected>Media</option><option>Alta</option></select></div>
 <div class="form-group"><label class="form-label">Data</label><input type="date" class="form-control" id="tDue"></div>
-<div class="form-group full"><label class="form-label">Descrizione</label><textarea class="form-control" id="tDesc"></textarea></div>
-<div id="customFields-tasks" class="custom-fields-area"></div>
+<div class="form-group full"><label class="form-label">Descrizione</label><textarea class="form-control" id="tDesc"></textarea></div><div id="customFields-tasks" class="custom-values form-group full"></div>
 </div></div><div class="modal-footer"><button type="button" class="btn btn-secondary" onclick="closeModal('taskModal')">Annulla</button><button class="btn btn-primary">Salva attività</button></div></form>
 </div></div>
 
 <!-- CALENDAR LOG MODAL -->
 <div class="modal-overlay" id="logModal"><div class="modal"><div class="modal-header"><div class="modal-title">Registra attività svolta</div><button class="modal-close" onclick="closeModal('logModal')">×</button></div><form id="logForm" onsubmit="saveLog(event)"><div class="modal-body"><div class="form-grid"><div class="form-group full"><label class="form-label">Attività svolta *</label><input class="form-control" id="logTitle" required placeholder="Es. Telefonata cliente, analisi bando, invio documenti"></div><div class="form-group"><label class="form-label">Data *</label><input class="form-control" type="date" id="logDate" required></div><div class="form-group"><label class="form-label">Categoria</label><select class="form-control" id="logCategory"><option>Attività svolta</option><option>Commerciale</option><option>Analisi tecnica</option><option>Documentazione</option><option>Invio domanda</option><option>Rendicontazione</option><option>Riunione</option><option>Follow-up</option></select></div><div class="form-group"><label class="form-label">Durata (minuti)</label><input class="form-control" type="number" min="0" id="logDuration"></div><div class="form-group full"><label class="form-label">Note / risultato</label><textarea class="form-control" id="logDetails" placeholder="Cosa è stato fatto, esito e prossimi passi"></textarea></div></div></div><div class="modal-footer"><button type="button" class="btn btn-secondary" onclick="closeModal('logModal')">Annulla</button><button class="btn btn-primary">Salva attività</button></div></form></div></div>
 <!-- PROJECT MODAL -->
-<div class="modal-overlay" id="projectModal"><div class="modal"><div class="modal-header"><div class="modal-title" id="projectModalTitle">Nuovo progetto</div><button class="modal-close" onclick="closeModal('projectModal')">×</button></div><form id="projectForm" onsubmit="saveProject(event)"><div class="modal-body"><input type="hidden" id="projectId"><div class="form-grid"><div class="form-group full"><label class="form-label">Nome progetto *</label><input class="form-control" id="projectName" required></div><div class="form-group"><label class="form-label">Cliente / committente</label><input class="form-control" id="projectClient"></div><div class="form-group"><label class="form-label">Responsabile</label><input class="form-control" id="projectOwner"></div><div class="form-group"><label class="form-label">Stato</label><select class="form-control" id="projectStatus"><option>Da avviare</option><option>In corso</option><option>In pausa</option><option>Completato</option></select></div><div class="form-group"><label class="form-label">Data inizio</label><input class="form-control" type="date" id="projectStart"></div><div class="form-group"><label class="form-label">Data fine prevista</label><input class="form-control" type="date" id="projectEnd"></div><div class="form-group full"><label class="form-label">Descrizione / obiettivo</label><textarea class="form-control" id="projectDescription"></textarea></div><div id="customFields-projects" class="custom-fields-area"></div></div></div><div class="modal-footer"><button type="button" class="btn btn-secondary" onclick="closeModal('projectModal')">Annulla</button><button class="btn btn-primary">Salva progetto</button></div></form></div></div>
+<div class="modal-overlay" id="projectModal"><div class="modal"><div class="modal-header"><div class="modal-title" id="projectModalTitle">Nuovo progetto</div><button class="modal-close" onclick="closeModal('projectModal')">×</button></div><form id="projectForm" onsubmit="saveProject(event)"><div class="modal-body"><input type="hidden" id="projectId"><div class="form-grid"><div class="form-group full"><label class="form-label">Nome progetto *</label><input class="form-control" id="projectName" required></div><div class="form-group"><label class="form-label">Pratica collegata</label><select class="form-control" id="projectPractice"></select></div><div class="form-group"><label class="form-label">Cliente / committente</label><input class="form-control" id="projectClient"></div><div class="form-group"><label class="form-label">Responsabile</label><input class="form-control" id="projectOwner"></div><div class="form-group"><label class="form-label">Stato</label><select class="form-control" id="projectStatus"><option>Da avviare</option><option>In corso</option><option>In pausa</option><option>Completato</option></select></div><div class="form-group"><label class="form-label">Data inizio</label><input class="form-control" type="date" id="projectStart"></div><div class="form-group"><label class="form-label">Data fine prevista</label><input class="form-control" type="date" id="projectEnd"></div><div class="form-group full"><label class="form-label">Descrizione / obiettivo</label><textarea class="form-control" id="projectDescription"></textarea></div><div id="customFields-projects" class="custom-values form-group full"></div></div></div><div class="modal-footer"><button type="button" class="btn btn-secondary" onclick="closeModal('projectModal')">Annulla</button><button class="btn btn-primary">Salva progetto</button></div></form></div></div>
 <!-- PASSWORD MODAL -->
 <div class="modal-overlay" id="passwordModal"><div class="modal"><div class="modal-header"><div class="modal-title">Nuova credenziale</div><button class="modal-close" onclick="closeModal('passwordModal')">×</button></div><form id="passwordForm" onsubmit="savePassword(event)"><div class="modal-body"><div class="form-grid"><div class="form-group"><label class="form-label">Servizio / sito *</label><input class="form-control" id="pwSite" required></div><div class="form-group"><label class="form-label">Nome utente / email</label><input class="form-control" id="pwUser" autocomplete="off"></div><div class="form-group"><label class="form-label">Password *</label><input class="form-control" id="pwValue" type="password" required autocomplete="new-password"></div><div class="form-group"><label class="form-label">URL</label><input class="form-control" id="pwUrl" type="url" placeholder="https://..."></div><div class="form-group full"><label class="form-label">Note</label><textarea class="form-control" id="pwNotes"></textarea></div></div><p class="small muted" style="margin-top:12px">Le credenziali sono cifrate nel browser. L’archivio resta su questo dispositivo; usa una password principale robusta e conserva un backup sicuro.</p></div><div class="modal-footer"><button type="button" class="btn btn-secondary" onclick="closeModal('passwordModal')">Annulla</button><button class="btn btn-primary">Salva credenziale</button></div></form></div></div>
 
@@ -395,7 +322,7 @@ function loadDatabase(){
  try{return JSON.parse(localStorage.getItem(KEY)||"null")}catch(e){return null}
 }
 let db=loadDatabase()||{clients:[],practices:[],tasks:[],files:[],logs:[],projects:[],vault:null,settings:{deptName:"Finanza Agevolata",manager:""}};
-db.clients ||= []; db.practices ||= []; db.tasks ||= []; db.logs ||= []; db.projects ||= []; db.vault ??= null; db.files ||= []; db.customFields ||= {clients:[],practices:[],tasks:[],projects:[]}; db.customFields.clients ||= []; db.customFields.practices ||= []; db.customFields.tasks ||= []; db.customFields.projects ||= []; db.settings ||= {deptName:"Finanza Agevolata",manager:""}; let calendarCursor=new Date(); let selectedDay=today(); let vaultKey=null, vaultItems=[];
+db.logs ||= []; db.projects ||= []; db.vault ??= null; db.files ||= []; db.customFields ||= {clients:[],practices:[],projects:[],tasks:[]}; ['clients','practices','projects','tasks'].forEach(k=>db.customFields[k] ||= []); db.menuOrder ||= []; let calendarCursor=new Date(); let selectedDay=today(); let vaultKey=null, vaultItems=[];
 
 function save(){
  try{localStorage.setItem(KEY,JSON.stringify(db));}
@@ -418,110 +345,12 @@ function badge(s){
 }
 function closeModal(id){document.getElementById(id).classList.remove("open")}
 function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2200)}
-function openCustomFieldSettings(entity){
- const select=document.getElementById("customFieldEntity");
- if(select&&entity)select.value=entity;
- navigate("settings");
- renderCustomFieldManager();
- const target=document.getElementById("customFieldsSettings");
- if(target)target.scrollIntoView({behavior:"smooth",block:"start"});
- const name=document.getElementById("customFieldName");
- if(name)setTimeout(()=>name.focus({preventScroll:true}),350);
-}
-function entityLabel(entity){return ({clients:"Clienti",practices:"Pratiche",tasks:"Attività",projects:"Progetti"})[entity]||entity}
-function getCustomFields(entity){db.customFields ||= {};db.customFields[entity] ||= [];return db.customFields[entity]}
-function customValue(record,fieldId){return record?.custom?.[fieldId]??""}
-function renderCustomInputs(entity,record={}){
- const box=document.getElementById("customFields-"+entity);if(!box)return;
- box.innerHTML=getCustomFields(entity).map(f=>{const id="cf_"+entity+"_"+f.id, val=customValue(record,f.id);let input="";
-  if(f.type==="textarea")input=`<textarea class="form-control" id="${id}">${esc(val)}</textarea>`;
-  else if(f.type==="select")input=`<select class="form-control" id="${id}"><option value="">Seleziona...</option>${(f.options||[]).map(o=>`<option value="${esc(o)}" ${String(val)===o?"selected":""}>${esc(o)}</option>`).join("")}</select>`;
-  else if(f.type==="checkbox")input=`<select class="form-control" id="${id}"><option value="">—</option><option value="Sì" ${String(val)==="Sì"?"selected":""}>Sì</option><option value="No" ${String(val)==="No"?"selected":""}>No</option></select>`;
-  else input=`<input class="form-control" id="${id}" type="${["number","date"].includes(f.type)?f.type:"text"}" value="${esc(val)}">`;
-  return `<div class="form-group ${f.type==="textarea"?"full":""}"><label class="form-label" for="${id}">${esc(f.name)}</label>${input}</div>`;
- }).join("");
-}
-function readCustomValues(entity){const out={};getCustomFields(entity).forEach(f=>{const el=document.getElementById("cf_"+entity+"_"+f.id);if(el)out[f.id]=el.value});return out}
-function addCustomField(){
- const entity=document.getElementById("customFieldEntity")?.value||"clients";
- const name=(document.getElementById("customFieldName")?.value||"").trim();
- const type=document.getElementById("customFieldType")?.value||"text";
- const raw=document.getElementById("customFieldOptions")?.value||"";
- if(!name){toast("Inserisci il nome del campo");document.getElementById("customFieldName")?.focus();return}
- const fields=getCustomFields(entity);
- if(fields.some(f=>String(f.name).toLocaleLowerCase("it")===name.toLocaleLowerCase("it"))){toast("Esiste già un campo con questo nome in questa sezione");return}
- const options=type==="select"?raw.split(",").map(x=>x.trim()).filter(Boolean):[];
- if(type==="select"&&!options.length){toast("Per un elenco a scelta, inserisci le opzioni separate da virgola");document.getElementById("customFieldOptions")?.focus();return}
- fields.push({id:uid(),name,type,options});
- db.customFields[entity]=fields;
- save();
- document.getElementById("customFieldName").value="";
- document.getElementById("customFieldOptions").value="";
- renderCustomFieldManager();
- renderAll();
- toast("Campo aggiunto e salvato nella sezione "+entityLabel(entity));
-}
-function deleteCustomField(entity,id){if(!confirm("Eliminare questo campo? I valori già inseriti per il campo verranno rimossi."))return;db.customFields[entity]=getCustomFields(entity).filter(f=>f.id!==id);[...(db[entity]||[])].forEach(r=>{if(r.custom)delete r.custom[id]});save();renderCustomFieldManager();renderAll();toast("Campo eliminato")}
-function renderCustomFieldManager(){
- const entity=document.getElementById("customFieldEntity")?.value||"clients",box=document.getElementById("customFieldManagerList");if(!box)return;
- const fields=getCustomFields(entity);box.innerHTML=`<div class="card-title">Campi configurati per ${entityLabel(entity)}</div>`+(fields.length?fields.map(f=>`<div class="custom-field-row"><strong>${esc(f.name)}</strong><span class="small muted">${({text:"Testo",number:"Numero",date:"Data",select:"Elenco",checkbox:"Sì/No",textarea:"Testo lungo"})[f.type]||f.type}</span><span class="small muted">${f.type==="select"?esc((f.options||[]).join(", ")):""}</span><button class="btn btn-secondary btn-small" onclick="deleteCustomField('${entity}','${f.id}')">Elimina</button></div>`).join(""):`<div class="custom-field-empty">Nessun campo personalizzato per questa sezione. Compila il modulo qui sopra e premi <strong>＋ Aggiungi campo</strong>.</div>`);
-}
-function renderCustomFilters(entity,records,rerender){
- const box=document.getElementById("customFilters-"+entity);if(!box)return;
- const fields=getCustomFields(entity);const previous={};box.querySelectorAll("select[data-custom-filter]").forEach(el=>previous[el.dataset.customFilter]=el.value);
- box.innerHTML=fields.map(f=>{const vals=[...new Set(records.map(r=>String(customValue(r,f.id))).filter(x=>x!==""))].sort();return `<select class="form-control custom-field-filter" data-custom-filter="${f.id}" aria-label="Filtra per ${esc(f.name)}" onchange="${rerender}()"><option value="">Tutti · ${esc(f.name)}</option>${vals.map(x=>`<option value="${esc(x)}" ${previous[f.id]===x?"selected":""}>${esc(x)}</option>`).join("")}</select>`}).join("");
-}
-function customFiltersMatch(entity,record){const box=document.getElementById("customFilters-"+entity);if(!box)return true;return [...box.querySelectorAll("select[data-custom-filter]")].every(el=>!el.value||String(customValue(record,el.dataset.customFilter))===el.value)}
-function customCells(entity,record){return getCustomFields(entity).map(f=>`<td>${esc(customValue(record,f.id)||"—")}</td>`).join("")}
-function customHeaders(entity){return getCustomFields(entity).map(f=>`<th>${esc(f.name)}</th>`).join("")}
-function getNavButtons(){return [...document.querySelectorAll(".nav button[data-page]")];}
-function persistNavOrder(){
- const order=getNavButtons().map(b=>b.dataset.page);
- try{localStorage.setItem("fa_nav_order",JSON.stringify(order));}catch(e){console.error("Impossibile salvare l'ordine del menu",e);toast("Il browser non consente di salvare l'ordine del menu")}
- renderNavOrderManager();
-}
-function renderNavOrderManager(){
- const box=document.getElementById("navOrderManager");if(!box)return;
- const labels={dashboard:"Dashboard",practices:"Pratiche",clients:"Clienti",tasks:"Attività",calendar:"Calendario",projects:"Progetti",passwords:"Password",files:"Documenti",settings:"Impostazioni"};
- box.innerHTML=getNavButtons().map((b,i)=>`<div class="nav-order-row"><span class="nav-order-name">${i+1}. ${labels[b.dataset.page]||b.dataset.page}</span><div class="nav-order-actions"><button type="button" class="btn btn-secondary btn-small" title="Sposta su" aria-label="Sposta ${labels[b.dataset.page]} su" onclick="moveNavItem('${b.dataset.page}',-1)" ${i===0?'disabled':''}>↑</button><button type="button" class="btn btn-secondary btn-small" title="Sposta giù" aria-label="Sposta ${labels[b.dataset.page]} giù" onclick="moveNavItem('${b.dataset.page}',1)" ${i===getNavButtons().length-1?'disabled':''}>↓</button></div></div>`).join("");
-}
-function moveNavItem(page,direction){
- const nav=document.querySelector(".nav");const buttons=getNavButtons();const index=buttons.findIndex(b=>b.dataset.page===page);const target=index+direction;
- if(!nav||index<0||target<0||target>=buttons.length)return;
- const item=buttons[index],other=buttons[target];
- if(direction<0)nav.insertBefore(item,other);else nav.insertBefore(other,item);
- persistNavOrder();
-}
-function initNavReordering(){
- const nav=document.querySelector(".nav");if(!nav)return;
- let saved=[];try{saved=JSON.parse(localStorage.getItem("fa_nav_order")||"[]")}catch(e){saved=[]}
- if(Array.isArray(saved)&&saved.length){const buttons=getNavButtons();buttons.sort((a,b)=>{const ai=saved.indexOf(a.dataset.page),bi=saved.indexOf(b.dataset.page);return (ai<0?999:ai)-(bi<0?999:bi)}).forEach(b=>nav.appendChild(b));}
- nav.querySelectorAll("button[data-page]").forEach(btn=>{
-  btn.draggable=true;
-  btn.addEventListener("dragstart",e=>{nav.dataset.draggingPage=btn.dataset.page;btn.classList.add("dragging");e.dataTransfer.effectAllowed="move";e.dataTransfer.setData("text/plain",btn.dataset.page)});
-  btn.addEventListener("dragend",()=>{btn.classList.remove("dragging");nav.querySelectorAll(".drag-over").forEach(x=>x.classList.remove("drag-over"));delete nav.dataset.draggingPage;persistNavOrder()});
-  btn.addEventListener("dragover",e=>{if(!nav.dataset.draggingPage||nav.dataset.draggingPage===btn.dataset.page)return;e.preventDefault();btn.classList.add("drag-over")});
-  btn.addEventListener("dragleave",()=>btn.classList.remove("drag-over"));
-  btn.addEventListener("drop",e=>{e.preventDefault();btn.classList.remove("drag-over");const dragged=nav.querySelector(`[data-page="${nav.dataset.draggingPage}"]`);if(!dragged||dragged===btn)return;const rect=btn.getBoundingClientRect();if(e.clientY<rect.top+rect.height/2)nav.insertBefore(dragged,btn);else nav.insertBefore(dragged,btn.nextSibling);persistNavOrder()});
- });
- renderNavOrderManager();
-}
-function resetNavOrder(){
- const nav=document.querySelector(".nav");const order=["dashboard","practices","clients","tasks","calendar","projects","passwords","files","settings"];
- order.forEach(id=>{const b=nav?.querySelector(`[data-page="${id}"]`);if(b)nav.appendChild(b)});
- try{localStorage.removeItem("fa_nav_order")}catch(e){}
- renderNavOrderManager();toast("Ordine del menu ripristinato");
-}
-
 function navigate(page){
  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
- const target=document.getElementById("page-"+page);if(!target){console.error("Sezione non trovata:",page);return}
- target.classList.add("active");
+ document.getElementById("page-"+page).classList.add("active");
  document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===page));
- document.getElementById("topbarTitle").textContent=titles[page]||page;
+ document.getElementById("topbarTitle").textContent=titles[page];
  renderAll();
- if(page==="settings")renderCustomFieldManager();
- window.scrollTo({top:0,behavior:"instant"});
 }
 document.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>navigate(b.dataset.page));
 
@@ -530,9 +359,8 @@ function getPractice(id){return db.practices.find(p=>p.id===id)}
 function openPracticeModal(id=null){
  const f=document.getElementById("practiceForm");f.reset();document.getElementById("practiceId").value=id||"";
  document.getElementById("practiceModalTitle").textContent=id?"Modifica pratica":"Nuova pratica";
- fillClientSelect();
+ fillClientSelect(); renderCustomFields('practices', id?getPractice(id)?.custom||{}:{});
  const p=id?getPractice(id):null;
- renderCustomInputs("practices",p||{});
  if(p){
   const map={pClient:"clientId",pBando:"bando",pStatus:"status",pPriority:"priority",pCommercial:"commercial",pTechnician:"technician",pInterestDate:"interestDate",pQuoteDate:"quoteDate",pAccepted:"accepted",pStartDate:"startDate",pEndDate:"endDate",pDeadline:"deadline",pInvestment:"investment",pRequested:"requested",pObtained:"obtained",pRevenue:"revenue",pErrors:"errors",pIntegrations:"integrations",pRejected:"rejected",pLost:"lost",pNotes:"notes"};
   Object.entries(map).forEach(([el,k])=>document.getElementById(el).value=p[k]??"");
@@ -547,8 +375,8 @@ function fillClientSelect(){
 function savePractice(e){
  e.preventDefault();
  const id=document.getElementById("practiceId").value;
- const p={id:id||uid(),clientId:v("pClient"),bando:v("pBando"),status:v("pStatus"),priority:v("pPriority"),commercial:v("pCommercial"),technician:v("pTechnician"),interestDate:v("pInterestDate"),quoteDate:v("pQuoteDate"),accepted:v("pAccepted"),startDate:v("pStartDate"),endDate:v("pEndDate"),deadline:v("pDeadline"),investment:n("pInvestment"),requested:n("pRequested"),obtained:n("pObtained"),revenue:n("pRevenue"),errors:n("pErrors"),integrations:n("pIntegrations"),rejected:v("pRejected"),lost:v("pLost"),notes:v("pNotes"),custom:readCustomValues("practices"),updated:today()};
  const old=id?getPractice(id):null;
+ const p={...(old||{}),id:id||uid(),clientId:v("pClient"),bando:v("pBando"),status:v("pStatus"),priority:v("pPriority"),commercial:v("pCommercial"),technician:v("pTechnician"),interestDate:v("pInterestDate"),quoteDate:v("pQuoteDate"),accepted:v("pAccepted"),startDate:v("pStartDate"),endDate:v("pEndDate"),deadline:v("pDeadline"),investment:n("pInvestment"),requested:n("pRequested"),obtained:n("pObtained"),revenue:n("pRevenue"),errors:n("pErrors"),integrations:n("pIntegrations"),rejected:v("pRejected"),lost:v("pLost"),notes:v("pNotes"),custom:readCustomFields('practices'),updated:today()};
  if(old) Object.assign(old,p); else db.practices.push(p);
  save();closeModal("practiceModal");renderAll();toast(old?"Pratica aggiornata":"Pratica creata");
 }
@@ -593,36 +421,36 @@ function renderDashboard(){
 function setText(id,x){document.getElementById(id).textContent=x}
 
 function renderPractices(){
- fillClientSelect();
+ fillClientSelect();renderCustomFilters('practices','practiceCustomFilters',renderPractices);
  const q=(document.getElementById("practiceSearch")?.value||"").toLowerCase(), st=document.getElementById("filterStatus")?.value||"", bd=document.getElementById("filterBando")?.value||"", pr=document.getElementById("filterPriority")?.value||"";
- renderCustomFilters("practices",db.practices,"renderPractices");
  const list=db.practices.filter(p=>{
   const c=getClient(p.clientId)?.name||"";
-  return (!q||(c+" "+p.bando+" "+p.technician+" "+p.commercial).toLowerCase().includes(q))&&(!st||p.status===st)&&(!bd||p.bando===bd)&&(!pr||p.priority===pr)&&customFiltersMatch("practices",p)
+  return (!q||(c+" "+p.bando+" "+p.technician+" "+p.commercial).toLowerCase().includes(q))&&(!st||p.status===st)&&(!bd||p.bando===bd)&&(!pr||p.priority===pr)&&customFilterMatch('practices',p)
  }).sort((a,b)=>(a.deadline||"9999").localeCompare(b.deadline||"9999"));
  document.getElementById("filterBando").innerHTML=`<option value="">Tutti i bandi</option>`+[...new Set(db.practices.map(p=>p.bando))].sort().map(x=>`<option ${x===bd?"selected":""}>${esc(x)}</option>`).join("");
- document.getElementById("practicesTable").innerHTML=list.length?`<table><thead><tr><th>Cliente</th><th>Bando</th><th>Stato</th><th>Responsabili</th><th>Scadenza</th><th>Investimento</th><th>Agevolazione</th><th>Qualità</th>${customHeaders("practices")}<th></th></tr></thead><tbody>${list.map(p=>{
-  const d=daysTo(p.deadline);return `<tr><td><div class="client-name">${esc(getClient(p.clientId)?.name||"—")}</div><div class="client-email">${esc(p.id)}</div></td><td>${esc(p.bando)}</td><td>${badge(p.status)} ${badge(p.priority)}</td><td>${esc(p.technician||"—")}<div class="client-email">${esc(p.commercial||"")}</div></td><td>${date(p.deadline)}<div class="client-email">${p.deadline?(d<0?"SCADUTA":d+" gg"):""}</div></td><td>${money(p.investment)}</td><td>${money(p.requested)}<div class="client-email">ottenuta: ${money(p.obtained)}</div></td><td>${p.errors?`❌ ${p.errors}`:"✓"} ${p.integrations?` · ⚠ ${p.integrations}`:""}</td>${customCells("practices",p)}<td><div class="actions"><button class="icon-btn" title="Modifica" onclick="openPracticeModal('${p.id}')">✎</button><button class="icon-btn" title="Elimina" onclick="deletePractice('${p.id}')">🗑</button></div></td></tr>`
+ document.getElementById("practicesTable").innerHTML=list.length?`<table><thead><tr><th>Cliente</th><th>Bando</th><th>Stato</th><th>Responsabili</th><th>Scadenza</th><th>Investimento</th><th>Agevolazione</th><th>Qualità</th><th></th></tr></thead><tbody>${list.map(p=>{
+  const d=daysTo(p.deadline);return `<tr><td><div class="client-name">${esc(getClient(p.clientId)?.name||"—")}</div><div class="client-email">${esc(p.id)}</div></td><td>${esc(p.bando)}</td><td>${badge(p.status)} ${badge(p.priority)}</td><td>${esc(p.technician||"—")}<div class="client-email">${esc(p.commercial||"")}</div></td><td>${date(p.deadline)}<div class="client-email">${p.deadline?(d<0?"SCADUTA":d+" gg"):""}</div></td><td>${money(p.investment)}</td><td>${money(p.requested)}<div class="client-email">ottenuta: ${money(p.obtained)}</div></td><td>${p.errors?`❌ ${p.errors}`:"✓"} ${p.integrations?` · ⚠ ${p.integrations}`:""}</td><td><div class="actions"><button class="icon-btn" title="Modifica" onclick="openPracticeModal('${p.id}')">✎</button><button class="icon-btn" title="Elimina" onclick="deletePractice('${p.id}')">🗑</button></div></td></tr>`
  }).join("")}</tbody></table>`:`<div class="empty"><div class="empty-icon">▣</div>Nessuna pratica trovata.</div>`;
 }
 function deletePractice(id){if(confirm("Eliminare la pratica?")){db.practices=db.practices.filter(p=>p.id!==id);db.tasks=db.tasks.filter(t=>t.practiceId!==id);save();renderAll();toast("Pratica eliminata")}}
 
 function openClientModal(id=null){
  const f=document.querySelector("#clientModal form");f.reset();document.getElementById("clientId").value=id||"";document.getElementById("clientModalTitle").textContent=id?"Modifica cliente":"Nuovo cliente";
- const existing=id?getClient(id):{};renderCustomInputs("clients",existing||{});
- if(id){const c=getClient(id);const map={cName:"name",cVat:"vat",cAteco:"ateco",cEmail:"email",cPec:"pec",cPhone:"phone",cCity:"city",cNotes:"notes"};Object.entries(map).forEach(([a,b])=>document.getElementById(a).value=c[b]||"")}
+ const c=id?getClient(id):null;renderCustomFields('clients',c?.custom||{});
+ if(c){const map={cName:"name",cVat:"vat",cAteco:"ateco",cEmail:"email",cPec:"pec",cPhone:"phone",cCity:"city",cNotes:"notes"};Object.entries(map).forEach(([a,b])=>document.getElementById(a).value=c[b]||"")}
  document.getElementById("clientModal").classList.add("open");
 }
-function saveClient(e){e.preventDefault();const id=v("clientId");const c={id:id||uid(),name:v("cName"),vat:v("cVat"),ateco:v("cAteco"),email:v("cEmail"),pec:v("cPec"),phone:v("cPhone"),city:v("cCity"),notes:v("cNotes"),custom:readCustomValues("clients")};const i=db.clients.findIndex(x=>x.id===id);if(i>=0)db.clients[i]=c;else db.clients.push(c);save();closeModal("clientModal");renderAll();toast("Cliente salvato")}
+function saveClient(e){e.preventDefault();const id=v("clientId"),old=id?getClient(id):null;const c={...(old||{}),id:id||uid(),name:v("cName"),vat:v("cVat"),ateco:v("cAteco"),email:v("cEmail"),pec:v("cPec"),phone:v("cPhone"),city:v("cCity"),notes:v("cNotes"),custom:readCustomFields('clients')};const i=db.clients.findIndex(x=>x.id===id);if(i>=0)db.clients[i]=c;else db.clients.push(c);save();closeModal("clientModal");renderAll();toast("Cliente salvato")}
 function renderClients(){
- const q=(document.getElementById("clientSearch")?.value||"").toLowerCase();renderCustomFilters("clients",db.clients,"renderClients");const list=db.clients.filter(c=>(c.name+" "+c.vat+" "+c.ateco).toLowerCase().includes(q)&&customFiltersMatch("clients",c));
- document.getElementById("clientsTable").innerHTML=list.length?`<table><thead><tr><th>Cliente</th><th>P.IVA</th><th>ATECO</th><th>Pratiche</th><th>Investimenti</th><th>Agevolazioni</th>${customHeaders("clients")}<th></th></tr></thead><tbody>${list.map(c=>{const ps=db.practices.filter(p=>p.clientId===c.id);return `<tr><td><div class="client-name">${esc(c.name)}</div><div class="client-email">${esc(c.email||"")}</div></td><td>${esc(c.vat||"—")}</td><td>${esc(c.ateco||"—")}</td><td>${ps.length}</td><td>${money(ps.reduce((a,p)=>a+Number(p.investment||0),0))}</td><td>${money(ps.reduce((a,p)=>a+Number(p.obtained||0),0))}</td>${customCells("clients",c)}<td><div class="actions"><button class="icon-btn" onclick="openClientModal('${c.id}')">✎</button><button class="icon-btn" onclick="deleteClient('${c.id}')">🗑</button></div></td></tr>`}).join("")}</tbody></table>`:`<div class="empty"><div class="empty-icon">👥</div>Nessun cliente.</div>`;
+ renderCustomFilters('clients','clientCustomFilters',renderClients);
+ const q=(document.getElementById("clientSearch")?.value||"").toLowerCase();const list=db.clients.filter(c=>(c.name+" "+c.vat+" "+c.ateco).toLowerCase().includes(q)&&customFilterMatch('clients',c));
+ document.getElementById("clientsTable").innerHTML=list.length?`<table><thead><tr><th>Cliente</th><th>P.IVA</th><th>ATECO</th><th>Pratiche</th><th>Investimenti</th><th>Agevolazioni</th><th></th></tr></thead><tbody>${list.map(c=>{const ps=db.practices.filter(p=>p.clientId===c.id);return `<tr><td><div class="client-name">${esc(c.name)}</div><div class="client-email">${esc(c.email||"")}</div></td><td>${esc(c.vat||"—")}</td><td>${esc(c.ateco||"—")}</td><td>${ps.length}</td><td>${money(ps.reduce((a,p)=>a+Number(p.investment||0),0))}</td><td>${money(ps.reduce((a,p)=>a+Number(p.obtained||0),0))}</td><td><div class="actions"><button class="icon-btn" onclick="openClientModal('${c.id}')">✎</button><button class="icon-btn" onclick="deleteClient('${c.id}')">🗑</button></div></td></tr>`}).join("")}</tbody></table>`:`<div class="empty"><div class="empty-icon">👥</div>Nessun cliente.</div>`;
 }
 function deleteClient(id){if(confirm("Eliminare il cliente? Le pratiche collegate resteranno senza cliente.")){db.clients=db.clients.filter(c=>c.id!==id);save();renderAll()}}
 
-function openTaskModal(id=null){document.querySelector("#taskModal form").reset();fillClientSelect();document.getElementById("taskId").value=id||"";const t=id?db.tasks.find(x=>x.id===id):null;if(t){const map={tName:"name",tPractice:"practiceId",tStatus:"status",tPriority:"priority",tDue:"due",tDesc:"desc"};Object.entries(map).forEach(([el,k])=>document.getElementById(el).value=t[k]??"")}renderCustomInputs("tasks",t||{});document.getElementById("taskModal").classList.add("open")}
-function saveTask(e){e.preventDefault();const id=v("taskId"),t={id:id||uid(),name:v("tName"),practiceId:v("tPractice"),status:v("tStatus"),priority:v("tPriority"),due:v("tDue"),desc:v("tDesc"),custom:readCustomValues("tasks")};const i=db.tasks.findIndex(x=>x.id===id);if(i>=0)db.tasks[i]=t;else db.tasks.push(t);save();closeModal("taskModal");renderAll();toast("Attività salvata")}
-function renderTasks(){renderCustomFilters("tasks",db.tasks,"renderTasks");const list=db.tasks.filter(t=>customFiltersMatch("tasks",t)).slice().sort((a,b)=>(a.due||"9999").localeCompare(b.due||"9999"));document.getElementById("tasksTable").innerHTML=list.length?`<table><thead><tr><th>Attività</th><th>Pratica</th><th>Stato</th><th>Priorità</th><th>Scadenza</th>${customHeaders("tasks")}<th></th></tr></thead><tbody>${list.map(t=>`<tr><td><strong>${esc(t.name)}</strong><div class="client-email">${esc(t.desc||"")}</div></td><td>${esc(getPractice(t.practiceId)?.bando||"—")}</td><td>${badge(t.status)}</td><td>${badge(t.priority)}</td><td>${date(t.due)}</td>${customCells("tasks",t)}<td><div class="actions"><button class="icon-btn" title="Modifica" onclick="openTaskModal('${t.id}')">✎</button><button class="icon-btn" onclick="deleteTask('${t.id}')">🗑</button></div></td></tr>`).join("")}</tbody></table>`:`<div class="empty">Nessuna attività.</div>`}
+function openTaskModal(id=null){document.querySelector("#taskModal form").reset();fillClientSelect();document.getElementById("taskId").value=id||"";const t=id?db.tasks.find(x=>x.id===id):null;renderCustomFields('tasks',t?.custom||{});if(t){[['tName','name'],['tPractice','practiceId'],['tStatus','status'],['tPriority','priority'],['tDue','due'],['tDesc','desc']].forEach(([el,k])=>document.getElementById(el).value=t[k]||'')}document.getElementById("taskModal").classList.add("open")}
+function saveTask(e){e.preventDefault();const id=v('taskId');const old=id?db.tasks.find(x=>x.id===id):null;const t={...(old||{}),id:id||uid(),name:v("tName"),practiceId:v("tPractice"),status:v("tStatus"),priority:v("tPriority"),due:v("tDue"),desc:v("tDesc"),custom:readCustomFields('tasks')};if(old)Object.assign(old,t);else db.tasks.push(t);save();closeModal("taskModal");renderAll();toast("Attività salvata")}
+function renderTasks(){renderCustomFilters('tasks','taskCustomFilters',renderTasks);const list=db.tasks.filter(t=>customFilterMatch('tasks',t)).slice().sort((a,b)=>(a.due||"9999").localeCompare(b.due||"9999"));document.getElementById("tasksTable").innerHTML=list.length?`<table><thead><tr><th>Attività</th><th>Pratica</th><th>Stato</th><th>Priorità</th><th>Scadenza</th><th></th></tr></thead><tbody>${list.map(t=>`<tr><td><strong>${esc(t.name)}</strong><div class="client-email">${esc(t.desc||"")}</div></td><td>${esc(getPractice(t.practiceId)?.bando||"—")}</td><td>${badge(t.status)}</td><td>${badge(t.priority)}</td><td>${date(t.due)}</td><td><button class="icon-btn" onclick="deleteTask('${t.id}')">🗑</button></td></tr>`).join("")}</tbody></table>`:`<div class="empty">Nessuna attività.</div>`}
 function deleteTask(id){db.tasks=db.tasks.filter(t=>t.id!==id);save();renderAll()}
 function renderDeadlines(){const list=db.practices.filter(p=>p.deadline).sort((a,b)=>a.deadline.localeCompare(b.deadline));document.getElementById("deadlineTable").innerHTML=list.length?`<table><thead><tr><th>Scadenza</th><th>Giorni</th><th>Cliente</th><th>Bando</th><th>Stato</th><th>Responsabile</th><th>Criticità</th></tr></thead><tbody>${list.map(p=>{const d=daysTo(p.deadline);return `<tr><td><strong>${date(p.deadline)}</strong></td><td>${badge(d<0?"Scaduta":d<=3?"Critica":"Normale")}</td><td>${esc(getClient(p.clientId)?.name||"—")}</td><td>${esc(p.bando)}</td><td>${badge(p.status)}</td><td>${esc(p.technician||"—")}</td><td>${esc(p.notes||"—")}</td></tr>`}).join("")}</tbody></table>`:`<div class="empty">Nessuna scadenza inserita.</div>`}
 async function uploadFiles(e){
@@ -645,7 +473,7 @@ function deleteFile(id){if(!confirm("Rimuovere il documento dall'archivio del br
 function saveSettings(){db.settings.deptName=v("deptName");db.settings.manager=v("deptManager");save();toast("Impostazioni salvate")}
 function loadSettings(){document.getElementById("deptName").value=db.settings.deptName||"Finanza Agevolata";document.getElementById("deptManager").value=db.settings.manager||""}
 function exportBackup(){const blob=new Blob([JSON.stringify({app:"Portale Finanza Agevolata",version:1,exportedAt:new Date().toISOString(),data:db},null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="backup_finanza_agevolata_"+today()+".json";a.click();URL.revokeObjectURL(a.href);toast("Backup esportato")}
-function importBackup(e){const file=e.target.files?.[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{try{const raw=JSON.parse(reader.result);const incoming=raw.data||raw;if(!incoming||!Array.isArray(incoming.clients)||!Array.isArray(incoming.practices))throw new Error("Formato non valido");if(!confirm("L'importazione sostituirà i dati attualmente presenti. Hai già esportato un backup?"))return;db={clients:incoming.clients||[],practices:incoming.practices||[],tasks:incoming.tasks||[],files:incoming.files||[],logs:incoming.logs||[],projects:incoming.projects||[],vault:incoming.vault||null,settings:incoming.settings||{deptName:"Finanza Agevolata",manager:""}};save();renderAll();toast("Backup importato correttamente")}catch(err){alert("File non valido o backup illeggibile.")}finally{e.target.value=""}};reader.readAsText(file)}
+function importBackup(e){const file=e.target.files?.[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{try{const raw=JSON.parse(reader.result);const incoming=raw.data||raw;if(!incoming||!Array.isArray(incoming.clients)||!Array.isArray(incoming.practices))throw new Error("Formato non valido");if(!confirm("L'importazione sostituirà i dati attualmente presenti. Hai già esportato un backup?"))return;db={clients:incoming.clients||[],practices:incoming.practices||[],tasks:incoming.tasks||[],files:incoming.files||[],logs:incoming.logs||[],projects:incoming.projects||[],vault:incoming.vault||null,customFields:incoming.customFields||{clients:[],practices:[],projects:[],tasks:[]},menuOrder:incoming.menuOrder||[],settings:incoming.settings||{deptName:"Finanza Agevolata",manager:""}};save();renderAll();toast("Backup importato correttamente")}catch(err){alert("File non valido o backup illeggibile.")}finally{e.target.value=""}};reader.readAsText(file)}
 
 // CALENDARIO: diario attività e vista mensile
 function changeMonth(delta){calendarCursor.setMonth(calendarCursor.getMonth()+delta);renderCalendar()}
@@ -677,66 +505,62 @@ function renderDayEntries(){const box=document.getElementById('dayEntries');if(!
 function deleteLog(id){if(confirm('Eliminare questa registrazione?')){db.logs=db.logs.filter(x=>x.id!==id);save();renderCalendar()}}
 
 // PROGETTI, FASI E ATTIVITÀ
-function openProjectModal(){document.getElementById('projectForm').reset();document.getElementById('projectId').value='';document.getElementById('projectModalTitle').textContent='Nuovo progetto';renderCustomInputs('projects',{});document.getElementById('projectModal').classList.add('open')}
-function saveProject(e){e.preventDefault();const id=v('projectId');const item={id:id||uid(),name:v('projectName'),client:v('projectClient'),owner:v('projectOwner'),status:v('projectStatus'),start:v('projectStart'),end:v('projectEnd'),description:v('projectDescription'),custom:readCustomValues('projects'),phases:id?(db.projects.find(p=>p.id===id)?.phases||[]):[]};const old=db.projects.findIndex(p=>p.id===id);if(old>=0)db.projects[old]=item;else db.projects.push(item);save();closeModal('projectModal');renderProjects();toast('Progetto salvato')}
-function editProject(id){const p=db.projects.find(x=>x.id===id);if(!p)return;openProjectModal();document.getElementById('projectId').value=id;document.getElementById('projectModalTitle').textContent='Modifica progetto';const map={projectName:'name',projectClient:'client',projectOwner:'owner',projectStatus:'status',projectStart:'start',projectEnd:'end',projectDescription:'description'};Object.entries(map).forEach(([el,k])=>document.getElementById(el).value=p[k]||'');renderCustomInputs('projects',p)}
+function openProjectModal(id=null){document.getElementById('projectForm').reset();document.getElementById('projectId').value=id||'';document.getElementById('projectModalTitle').textContent=id?'Modifica progetto':'Nuovo progetto';const p=id?db.projects.find(x=>x.id===id):null;const sel=document.getElementById('projectPractice');sel.innerHTML='<option value="">Nessuna pratica collegata</option>'+db.practices.map(x=>`<option value="${x.id}">${esc((getClient(x.clientId)?.name||'Cliente')+' · '+x.bando)}</option>`).join('');if(p){const map={projectName:'name',projectClient:'client',projectOwner:'owner',projectStatus:'status',projectStart:'start',projectEnd:'end',projectDescription:'description',projectPractice:'practiceId'};Object.entries(map).forEach(([el,k])=>document.getElementById(el).value=p[k]||'');renderCustomFields('projects',p.custom||{})}else renderCustomFields('projects',{});document.getElementById('projectModal').classList.add('open')}
+function saveProject(e){e.preventDefault();const id=v('projectId'),old=db.projects.find(p=>p.id===id);const item={...(old||{}),id:id||uid(),name:v('projectName'),practiceId:v('projectPractice'),client:v('projectClient'),owner:v('projectOwner'),status:v('projectStatus'),start:v('projectStart'),end:v('projectEnd'),description:v('projectDescription'),custom:readCustomFields('projects'),phases:old?.phases||[]};const ix=db.projects.findIndex(p=>p.id===id);if(ix>=0)db.projects[ix]=item;else db.projects.push(item);if(item.practiceId){const pr=getPractice(item.practiceId);if(pr)pr.projectId=item.id}save();closeModal('projectModal');renderProjects();renderPractices();toast('Progetto salvato')}
+function editProject(id){openProjectModal(id)}
 function addPhase(pid){const name=prompt('Nome della fase (es. Analisi e requisiti):');if(!name?.trim())return;const p=db.projects.find(x=>x.id===pid);p.phases ||= [];p.phases.push({id:uid(),name:name.trim(),status:'Da fare',tasks:[]});save();renderProjects()}
 function addProjectTask(pid,phid){const title=prompt('Descrizione dell’attività:');if(!title?.trim())return;const p=db.projects.find(x=>x.id===pid),ph=p?.phases.find(x=>x.id===phid);if(!ph)return;ph.tasks ||= [];ph.tasks.push({id:uid(),title:title.trim(),status:'Da fare',due:''});save();renderProjects()}
 function setPhaseStatus(pid,phid,status){const p=db.projects.find(x=>x.id===pid),ph=p?.phases.find(x=>x.id===phid);if(ph){ph.status=status;save();renderProjects()}}
 function setProjectTaskStatus(pid,phid,tid,status){const p=db.projects.find(x=>x.id===pid),ph=p?.phases.find(x=>x.id===phid),t=ph?.tasks.find(x=>x.id===tid);if(t){t.status=status;save();renderProjects()}}
-function removeProject(pid){if(confirm('Eliminare il progetto e le sue fasi?')){db.projects=db.projects.filter(x=>x.id!==pid);save();renderProjects()}}
-function renderProjects(){const box=document.getElementById('projectsList');if(!box)return;renderCustomFilters('projects',db.projects,'renderProjects');const visibleProjects=db.projects.filter(p=>customFiltersMatch('projects',p));box.innerHTML=visibleProjects.length?visibleProjects.map(p=>{const phases=p.phases||[], tasks=phases.flatMap(x=>x.tasks||[]), done=tasks.filter(t=>t.status==='Completata').length, pct=tasks.length?Math.round(done/tasks.length*100):0;return `<div class="card project-card"><div class="card-header"><div><div class="card-title">${esc(p.name)}</div><div class="small muted" style="margin-top:5px">${esc(p.client||'Progetto interno')} · Responsabile: ${esc(p.owner||'—')} · ${p.start?date(p.start):'Data non definita'}${p.end?' → '+date(p.end):''}</div></div><div class="actions"><button class="btn btn-secondary btn-small" onclick="editProject('${p.id}')">Modifica</button><button class="btn btn-secondary btn-small" onclick="addPhase('${p.id}')">+ Fase</button><button class="icon-btn" onclick="removeProject('${p.id}')">🗑</button></div></div><div style="padding:16px 20px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:7px"><span>${badge(p.status||'In corso')} ${esc(p.description||'')} ${getCustomFields('projects').map(f=>customValue(p,f.id)?`<span class="custom-value">· ${esc(f.name)}: ${esc(customValue(p,f.id))}</span>`:'').join('')}</span><strong>${pct}% attività completate</strong></div><div class="progress"><div class="progress-bar" style="width:${pct}%"></div></div>${phases.length?phases.map(ph=>`<div class="phase"><div class="phase-head"><div><strong>${esc(ph.name)}</strong><div class="small muted">${(ph.tasks||[]).filter(t=>t.status==='Completata').length}/${(ph.tasks||[]).length} attività completate</div></div><div class="filters"><select class="form-control phase-select" onchange="setPhaseStatus('${p.id}','${ph.id}',this.value)">${['Da fare','In corso','Completata','Bloccata'].map(st=>`<option ${ph.status===st?'selected':''}>${st}</option>`).join('')}</select><button class="btn btn-secondary btn-small" onclick="addProjectTask('${p.id}','${ph.id}')">+ Attività</button></div></div>${(ph.tasks||[]).map(t=>`<div class="project-task"><span>${esc(t.title)}</span><select class="form-control task-select" onchange="setProjectTaskStatus('${p.id}','${ph.id}','${t.id}',this.value)">${['Da fare','In corso','Completata','Bloccata'].map(st=>`<option ${t.status===st?'selected':''}>${st}</option>`).join('')}</select></div>`).join('')||'<div class="small muted" style="padding:10px 0">Nessuna attività nella fase.</div>'}</div>`).join(''):'<div class="empty">Crea il progetto e aggiungi le fasi; ogni fase può contenere più attività.</div>'}</div></div>`}).join(''):'<div class="card empty"><div class="empty-icon">◫</div>Nessun progetto creato. Usa “Nuovo progetto” per iniziare.</div>'}
+function removeProject(pid){if(confirm('Eliminare il progetto e le sue fasi?')){db.projects=db.projects.filter(x=>x.id!==pid);db.practices.forEach(p=>{if(p.projectId===pid)p.projectId=''});save();renderProjects();renderPractices()}}
+function renderProjects(){const box=document.getElementById('projectsList');if(!box)return;renderCustomFilters('projects','projectCustomFilters',renderProjects);const list=db.projects.filter(p=>customFilterMatch('projects',p));box.innerHTML=list.length?list.map(p=>{const phases=p.phases||[],tasks=phases.flatMap(x=>x.tasks||[]),done=tasks.filter(t=>t.status==='Completata').length,pct=tasks.length?Math.round(done/tasks.length*100):0,pr=getPractice(p.practiceId);return `<div class="card project-card"><div class="card-header"><div><div class="card-title">${esc(p.name)}</div><div class="small muted" style="margin-top:5px">${pr?`Pratica: ${esc(getClient(pr.clientId)?.name||'Cliente')} · ${esc(pr.bando)}`:esc(p.client||'Nessuna pratica collegata')} · Responsabile: ${esc(p.owner||'—')} · ${p.start?date(p.start):'Data non definita'}${p.end?' → '+date(p.end):''}</div></div><div class="actions"><button class="btn btn-secondary btn-small" onclick="editProject('${p.id}')">Modifica</button><button class="btn btn-secondary btn-small" onclick="addPhase('${p.id}')">＋ Fase</button><button class="icon-btn" onclick="removeProject('${p.id}')">🗑</button></div></div><div style="padding:16px 20px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:7px"><span>${badge(p.status||'In corso')} ${esc(p.description||'')}</span><strong>${pct}% attività completate</strong></div><div class="progress"><div class="progress-bar" style="width:${pct}%"></div></div><div class="project-flow-wrap"><div class="project-flow">${phases.length?phases.map((ph,i)=>`${i?'<div class="flow-arrow">➜</div>':''}<div class="flow-phase"><div class="flow-phase-head"><strong>${i+1}. ${esc(ph.name)}</strong><div class="small muted">${(ph.tasks||[]).filter(t=>t.status==='Completata').length}/${(ph.tasks||[]).length} attività completate</div><select class="form-control phase-select" style="margin-top:9px" onchange="setPhaseStatus('${p.id}','${ph.id}',this.value)">${['Da fare','In corso','Completata','Bloccata'].map(st=>`<option ${ph.status===st?'selected':''}>${st}</option>`).join('')}</select></div><div class="flow-phase-body">${(ph.tasks||[]).map(t=>`<div class="project-task"><span>${esc(t.title)}${t.due?`<div class="small muted">Scadenza: ${date(t.due)}</div>`:''}</span><select class="form-control task-select" onchange="setProjectTaskStatus('${p.id}','${ph.id}','${t.id}',this.value)">${['Da fare','In corso','Completata','Bloccata'].map(st=>`<option ${t.status===st?'selected':''}>${st}</option>`).join('')}</select></div>`).join('')||'<div class="small muted" style="padding:10px 0">Nessuna attività.</div>'}<button class="btn btn-secondary btn-small" style="margin-top:10px" onclick="addProjectTask('${p.id}','${ph.id}')">＋ Aggiungi attività</button></div></div>`).join(''):'<div class="empty">Aggiungi la prima fase con il pulsante “＋ Fase”.</div>'}</div></div></div></div>`}).join(''):'<div class="card empty"><div class="empty-icon">◫</div>Nessun progetto corrispondente ai filtri. Crea un progetto per iniziare.</div>'}
 
-// PASSWORD VAULT: AES-GCM + PBKDF2, cifratura lato browser
-const enc=new TextEncoder(), dec=new TextDecoder();
-async function deriveVaultKey(password,salt){const material=await crypto.subtle.importKey('raw',enc.encode(password),'PBKDF2',false,['deriveKey']);return crypto.subtle.deriveKey({name:'PBKDF2',salt,iterations:250000,hash:'SHA-256'},material,{name:'AES-GCM',length:256},false,['encrypt','decrypt'])}
-function b64(buf){return btoa(String.fromCharCode(...new Uint8Array(buf)))}function unb64(s){return Uint8Array.from(atob(s),c=>c.charCodeAt(0))}
-async function encryptVault(items,key){const iv=crypto.getRandomValues(new Uint8Array(12));const data=await crypto.subtle.encrypt({name:'AES-GCM',iv},key,enc.encode(JSON.stringify(items)));return {iv:b64(iv),data:b64(data)}}
-async function unlockVault(){const pass=v('masterPassword');if(pass.length<10){document.getElementById('vaultMessage').textContent='Usa una password principale di almeno 10 caratteri.';return}try{if(!db.vault){const salt=crypto.getRandomValues(new Uint8Array(16));vaultKey=await deriveVaultKey(pass,salt);db.vault={salt:b64(salt),iv:'',data:''};await persistVault();document.getElementById('vaultMessage').textContent='Cassaforte creata.'}else{vaultKey=await deriveVaultKey(pass,unb64(db.vault.salt));if(db.vault.data){const plain=await crypto.subtle.decrypt({name:'AES-GCM',iv:unb64(db.vault.iv)},vaultKey,unb64(db.vault.data));vaultItems=JSON.parse(dec.decode(plain))}else vaultItems=[]}document.getElementById('masterPassword').value='';document.getElementById('vaultGate').style.display='none';document.getElementById('vaultContent').style.display='block';renderPasswords()}catch(err){vaultKey=null;document.getElementById('vaultMessage').textContent='Password errata o archivio non leggibile.'}}
-async function persistVault(){const encrypted=await encryptVault(vaultItems,vaultKey);db.vault={salt:db.vault.salt,...encrypted};save()}
-function lockVault(){vaultKey=null;vaultItems=[];document.getElementById('vaultContent').style.display='none';document.getElementById('vaultGate').style.display='block';document.getElementById('vaultMessage').textContent='Cassaforte bloccata.';renderPasswords()}
+// CAMPI PERSONALIZZATI, FILTRI E RIORDINO MENU
+const CUSTOM_ENTITIES={clients:'Clienti',practices:'Pratiche',projects:'Progetti',tasks:'Attività'};
+function fieldKey(s){return 'cf_'+s.toLowerCase().replace(/[^a-z0-9]+/g,'_')+'_'+Math.random().toString(36).slice(2,6)}
+function openFieldSettings(entity){navigate('settings');document.getElementById('customEntity').value=entity;renderCustomFieldManager();document.querySelector('.field-manager')?.scrollIntoView({behavior:'smooth',block:'start'})}
+function addCustomField(){const entity=v('customEntity'),name=v('customFieldName').trim(),type=v('customFieldType'),opts=v('customFieldOptions').split(',').map(x=>x.trim()).filter(Boolean);if(!name){toast('Inserisci il nome del campo');return}if(type==='select'&&!opts.length){toast('Per un elenco inserisci almeno un’opzione separata da virgole');return}db.customFields ||= {clients:[],practices:[],projects:[],tasks:[]};db.customFields[entity] ||= [];if(db.customFields[entity].some(f=>f.name.toLowerCase()===name.toLowerCase())){toast('Esiste già un campo con questo nome');return}db.customFields[entity].push({id:fieldKey(name),name,type,options:opts});save();document.getElementById('customFieldName').value='';document.getElementById('customFieldOptions').value='';renderCustomFieldManager();renderAll();toast('Campo personalizzato aggiunto')}
+function renderCustomFieldManager(){const entity=v('customEntity')||'clients',box=document.getElementById('customFieldManagerList');if(!box)return;const fields=(db.customFields?.[entity]||[]);box.innerHTML=fields.length?fields.map(f=>`<div class="custom-field-row"><input class="form-control" aria-label="Nome campo" id="cfname-${f.id}" value="${esc(f.name)}"><select class="form-control" id="cftype-${f.id}">${[['text','Testo'],['number','Numero'],['date','Data'],['select','Elenco a scelta'],['yesno','Sì / No'],['textarea','Testo lungo']].map(([v,l])=>`<option value="${v}" ${f.type===v?'selected':''}>${l}</option>`).join('')}</select><input class="form-control" aria-label="Opzioni elenco" id="cfopts-${f.id}" value="${esc((f.options||[]).join(', '))}" placeholder="Opzioni separate da virgola"><div class="actions"><button class="btn btn-secondary btn-small" onclick="saveCustomField('${entity}','${f.id}')">Salva</button><button class="btn btn-danger btn-small" onclick="deleteCustomField('${entity}','${f.id}')">Elimina</button></div></div>`).join(''):'<div class="small muted">Nessun campo personalizzato per questa sezione. Usa il modulo qui sopra per crearne uno.</div>';}
+function saveCustomField(entity,id){const f=(db.customFields[entity]||[]).find(x=>x.id===id);if(!f)return;const name=v('cfname-'+id).trim(),type=v('cftype-'+id),options=v('cfopts-'+id).split(',').map(x=>x.trim()).filter(Boolean);if(!name){toast('Il nome non può essere vuoto');return}if(type==='select'&&!options.length){toast('Inserisci le opzioni separate da virgole');return}f.name=name;f.type=type;f.options=options;save();renderCustomFieldManager();renderAll();toast('Campo aggiornato')}
+function deleteCustomField(entity,id){if(!confirm('Eliminare questo campo dalla configurazione? I valori già salvati nei record non verranno mostrati.'))return;db.customFields[entity]=(db.customFields[entity]||[]).filter(f=>f.id!==id);save();renderCustomFieldManager();renderAll();toast('Campo eliminato')}
+function renderCustomFields(entity,values={}){const box=document.getElementById('customFields-'+entity);if(!box)return;const fields=db.customFields?.[entity]||[];box.innerHTML=fields.map(f=>{const value=values?.[f.id]??'';let input='';if(f.type==='textarea')input=`<textarea class="form-control custom-value" data-field="${f.id}">${esc(value)}</textarea>`;else if(f.type==='select')input=`<select class="form-control custom-value" data-field="${f.id}"><option value="">Seleziona…</option>${(f.options||[]).map(o=>`<option ${String(value)===o?'selected':''}>${esc(o)}</option>`).join('')}</select>`;else if(f.type==='yesno')input=`<select class="form-control custom-value" data-field="${f.id}"><option value="">—</option><option value="Sì" ${value==='Sì'?'selected':''}>Sì</option><option value="No" ${value==='No'?'selected':''}>No</option></select>`;else input=`<input class="form-control custom-value" data-field="${f.id}" type="${f.type==='number'?'number':f.type==='date'?'date':'text'}" value="${esc(value)}">`;return `<div class="form-group"><label class="form-label">${esc(f.name)}</label>${input}</div>`}).join('')}
+function readCustomFields(entity){const result={};document.querySelectorAll(`#customFields-${entity} [data-field]`).forEach(el=>result[el.dataset.field]=el.value);return result}
+function renderCustomFilters(entity,containerId,rerender){const box=document.getElementById(containerId);if(!box)return;const previous={};box.querySelectorAll('.custom-filter').forEach(el=>previous[el.dataset.field]=el.value);const fields=db.customFields?.[entity]||[];box.innerHTML=fields.map(f=>{if(f.type==='select'||f.type==='yesno')return `<select class="form-control custom-filter" data-entity="${entity}" data-field="${f.id}" onchange="${rerender.name}()"><option value="">Tutti · ${esc(f.name)}</option>${(f.type==='yesno'?['Sì','No']:(f.options||[])).map(o=>`<option ${previous[f.id]===o?'selected':''}>${esc(o)}</option>`).join('')}</select>`;return `<input class="form-control custom-filter" data-entity="${entity}" data-field="${f.id}" value="${esc(previous[f.id]||'')}" placeholder="Filtra ${esc(f.name)}" oninput="${rerender.name}()">`}).join('')}
+function customFilterMatch(entity,item){return [...document.querySelectorAll(`.custom-filter[data-entity="${entity}"]`)].every(el=>{if(!el.value)return true;const val=String(item.custom?.[el.dataset.field]??'').toLowerCase();return val.includes(el.value.toLowerCase())})}
+function renderAllCustomFilters(){renderCustomFilters('clients','clientCustomFilters',renderClients);renderCustomFilters('tasks','taskCustomFilters',renderTasks);renderCustomFilters('projects','projectCustomFilters',renderProjects)}
+function resetMenuOrder(){db.menuOrder=[];save();location.reload()}
+function setupMenuReorder(){const nav=document.querySelector('.nav');if(!nav)return;const keyOrder=db.menuOrder||[];const buttons=[...nav.querySelectorAll('button')];if(keyOrder.length){buttons.sort((a,b)=>{const ai=keyOrder.indexOf(a.dataset.page),bi=keyOrder.indexOf(b.dataset.page);return (ai<0?999:ai)-(bi<0?999:bi)}).forEach(b=>nav.appendChild(b))}nav.querySelectorAll('button').forEach(btn=>{btn.draggable=true;btn.addEventListener('dragstart',e=>{e.dataTransfer.setData('text/plain',btn.dataset.page);btn.classList.add('dragging')});btn.addEventListener('dragend',()=>btn.classList.remove('dragging'));btn.addEventListener('dragover',e=>e.preventDefault());btn.addEventListener('drop',e=>{e.preventDefault();const from=e.dataTransfer.getData('text/plain'),source=nav.querySelector(`[data-page="${from}"]`);if(source&&source!==btn){const rect=btn.getBoundingClientRect();nav.insertBefore(source,e.clientY<rect.top+rect.height/2?btn:btn.nextSibling);db.menuOrder=[...nav.querySelectorAll('button')].map(x=>x.dataset.page);save()}})})}
+
+// ARCHIVIO PASSWORD SENZA PASSWORD PRINCIPALE: dati salvati in chiaro nel localStorage
+async function unlockVault(){
+  if(db.vault && !Array.isArray(db.vault.items)){
+    const msg='Questo gestionale contiene un vecchio archivio cifrato. Per recuperare quelle credenziali serve la precedente password principale. Per evitare di cancellare i dati cifrati, l’archivio non è stato modificato.';
+    alert(msg);
+    return;
+  }
+  vaultItems=Array.isArray(db.vault?.items)?db.vault.items:[];
+  db.vault={plain:true,items:vaultItems};
+  save();
+  renderPasswords();
+}
+async function persistVault(){db.vault={plain:true,items:vaultItems};save()}
+function lockVault(){/* L'archivio non richiede una password e resta disponibile nella pagina. */renderPasswords()}
 function openPasswordModal(){document.getElementById('passwordForm').reset();document.getElementById('passwordModal').classList.add('open')}
-async function savePassword(e){e.preventDefault();if(!vaultKey)return;vaultItems.push({id:uid(),site:v('pwSite'),user:v('pwUser'),password:v('pwValue'),url:v('pwUrl'),notes:v('pwNotes')});await persistVault();closeModal('passwordModal');renderPasswords();toast('Credenziale cifrata e salvata')}
+async function savePassword(e){e.preventDefault();vaultItems.push({id:uid(),site:v('pwSite'),user:v('pwUser'),password:v('pwValue'),url:v('pwUrl'),notes:v('pwNotes')});await persistVault();closeModal('passwordModal');renderPasswords();toast('Credenziale salvata')}
 function renderPasswords(){const box=document.getElementById('passwordTable');if(!box)return;box.innerHTML=vaultItems.length?`<table><thead><tr><th>Servizio</th><th>Utente</th><th>URL</th><th>Password</th><th>Note</th><th></th></tr></thead><tbody>${vaultItems.map(x=>`<tr><td><strong>${esc(x.site)}</strong></td><td>${esc(x.user||'—')}</td><td>${x.url?`<a href="${esc(x.url)}" target="_blank" rel="noopener">Apri</a>`:'—'}</td><td><input type="password" class="form-control pw-hidden" id="pw-${x.id}" value="${esc(x.password)}" readonly style="min-width:130px;width:150px"><button class="btn btn-secondary btn-small" onclick="togglePw('${x.id}')">Mostra</button> <button class="btn btn-secondary btn-small" onclick="copyPw('${x.id}')">Copia</button></td><td>${esc(x.notes||'—')}</td><td><button class="icon-btn" onclick="deletePassword('${x.id}')">🗑</button></td></tr>`).join('')}</tbody></table>`:'<div class="empty">Nessuna credenziale salvata.</div>'}
 function togglePw(id){const el=document.getElementById('pw-'+id);el.type=el.type==='password'?'text':'password'}
 async function copyPw(id){const x=vaultItems.find(x=>x.id===id);if(x){try{await navigator.clipboard.writeText(x.password);toast('Password copiata')}catch(e){toast('Copia non disponibile nel browser')}}}
 async function deletePassword(id){if(confirm('Eliminare questa credenziale?')){vaultItems=vaultItems.filter(x=>x.id!==id);await persistVault();renderPasswords()}}
 
+
+// Inizializza l'archivio senza chiedere una password principale.
+try { if(db.vault && Array.isArray(db.vault.items)) vaultItems=db.vault.items; else if(!db.vault) { vaultItems=[]; db.vault={plain:true,items:[]}; save(); } renderPasswords(); } catch(e) {}
+
 function setupDocumentDropzone(){const zone=document.getElementById("documentDropzone");if(!zone)return;["dragenter","dragover"].forEach(ev=>zone.addEventListener(ev,e=>{e.preventDefault();e.stopPropagation();zone.classList.add("dragover")}));["dragleave","dragend"].forEach(ev=>zone.addEventListener(ev,e=>{e.preventDefault();zone.classList.remove("dragover")}));zone.addEventListener("drop",e=>{e.preventDefault();e.stopPropagation();zone.classList.remove("dragover");uploadFiles(e)})}
-function renderAll(){renderDashboard();renderPractices();renderClients();renderTasks();renderDeadlines();renderFiles();loadSettings();renderCalendar();renderProjects()}
-renderAll();renderCustomFieldManager();initNavReordering();renderNavOrderManager();setupDocumentDropzone();
-
-// Blocco di accesso iniziale (password di accesso: 0852).
-// Nota: su un sito statico GitHub Pages questa è una barriera d'accesso lato client,
-// non una protezione forte: la password è presente nel codice sorgente.
-(function setupSitePasswordGate(){
-  const gate = document.getElementById("sitePasswordGate");
-  const form = document.getElementById("sitePasswordForm");
-  const input = document.getElementById("sitePasswordInput");
-  const error = document.getElementById("sitePasswordError");
-  if (!gate || !form) return;
-  const unlock = () => {
-    document.body.classList.remove("access-locked");
-    gate.remove();
-    sessionStorage.setItem("fa_site_unlocked", "1");
-  };
-  if (sessionStorage.getItem("fa_site_unlocked") === "1") {
-    document.body.classList.remove("access-locked");
-    gate.remove();
-    return;
-  }
-  form.addEventListener("submit", function(event){
-    event.preventDefault();
-    if (input.value === "0852") {
-      unlock();
-    } else {
-      error.textContent = "Password non corretta. Riprova.";
-      input.value = "";
-      input.focus();
-    }
-  });
-})();
-
+function renderAll(){renderDashboard();renderPractices();renderClients();renderTasks();renderDeadlines();renderFiles();loadSettings();renderCalendar();renderProjects();renderAllCustomFilters();renderCustomFieldManager()}
+// Access gate: password requested by user (client-side barrier only; not strong authentication on static hosting)
+(function(){const gate=document.getElementById('sitePasswordGate'),form=document.getElementById('sitePasswordForm');if(!gate||!form)return;form.addEventListener('submit',e=>{e.preventDefault();if(document.getElementById('sitePasswordInput').value==='0852'){document.body.classList.remove('access-locked');gate.remove();sessionStorage.setItem('fa_site_unlocked','1')}else{document.getElementById('sitePasswordError').textContent='Password non corretta. Riprova.';document.getElementById('sitePasswordInput').value=''}});if(sessionStorage.getItem('fa_site_unlocked')==='1'){document.body.classList.remove('access-locked');gate.remove()}})();
+renderAll();setupDocumentDropzone();setupMenuReorder();
 </script>
 </body>
 </html>
