@@ -126,6 +126,15 @@ body.access-locked .app { display: none !important; }
 .custom-field-empty{padding:12px;border:1px dashed var(--border);border-radius:10px;color:var(--muted);font-size:12px;margin-top:12px}
 @media(max-width:800px){.custom-fields-area{grid-template-columns:1fr}.custom-field-row{grid-template-columns:1fr 1fr}.custom-field-row button{justify-self:start}}
 
+
+/* Accesso rapido alla gestione dei campi personalizzati */
+.custom-fields-callout{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:16px 18px;margin-bottom:18px;border:1px solid #c7d2fe;border-radius:14px;background:linear-gradient(120deg,#eef2ff,#fff)}
+.custom-fields-callout strong{display:block;font-size:14px;color:#312e81;margin-bottom:4px}
+.custom-fields-callout p{font-size:12px;color:#4b5563;line-height:1.5}
+.page-header-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.custom-field-guide{padding:12px 14px;margin-bottom:16px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;font-size:12px;line-height:1.6;color:#334155}
+.custom-field-guide strong{color:#1e293b}
+
 </style>
 </head>
 
@@ -214,7 +223,7 @@ body.access-locked .app { display: none !important; }
 </section>
 
 <section class="page" id="page-practices">
-  <div class="page-header"><div><h1 class="page-title">Pratiche</h1><p class="page-subtitle">Gestisci il ciclo completo commerciale → tecnico → istruttoria → esito.</p></div><button class="btn btn-primary" onclick="openPracticeModal()">+ Nuova pratica</button></div>
+  <div class="page-header"><div><h1 class="page-title">Pratiche</h1><p class="page-subtitle">Gestisci il ciclo completo commerciale → tecnico → istruttoria → esito.</p></div><div class="page-header-actions"><button class="btn btn-secondary" onclick="openCustomFieldSettings('practices')">⚙ Campi personalizzati</button><button class="btn btn-primary" onclick="openPracticeModal()">+ Nuova pratica</button></div></div>
   <div class="card table-card">
     <div class="toolbar">
       <div class="search"><span class="search-icon">⌕</span><input id="practiceSearch" placeholder="Cerca cliente, pratica, bando..." oninput="renderPractices()"></div>
@@ -230,12 +239,12 @@ body.access-locked .app { display: none !important; }
 </section>
 
 <section class="page" id="page-clients">
-  <div class="page-header"><div><h1 class="page-title">Clienti</h1><p class="page-subtitle">Anagrafiche e pratiche collegate.</p></div><button class="btn btn-primary" onclick="openClientModal()">+ Nuovo cliente</button></div>
+  <div class="page-header"><div><h1 class="page-title">Clienti</h1><p class="page-subtitle">Anagrafiche e pratiche collegate.</p></div><div class="page-header-actions"><button class="btn btn-secondary" onclick="openCustomFieldSettings('clients')">⚙ Campi personalizzati</button><button class="btn btn-primary" onclick="openClientModal()">+ Nuovo cliente</button></div></div>
   <div class="card"><div class="toolbar"><div class="search"><span class="search-icon">⌕</span><input id="clientSearch" placeholder="Cerca cliente, P.IVA, ATECO..." oninput="renderClients()"></div><div class="filters" id="customFilters-clients"></div></div><div class="table-scroll" id="clientsTable"></div></div>
 </section>
 
 <section class="page" id="page-tasks">
-  <div class="page-header"><div><h1 class="page-title">Attività</h1><p class="page-subtitle">Azioni operative collegate alle pratiche.</p></div><button class="btn btn-primary" onclick="openTaskModal()">+ Nuova attività</button></div>
+  <div class="page-header"><div><h1 class="page-title">Attività</h1><p class="page-subtitle">Azioni operative collegate alle pratiche.</p></div><div class="page-header-actions"><button class="btn btn-secondary" onclick="openCustomFieldSettings('tasks')">⚙ Campi personalizzati</button><button class="btn btn-primary" onclick="openTaskModal()">+ Nuova attività</button></div></div>
   <div class="card"><div class="toolbar"><div class="small muted">Filtra le attività per i campi personalizzati</div><div class="filters" id="customFilters-tasks"></div></div><div class="table-scroll" id="tasksTable"></div></div>
 </section>
 
@@ -247,7 +256,7 @@ body.access-locked .app { display: none !important; }
 </section>
 
 <section class="page" id="page-projects">
- <div class="page-header"><div><h1 class="page-title">Progetti</h1><p class="page-subtitle">Organizza ogni progetto in fasi e ogni fase in attività, con stato e scadenze.</p></div><button class="btn btn-primary" onclick="openProjectModal()">+ Nuovo progetto</button></div>
+ <div class="page-header"><div><h1 class="page-title">Progetti</h1><p class="page-subtitle">Organizza ogni progetto in fasi e ogni fase in attività, con stato e scadenze.</p></div><div class="page-header-actions"><button class="btn btn-secondary" onclick="openCustomFieldSettings('projects')">⚙ Campi personalizzati</button><button class="btn btn-primary" onclick="openProjectModal()">+ Nuovo progetto</button></div></div>
  <div class="card" style="margin-bottom:16px"><div class="toolbar"><div class="small muted">Filtra i progetti per i campi personalizzati</div><div class="filters" id="customFilters-projects"></div></div></div><div id="projectsList" class="projects-list"></div>
 </section>
 
@@ -275,6 +284,7 @@ body.access-locked .app { display: none !important; }
 
 <section class="page" id="page-settings">
   <div class="page-header"><div><h1 class="page-title">Impostazioni</h1><p class="page-subtitle">Anagrafiche e configurazioni del portale.</p></div></div>
+  <div class="custom-fields-callout"><div><strong>Vuoi aggiungere un campo alle schede?</strong><p>Seleziona la sezione, scrivi il nome del campo, scegli il tipo e premi <b>＋ Aggiungi campo</b>. Poi apri una nuova scheda o modifica un record per compilare il campo.</p></div><button class="btn btn-primary" onclick="document.getElementById('customFieldsSettings').scrollIntoView({behavior:'smooth',block:'start'})">Vai a Campi personalizzati ↓</button></div>
   <div class="card">
     <div class="card-header"><div><div class="card-title">Configurazione reparto</div><div class="small muted">I dati sono salvati nel database SQLite sul disco del computer.</div></div></div>
     <div style="padding:20px"><div class="form-grid">
@@ -286,9 +296,10 @@ body.access-locked .app { display: none !important; }
       <label class="btn btn-secondary" for="backupInput">↑ Importa backup JSON<input id="backupInput" type="file" accept="application/json,.json" style="display:none" onchange="importBackup(event)"></label>
     </div><p class="small muted" style="margin-top:12px">Il database resta nella cartella <strong>data</strong> del programma. Per aggiornare il programma, sostituisci i file dell'applicazione senza eliminare questa cartella.</p></div>
   </div>
-  <div class="card" style="margin-top:18px">
+  <div class="card" id="customFieldsSettings" style="margin-top:18px;scroll-margin-top:95px">
     <div class="card-header"><div><div class="card-title">Campi personalizzati</div><div class="small muted">Aggiungi campi alle schede di clienti, pratiche, attività e progetti. I valori restano salvati nei record.</div></div></div>
     <div style="padding:20px">
+      <div class="custom-field-guide"><strong>Come fare:</strong> 1. Scegli dove vuoi il campo (Clienti, Pratiche, Attività o Progetti). 2. Inserisci il nome. 3. Scegli il tipo. 4. Se scegli “Elenco a scelta”, scrivi le opzioni separate da virgole. 5. Premi <strong>＋ Aggiungi campo</strong>. Il campo apparirà nella finestra di inserimento/modifica e nella tabella della sezione.</div>
       <div class="form-grid">
         <div class="form-group"><label class="form-label">Sezione</label><select class="form-control" id="customFieldEntity" onchange="renderCustomFieldManager()"><option value="clients">Clienti</option><option value="practices">Pratiche</option><option value="tasks">Attività</option><option value="projects">Progetti</option></select></div>
         <div class="form-group"><label class="form-label">Nome del campo</label><input class="form-control" id="customFieldName" placeholder="Es. Referente, Regione, Importo preventivo"></div>
@@ -407,6 +418,16 @@ function badge(s){
 }
 function closeModal(id){document.getElementById(id).classList.remove("open")}
 function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2200)}
+function openCustomFieldSettings(entity){
+ const select=document.getElementById("customFieldEntity");
+ if(select&&entity)select.value=entity;
+ navigate("settings");
+ renderCustomFieldManager();
+ const target=document.getElementById("customFieldsSettings");
+ if(target)target.scrollIntoView({behavior:"smooth",block:"start"});
+ const name=document.getElementById("customFieldName");
+ if(name)setTimeout(()=>name.focus({preventScroll:true}),350);
+}
 function entityLabel(entity){return ({clients:"Clienti",practices:"Pratiche",tasks:"Attività",projects:"Progetti"})[entity]||entity}
 function getCustomFields(entity){db.customFields ||= {};db.customFields[entity] ||= [];return db.customFields[entity]}
 function customValue(record,fieldId){return record?.custom?.[fieldId]??""}
@@ -494,10 +515,13 @@ function resetNavOrder(){
 
 function navigate(page){
  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
- document.getElementById("page-"+page).classList.add("active");
+ const target=document.getElementById("page-"+page);if(!target){console.error("Sezione non trovata:",page);return}
+ target.classList.add("active");
  document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===page));
- document.getElementById("topbarTitle").textContent=titles[page];
+ document.getElementById("topbarTitle").textContent=titles[page]||page;
  renderAll();
+ if(page==="settings")renderCustomFieldManager();
+ window.scrollTo({top:0,behavior:"instant"});
 }
 document.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>navigate(b.dataset.page));
 
